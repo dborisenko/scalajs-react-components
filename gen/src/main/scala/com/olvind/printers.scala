@@ -115,11 +115,12 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
   }
 
   def safeName(name: String): String = {
+    val safeName = if (name.contains("-")) s"`$name`" else name
     val safeSubstitutions = Map(
-      ("super" -> "`super`"),
-      ("type"  -> "`type`")
+      "super" -> "`super`",
+      "type"  -> "`type`"
     )
-    safeSubstitutions.get(name).getOrElse(name)
+    safeSubstitutions.getOrElse(safeName, safeName)
   }
 
   def outProp(p: ParsedProp, fs: FieldStats): String = {

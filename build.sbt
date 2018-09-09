@@ -1,34 +1,6 @@
 // *****************************************************************************
 // Projects
 // *****************************************************************************
-lazy val macros =
-  project
-    .in(file("macros"))
-    .enablePlugins(ScalaJSPlugin)
-    .settings(commonSettings, publicationSettings)
-    .settings(
-      name := "scalajs-react-components-macros",
-      libraryDependencies ++= Seq(
-        "com.github.japgolly.scalajs-react" %%% "core"      % "1.1.1",
-        "com.github.japgolly.scalajs-react" %%% "extra"     % "1.1.1",
-        "org.scalatest"                     %%% "scalatest" % "3.0.4" % Test
-      )
-    )
-
-lazy val gen =
-  project
-    .in(file("gen"))
-    .enablePlugins(ScalaJSBundlerPlugin)
-    .settings(commonSettings, preventPublication, npmGenSettings)
-    .settings(
-      organization := "com.olvind",
-      name := "generator",
-      version in webpack := "2.6.1",
-      libraryDependencies ++= Seq(
-        "com.lihaoyi"   %% "ammonite-ops" % "1.0.1",
-        "org.scalatest" %% "scalatest"    % "3.0.4" % Test
-      )
-    )
 
 lazy val generateMui = TaskKey[Seq[File]]("generateMui")
 lazy val generateEui = TaskKey[Seq[File]]("generateEui")
@@ -46,9 +18,9 @@ lazy val core =
         genDir.mkdirs()
         val res = runner.value.run(
           "com.olvind.eui.EuiRunner",
-          (fullClasspath in (gen, Runtime)).value.files,
+          (fullClasspath in (generator, Runtime)).value.files,
           List(
-            (npmUpdate in (gen, Compile)).value / "node_modules" / "elemental",
+            (npmUpdate in (generator, Compile)).value / "node_modules" / "elemental",
             sourceManaged.value / "main"
           ) map (_.absolutePath),
           streams.value.log
@@ -62,38 +34,22 @@ lazy val core =
         genDir.mkdirs()
         val res = runner.value.run(
           "com.olvind.mui.MuiRunner",
-          (fullClasspath in (gen, Runtime)).value.files,
+          (fullClasspath in (generator, Runtime)).value.files,
           List(
-            (npmUpdate in (gen, Compile)).value / "node_modules" / "material-ui",
+            (npmUpdate in (generator, Compile)).value / "node_modules" / "material-ui",
             sourceManaged.value / "main"
           ) map (_.absolutePath),
           streams.value.log
         )
         val pathFinder: PathFinder = sourceManaged.value ** "*.scala"
         pathFinder.get.filter(_.getAbsolutePath.contains("material"))
-      },
-      generateSui := {
-        val genDir = sourceManaged.value
-        genDir.mkdirs()
-        val res = runner.value.run(
-          "com.olvind.sui.SuiRunner",
-          (fullClasspath in (gen, Runtime)).value.files,
-          List(
-            (npmUpdate in (gen, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",
-            sourceManaged.value / "main"
-          ) map (_.absolutePath),
-          streams.value.log
-        )
-        val pathFinder: PathFinder = sourceManaged.value ** "*.scala"
-        pathFinder.get.filter(_.getAbsolutePath.contains("semanticui"))
       }
     )
     .settings(
       sourceGenerators in Compile += generateMui,
       sourceGenerators in Compile += generateEui,
-      sourceGenerators in Compile += generateSui,
       mappings in (Compile, packageSrc) ++= {
-        val sourceDir = (sourceManaged.value / "main").toPath
+        val sourceDir    = (sourceManaged.value / "main").toPath
         def rel(f: File) = sourceDir.relativize(f.toPath).toString
 
         (managedSources in Compile).value map (s ⇒ s → rel(s))
@@ -131,7 +87,7 @@ lazy val demo =
       webpackResources :=
         webpackResources.value +++
           PathFinder(Seq(baseDirectory.value / "images", baseDirectory.value / "index.html")) ** "*.*",
-      webpackConfigFile in (Test) := Some(baseDirectory.value / "webpack.config.test.js"),
+      webpackConfigFile in Test := Some(baseDirectory.value / "webpack.config.test.js"),
       webpackConfigFile in (Compile, fastOptJS) := Some(
         baseDirectory.value / "webpack.config.dev.js"),
       webpackConfigFile in (Compile, fullOptJS) := Some(
@@ -140,19 +96,13 @@ lazy val demo =
       webpackBundlingMode := BundlingMode.LibraryOnly()
     )
 
-lazy val root =
-  project
-    .in(file("."))
-    .aggregate(macros, core, demo)
-    .settings(commonSettings, preventPublication)
-
 // *****************************************************************************
 // Settings
 // *****************************************************************************
 
 lazy val commonSettings =
   Seq(
-    scalaVersion := "2.12.4",
+    scalaVersion := "2.12.6",
     version := "1.0.0-M2",
     name := "scalajs-react-components",
     organization := "com.olvind",
@@ -210,15 +160,6 @@ lazy val EuiVersion   = "0.6.1"
 lazy val MuiVersion   = "0.20.0"
 lazy val reactVersion = "15.5.4"
 
-lazy val npmGenSettings = Seq(
-  useYarn := true,
-  npmDependencies.in(Compile) := Seq(
-    "elemental"         -> EuiVersion,
-    "material-ui"       -> MuiVersion,
-    "semantic-ui-react" -> SuiVersion
-  )
-)
-
 lazy val npmSettings = Seq(
   useYarn := true,
   npmDependencies.in(Compile) := Seq(
@@ -269,3 +210,129 @@ lazy val npmDevSettings = {
     npmDevDependencies in Compile := deps
   )
 }
+
+// *****************************************************************************
+// !!!!!
+// *****************************************************************************
+
+inThisBuild(
+  List(
+    scalaVersion := Dependencies.Versions.scala,
+    organization := "com.dbrsn.scalajs.react.components",
+    scalacOptions := Seq(
+      "-deprecation", // warning and location for usages of deprecated APIs
+      "-encoding", "UTF-8",
+      "-feature", // warning and location for usages of features that should be imported explicitly
+      "-unchecked", // additional warnings where generated code depends on assumptions
+      "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
+      "-Xfuture", // Turn on future language features.
+      "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
+      "-Ypartial-unification", // Enable partial unification in type constructor inference
+      "-Ywarn-dead-code", // Warn when dead code is identified.
+      "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
+      "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
+      "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
+      "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
+      "-Ywarn-numeric-widen", // Warn when numerics are widened.
+      "-Ywarn-value-discard", // Warn when non-Unit expression results are unused.
+      "-Ywarn-extra-implicit", // Warn when more than one implicit parameter section is defined.
+      "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver
+      "-Xlint:adapted-args", // Warn if an argument list is modified to match the receiver.
+      "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
+      "-Xlint:delayedinit-select", // Selecting member of DelayedInit.
+      "-Xlint:doc-detached", // A Scaladoc comment appears to be detached from its element.
+      "-Xlint:inaccessible", // Warn about inaccessible types in method signatures.
+      "-Xlint:infer-any", // Warn when a type argument is inferred to be `Any`.
+      "-Xlint:missing-interpolator", // A string literal appears to be missing an interpolator id.
+      "-Xlint:nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
+      "-Xlint:nullary-unit", // Warn when nullary methods return Unit.
+      "-Xlint:option-implicit", // Option.apply used implicit view.
+      "-Xlint:package-object-classes", // Class or object defined in package object.
+      "-Xlint:poly-implicit-overload", // Parameterized overloaded implicit methods are not visible as view bounds.
+      "-Xlint:private-shadow", // A private field (or class parameter) shadows a superclass field.
+      "-Xlint:stars-align", // Pattern sequence wildcard must align with sequence component.
+      "-Xlint:type-parameter-shadow", // A local type parameter shadows a type already in scope.
+      "-Xlint:unsound-match", // Pattern match may not be typesafe.
+      "-Xlint:constant", // Evaluation of a constant arithmetic expression results in an error.
+      "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
+      "-Ywarn-unused:locals", // Warn if a local definition is unused.
+      "-Ywarn-unused:params", // Warn if a value parameter is unused.
+      "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
+      "-Ywarn-unused:privates", // Warn if a private member is unused.
+    )
+  ))
+
+lazy val macros = project
+  .in(file("macros"))
+  .enablePlugins(ScalaJSPlugin)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-extra`.value,
+      Dependencies.scalatest.value % Test
+    )
+  )
+
+lazy val generator = project
+  .in(file("gen"))
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(
+    version in webpack := "2.6.1",
+    libraryDependencies ++= Seq(
+      Dependencies.`ammonite-ops`,
+      Dependencies.scalatest.value % Test
+    )
+  )
+  .settings(
+    useYarn := true,
+    npmDependencies in Compile := Seq(
+      Dependencies.`semantic-ui-react`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    )
+  )
+  .settings(
+    scalacOptions := Seq(
+      "-deprecation", // Emit warning and location for usages of deprecated APIs.
+      "-feature", // Emit warning and location for usages of features that should be imported explicitly.
+      "-unchecked", // Enable additional warnings where generated code depends on assumptions.
+      "-language:implicitConversions", // Allow definition of implicit functions called views
+      "-language:postfixOps",
+      "-P:scalajs:sjsDefinedByDefault"
+    )
+  )
+  .settings(
+    publishArtifact := false
+  )
+
+lazy val `semantic-ui` = project
+  .in(file("semantic-ui"))
+  .enablePlugins(ScalaJSPlugin)
+  .dependsOn(macros)
+  .settings(
+    generateSui := {
+      val genDir = sourceManaged.value
+      genDir.mkdirs()
+      val res = runner.value.run(
+        "com.olvind.sui.SuiRunner",
+        (fullClasspath in (generator, Runtime)).value.files,
+        List(
+          (npmUpdate in (generator, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",
+          sourceManaged.value / "main"
+        ) map (_.absolutePath),
+        streams.value.log
+      )
+      val pathFinder: PathFinder = sourceManaged.value ** "*.scala"
+      pathFinder.get.filter(_.getAbsolutePath.contains("semanticui"))
+    },
+    sourceGenerators in Compile += generateSui
+  )
+  .settings(
+    scalafmtOnCompile := true,
+    scalafmtTestOnCompile := true
+  )
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-test`.value % Test
+    )
+  )

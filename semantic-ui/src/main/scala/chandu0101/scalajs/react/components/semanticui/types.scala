@@ -1,6 +1,7 @@
 package chandu0101.scalajs.react.components.semanticui
 
 case class ButtonAnimatedType private (value: String) extends AnyVal
+
 object ButtonAnimatedType {
   val fade     = ButtonAnimatedType("fade")
   val vertical = ButtonAnimatedType("vertical")

@@ -36,7 +36,7 @@ object EuiTypeMapper extends TypeMapper {
       case (_, "children", "node")          => Normal("VdomNode")
       case (_, _, "React.node")             => Normal("ReactNode")
       case (_, "children", "React.element") => Normal("VdomNode")
-      case (_, _, "React.element")          => Normal("ReactElement")
+      case (_, _, "React.element")          => Normal("React.Element")
       case (_, _, "number")                 => Normal("Double")
       case (_, _, "React.number")           => Normal("Double")
       case ("Glyph", "icon", _)             => Normal("Octicons")

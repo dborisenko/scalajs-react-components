@@ -53,7 +53,7 @@ case class VisitorComponents(n: FunctionNode)
             ternary.getTest match {
               case testNode: BinaryNode =>
                 testNode.rhs match {
-                  case test: LiteralNode[String] =>
+                  case test: LiteralNode[String] @unchecked =>
                     if ((test.getValue == "production" && testNode.tokenType() == TokenType.NE_STRICT) ||
                       (test.getValue == "development" && testNode.tokenType() == TokenType.EQ_STRICT)) {
                       //Use the true Expression

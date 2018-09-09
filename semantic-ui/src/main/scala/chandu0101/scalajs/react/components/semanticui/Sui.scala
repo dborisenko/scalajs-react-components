@@ -1,5 +1,5 @@
-package chandu0101.scalajs.react.components
-package semanticui
+package chandu0101.scalajs.react.components.semanticui
+
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
