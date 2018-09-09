@@ -4,7 +4,8 @@ inThisBuild(
     organization := "com.dbrsn.scalajs.react.components",
     scalacOptions := Seq(
       "-deprecation", // warning and location for usages of deprecated APIs
-      "-encoding", "UTF-8",
+      "-encoding",
+      "UTF-8",
       "-feature", // warning and location for usages of features that should be imported explicitly
       "-unchecked", // additional warnings where generated code depends on assumptions
       "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
@@ -41,8 +42,10 @@ inThisBuild(
       "-Ywarn-unused:locals", // Warn if a local definition is unused.
       "-Ywarn-unused:params", // Warn if a value parameter is unused.
       "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
-      "-Ywarn-unused:privates", // Warn if a private member is unused.
-    )
+      "-Ywarn-unused:privates" // Warn if a private member is unused.
+    ),
+    scalafmtOnCompile := true,
+    scalafmtTestOnCompile := true
   ))
 
 lazy val macros = project
@@ -113,11 +116,8 @@ lazy val `semantic-ui` = project
     sourceGenerators in Compile += generateSui
   )
   .settings(
-    scalafmtOnCompile := true,
-    scalafmtTestOnCompile := true
-  )
-  .settings(
     libraryDependencies ++= Seq(
-      Dependencies.`scalajs-react-test`.value % Test
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value               % Test
     )
   )

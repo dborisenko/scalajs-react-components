@@ -17,7 +17,7 @@ case class SuiLibrary(base: Path) extends Library {
   override val typeMapper   = SuiTypeMapper
   override val memberMapper = SuiTypeMemberMethodMapper
   override val indexNames   = Set("index.js")
-  override val packageName  = "chandu0101.scalajs.react.components.semanticui"
+  override val packageName  = "com.dbrsn.scalajs.react.semanticui"
 
   val icon = ComponentDef(CompName("Icon"))
 
@@ -117,10 +117,10 @@ case class SuiLibrary(base: Path) extends Library {
       ComponentDef(CompName("ListItem")),
       //      ComponentDef(CompName("ListList")),
       //      ComponentDef(CompName("Loader")),
-            ComponentDef(CompName("Menu")),
-            ComponentDef(CompName("MenuHeader")),
-            ComponentDef(CompName("MenuItem")),
-            ComponentDef(CompName("MenuMenu")),
+      ComponentDef(CompName("Menu")),
+      ComponentDef(CompName("MenuHeader")),
+      ComponentDef(CompName("MenuItem")),
+      ComponentDef(CompName("MenuMenu")),
       //      ComponentDef(CompName("Message")),
       //      ComponentDef(CompName("MessageContent")),
       //      ComponentDef(CompName("MessageHeader")),

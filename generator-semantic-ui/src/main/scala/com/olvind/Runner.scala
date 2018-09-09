@@ -10,10 +10,9 @@ import scala.collection.mutable
 object Runner {
 
   def preludeFor(library: Library): String =
-    s"""package chandu0101.scalajs.react.components
-       |package ${library.name}
+    s"""package com.dbrsn.scalajs.react.${library.name}
        |
-       |import chandu0101.macros.tojs.JSMacro
+       |import com.dbrsn.scalajs.react.macros.tojs.JSMacro
        |import japgolly.scalajs.react._
        |import japgolly.scalajs.react.raw._
        |import japgolly.scalajs.react.vdom._

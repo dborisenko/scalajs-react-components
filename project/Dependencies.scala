@@ -16,6 +16,7 @@ object Dependencies extends DependencyBuilders {
 
     // Scala: JVM + JS libraries
     lazy val scalatest = "3.0.5"
+    lazy val specs2 = "4.3.4"
 
     // JavaScript: Node.js libraries
     lazy val `semantic-ui-react` = "0.82.3"
@@ -32,6 +33,7 @@ object Dependencies extends DependencyBuilders {
 
   // Scala: JVM + JS libraries
   lazy val scalatest = Def.setting("org.scalatest" %%% "scalatest" % Versions.scalatest)
+  lazy val specs2 = Def.setting("org.specs2" %%% "specs2-core" % Versions.specs2)
 
   // JavaScript: Node.js libraries
   lazy val `semantic-ui-react`: NpmDependency = "semantic-ui-react" -> Versions.`semantic-ui-react`

@@ -51,7 +51,8 @@ object SuiTypeMapper extends TypeMapper {
                  "grey",
                  "black"),
              "SuiColor")
-      case (_, _, "_propTypes.default.oneOf(_lib.SUI.FLOATS)") => Enum(compName, Seq("left", "right"), "SuiFloat")
+      case (_, _, "_propTypes.default.oneOf(_lib.SUI.FLOATS)") =>
+        Enum(compName, Seq("left", "right"), "SuiFloat")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.SIZES)") =>
         Enum(compName,
              Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"),
@@ -82,17 +83,18 @@ object SuiTypeMapper extends TypeMapper {
       case (_, _, "number")                    => Normal("Double")
       case (_, "children", "arrayOf(element)") => Normal("js.Array[React.Element]")
 
-      case (_, _, "Mui.arrayOf")                       => Normal("js.Array[js.Any]")
-      case (_, "valueLink", "_propTypes.default.object")              => Normal("js.Any")
-      case (_, _, "_propTypes.default.string")                        => Normal("String")
-      case (_, _, "_propTypes.default.bool")                          => Normal("Boolean")
-      case (_, "children", "_propTypes.default.element")              => Normal("VdomElement")
-      case (_, _, "_propTypes.default.element")                       => Normal("React.Element")
-      case (_, "children", "_propTypes.default.node")                 => Normal("VdomNode")
-      case (_, _, "_propTypes.default.node")                          => Normal("ReactNode")
-      case (_, _, "_propTypes.default.object")                        => Normal("js.Object")
-      case (_, _, "_propTypes.default.number")                        => Normal("Double")
-      case (_, "children", "Mui.arrayOf(_propTypes.default.element)") => Normal("js.Array[React.Element]")
+      case (_, _, "Mui.arrayOf")                         => Normal("js.Array[js.Any]")
+      case (_, "valueLink", "_propTypes.default.object") => Normal("js.Any")
+      case (_, _, "_propTypes.default.string")           => Normal("String")
+      case (_, _, "_propTypes.default.bool")             => Normal("Boolean")
+      case (_, "children", "_propTypes.default.element") => Normal("VdomElement")
+      case (_, _, "_propTypes.default.element")          => Normal("React.Element")
+      case (_, "children", "_propTypes.default.node")    => Normal("VdomNode")
+      case (_, _, "_propTypes.default.node")             => Normal("ReactNode")
+      case (_, _, "_propTypes.default.object")           => Normal("js.Object")
+      case (_, _, "_propTypes.default.number")           => Normal("Double")
+      case (_, "children", "Mui.arrayOf(_propTypes.default.element)") =>
+        Normal("js.Array[React.Element]")
 
       case ("AutoComplete", "popoverProps", "object")     => Normal("js.Any")
       case ("RadioButtonGroup", "defaultSelected", "any") => Normal("js.Any")

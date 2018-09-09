@@ -8,7 +8,7 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 case class VisitorComponents(n: FunctionNode)
-  extends VisitorHelperNameStack[FunctionNode, Map[CompName, ObjectNode]](n) {
+    extends VisitorHelperNameStack[FunctionNode, Map[CompName, ObjectNode]](n) {
   private val ret: mutable.Map[CompName, ObjectNode] =
     mutable.Map.empty[CompName, ObjectNode]
 
@@ -54,15 +54,16 @@ case class VisitorComponents(n: FunctionNode)
               case testNode: BinaryNode =>
                 testNode.rhs match {
                   case test: LiteralNode[String] @unchecked =>
-                    if ((test.getValue == "production" && testNode.tokenType() == TokenType.NE_STRICT) ||
-                      (test.getValue == "development" && testNode.tokenType() == TokenType.EQ_STRICT)) {
+                    if ((test.getValue == "production" && testNode
+                          .tokenType() == TokenType.NE_STRICT) ||
+                        (test.getValue == "development" && testNode
+                          .tokenType() == TokenType.EQ_STRICT)) {
                       //Use the true Expression
                       ternary.getTrueExpression.getExpression match {
                         case o: ObjectNode ⇒
                           ret(CompName(a.getBase.asInstanceOf[IdentNode].getName)) = o
                       }
-                    }
-                    else {
+                    } else {
                       //Use the false Expression
                       ternary.getFalseExpression.getExpression match {
                         case o: ObjectNode ⇒
@@ -91,7 +92,7 @@ case class VisitorComponents(n: FunctionNode)
             case (i: IdentNode, o: ObjectNode) if i.getName == "propTypes" =>
               nameStack.headOption match {
                 case Some(name) => ret(CompName(name.value)) = o
-                case None => ()
+                case None       => ()
               }
           }
     }
