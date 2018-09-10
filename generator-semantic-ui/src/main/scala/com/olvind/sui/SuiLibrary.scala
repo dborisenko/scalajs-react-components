@@ -63,7 +63,7 @@ case class SuiLibrary(base: Path) extends Library {
       //      ComponentDef(CompName("Dropdown")),
       //      ComponentDef(CompName("DropdownDivider")),
       //      ComponentDef(CompName("DropdownHeader")),
-      //      ComponentDef(CompName("DropdownItem")),
+      ComponentDef(CompName("DropdownItem")),
       //      ComponentDef(CompName("DropdownMenu")),
       ComponentDef(CompName("Feed")),
       ComponentDef(CompName("FeedContent")),

@@ -104,6 +104,11 @@ object SuiTypeMapper extends TypeMapper {
       case ("DatePicker", "utils", "object")              => Normal("DatePickerUtils")   //TODO ???
       case ("SelectField", "dropDownMenuProps", "object") => Normal("DropDownMenuProps") //TODO ???
 
+      case ("Select", "options", _)                                => Normal("js.Array[SuiDropdownItem]")
+      case ("DropdownItem", "text", "_lib.customcontentShorthand") => Normal("String")
+      case ("Button", "onClick", "_propTypes.default.func") =>
+        Normal(SuiTypeMapperFunction(compName, fieldName))
+
       case (_, _, "Mui.func") =>
         Normal(SuiTypeMapperFunction(compName, fieldName))
       case (_, _, "func") =>
