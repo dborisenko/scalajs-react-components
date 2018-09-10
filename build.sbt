@@ -96,6 +96,7 @@ lazy val generateSui = TaskKey[Seq[File]]("generateSui")
 lazy val `semantic-ui` = project
   .in(file("semantic-ui"))
   .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
   .dependsOn(macros)
   .settings(
     generateSui := {
@@ -119,5 +120,11 @@ lazy val `semantic-ui` = project
     libraryDependencies ++= Seq(
       Dependencies.`scalajs-react-test`.value % Test,
       Dependencies.specs2.value               % Test
-    )
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`semantic-ui-react`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
