@@ -79,7 +79,7 @@ object SuiTypeMapper extends TypeMapper {
       case (_, "children", "element")          => Normal("VdomElement")
       case (_, _, "element")                   => Normal("React.Element")
       case (_, "children", "node")             => Normal("VdomNode")
-      case (_, _, "node")                      => Normal("ReactNode")
+      case (_, _, "node")                      => Normal("React.Node")
       case (_, _, "number")                    => Normal("Double")
       case (_, "children", "arrayOf(element)") => Normal("js.Array[React.Element]")
 
@@ -90,7 +90,7 @@ object SuiTypeMapper extends TypeMapper {
       case (_, "children", "_propTypes.default.element") => Normal("VdomElement")
       case (_, _, "_propTypes.default.element")          => Normal("React.Element")
       case (_, "children", "_propTypes.default.node")    => Normal("VdomNode")
-      case (_, _, "_propTypes.default.node")             => Normal("ReactNode")
+      case (_, _, "_propTypes.default.node")             => Normal("React.Node")
       case (_, _, "_propTypes.default.object")           => Normal("js.Object")
       case (_, _, "_propTypes.default.number")           => Normal("Double")
       case (_, "children", "Mui.arrayOf(_propTypes.default.element)") =>
