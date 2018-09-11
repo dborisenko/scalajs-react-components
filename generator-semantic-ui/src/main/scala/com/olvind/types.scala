@@ -4,7 +4,7 @@ import ammonite.ops.Path
 
 trait Wrapper[A] {
   def value: A
-  override def toString = value.toString
+  override def toString: String = value.toString
 }
 case class MemberMethod(name: String, paramNames: Seq[String])
 

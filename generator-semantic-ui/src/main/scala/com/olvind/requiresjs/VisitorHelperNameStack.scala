@@ -8,7 +8,7 @@ abstract class VisitorHelperNameStack[N <: Node, Out](n: N) extends VisitorHelpe
 
   override def enterPropertyNode(n: PropertyNode): Boolean =
     matcher(n.getKey) {
-      case (i: IdentNode) =>
+      case i: IdentNode =>
         nameStack = VarName(i.getName) :: nameStack
     }
 

@@ -17,6 +17,6 @@ object SuiTypeMemberMethodMapper extends MemberMapper {
         println("missing types for method: " + other)
         m + args.map(sanitize(_) + ": js.Any").mkString("(", ", ", ")") + ": js.Dynamic"
     }
-  def sanitize(s: String) =
+  def sanitize(s: String): String =
     if (s == "val") "`val`" else s
 }

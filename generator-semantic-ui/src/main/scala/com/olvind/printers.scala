@@ -136,9 +136,10 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
       s"$comment$deprecation${indent(1)}${padTo(fixedName + ": ")(fs.maxFieldNameLen + 2)}"
     }
 
-    p.isRequired match {
-      case true  => intro + p.typeName
-      case false => intro + padTo(p.typeName)(fs.maxTypeNameLen) + " = js.undefined"
+    if (p.isRequired) {
+      intro + p.typeName
+    } else {
+      intro + padTo(p.typeName)(fs.maxTypeNameLen) + " = js.undefined"
     }
   }
 

@@ -1,4 +1,5 @@
 package com.olvind
+import scala.util.matching.Regex
 
 object ParseComponent {
   val ignoredMembers: Set[String] =
@@ -95,7 +96,7 @@ object ParseComponent {
 
 object ParseProp {
   //  "Deprecated(string, 'Instead, use a custom `actions` property.')"
-  val Pattern = "Deprecated\\(([^,]+), '(.+)'\\)".r
+  val Pattern: Regex = "Deprecated\\(([^,]+), '(.+)'\\)".r
 
   def apply(
     library: Library,

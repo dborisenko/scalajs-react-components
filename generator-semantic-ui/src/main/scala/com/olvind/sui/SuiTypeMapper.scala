@@ -2,8 +2,8 @@ package com.olvind
 package sui
 
 object SuiTypeMapper extends TypeMapper {
-  val typeT = Normal("T").generic("T")
-  val typeTJs = Normal("T").genericJs("T")
+  val typeT: Normal = Normal("T").generic("T")
+  val typeTJs: Normal = Normal("T").genericJs("T")
 
   def apply(compName: CompName, fieldName: PropName, typeString: String): Type = {
     def is(s: String) =
@@ -28,10 +28,9 @@ object SuiTypeMapper extends TypeMapper {
         Enum(compName, Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"), "SuiSize")
       case ("IconGroup", "name", "_lib.customsuggest(_lib.SUI.ALL_ICONS_IN_ALL_CONTEXTS)") =>
         Normal("SuiIconType")
-      case (_, _, e) if e.contains("oneOfType") || e.contains("some(") => {
+      case (_, _, e) if e.contains("oneOfType") || e.contains("some(") =>
         val splitted = split(1, e)
         Normal(splitted.map(t => apply(compName, fieldName, t)) map (_.name) mkString " | ")
-      }
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.WIDTHS)") => Normal("Double")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.COLORS)") =>
         Enum(
@@ -62,12 +61,12 @@ object SuiTypeMapper extends TypeMapper {
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.VERTICAL_ALIGNMENTS)") =>
         Enum(compName, Seq("bottom", "middle", "top"), "SuiVerticalAlignment")
 
-      case (a, b, enum) if enum.contains("oneOf(") && enum.contains(']') =>
+      case (_, _, enum) if enum.contains("oneOf(") && enum.contains(']') =>
         val found = "(\\[.*?\\])".r.findAllIn(enum).toList
         val array =
           found.last.replaceAll("\\[|\\]", "").split(", ").map(_.replace("'", "").replace(" ", ""))
         Enum(compName, array)
-      case (a, b, enum) if enum.contains("oneOf(") && !enum.contains(']') =>
+      case (_, _, enum) if enum.contains("oneOf(") && !enum.contains(']') =>
         Enum(compName, split(1, enum))
 
       case (_, _, "_lib.customas") => Normal("js.Any") //TODO: what to do with this?

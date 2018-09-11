@@ -6,7 +6,7 @@ final case class ParsedComponent(
   methodClassOpt: Option[ParsedMethodClass]
 ) {
 
-  val name = definition.name
+  val name: CompName = definition.name
 
   val childrenOpt: Option[ParsedProp] = {
     val field = fields.find(_.name.value == "children")
@@ -29,9 +29,9 @@ final case class ParsedComponent(
   val genericParams: Seq[ParsedGeneric] =
     fields
       .foldLeft(Map.empty[String, Boolean]) {
-        case (m, ParsedProp(_, _, Normal(_, Some(Generic(name, jsObject))), _, _, _)) ⇒
-          m.updated(name, m.getOrElse(name, jsObject) || jsObject)
-        case (m, other) ⇒
+        case (m, ParsedProp(_, _, Normal(_, Some(Generic(n, jsObject))), _, _, _)) ⇒
+          m.updated(n, m.getOrElse(n, jsObject) || jsObject)
+        case (m, _) ⇒
           m
       }
       .map(ParsedGeneric.tupled)
@@ -100,10 +100,10 @@ sealed trait Type {
 case class Generic(name: String, jsObject: Boolean = false)
 
 case class Normal(name: String, genericOpt: Option[Generic] = None) extends Type {
-  def generic(name: String) =
+  def generic(name: String): Normal =
     copy(genericOpt = Some(Generic(name)))
 
-  def genericJs(name: String) =
+  def genericJs(name: String): Normal =
     copy(genericOpt = Some(Generic(name, jsObject = true)))
 }
 
@@ -114,7 +114,7 @@ case class Enum(component: CompName, ss: Seq[String], specialName: String = "") 
     }
 
   override val name: String =
-    if (specialName.isEmpty()) fixedNames.map(_._1.value.capitalize).mkString("") else specialName
+    if (specialName.isEmpty) fixedNames.map(_._1.value.capitalize).mkString("") else specialName
 
   def enumClass: ParsedEnumClass =
     ParsedEnumClass(name, fixedNames)

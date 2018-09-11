@@ -17,7 +17,7 @@ object OutputFolder {
     } match {
       case Success((p, Dir)) =>
         Some(p)
-      case Success((p, other)) =>
+      case Success((_, _)) =>
         System.err.println(s"Illegal argument: s. must be folder")
         None
       case Failure(th) =>

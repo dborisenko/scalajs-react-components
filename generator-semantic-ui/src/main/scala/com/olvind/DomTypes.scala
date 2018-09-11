@@ -44,7 +44,7 @@ case object DomInput extends DomType("FromInput") {
     "InputEncodingType"
   )
 
-  override val props = super.props ++
+  override val props: Seq[ParsedProp] = super.props ++
     Seq(
       ParsedProp(
         PropName("accept"),
@@ -228,8 +228,7 @@ sealed abstract class DomType(val suffix: String) {
   private def handler(name: String, param: String): ParsedProp =
     ParsedProp(
       name = PropName(name),
-      isRequired = false,
-      baseType = Normal(s"$param${suffix} => Callback"),
+      baseType = Normal(s"$param$suffix => Callback"),
       commentOpt = None,
       deprecatedMsg = None,
       inheritedFrom = Some(CompName("DOM"))

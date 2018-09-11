@@ -85,10 +85,9 @@ object Runner {
     val secondary: Path = fullOutputPath / "gen-types.scala"
     printToFile(secondary) { w =>
       w.println(prelude)
-      secondaryFiles.sortBy(_.content).distinct.foreach {
-        case file =>
-          w.println(file.content)
-          w.println("")
+      secondaryFiles.sortBy(_.content).distinct.foreach { file =>
+        w.println(file.content)
+        w.println("")
       }
     }
 

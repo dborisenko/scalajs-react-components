@@ -14,8 +14,8 @@ case class SuiLibrary(base: Path) extends Library {
 
   override val prefixOpt = Some("Sui")
   override val name = "semanticui"
-  override val typeMapper = SuiTypeMapper
-  override val memberMapper = SuiTypeMemberMethodMapper
+  override val typeMapper: TypeMapper = SuiTypeMapper
+  override val memberMapper: MemberMapper = SuiTypeMemberMethodMapper
   override val indexNames = Set("index.js")
   override val packageName = "com.dbrsn.scalajs.react.semanticui"
 

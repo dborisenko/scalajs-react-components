@@ -19,12 +19,10 @@ class SuiContainerSpec extends Specification {
   }
 
   "TYPES" >> {
-    "Container: A standard container." >> {
+    "Container: A standard container." >>
       testText(txt => SuiContainer()(tg.p(txt)))
-    }
-    "Text Container: A container can reduce its maximum width to more naturally accommodate a single column of text." >> {
+    "Text Container: A container can reduce its maximum width to more naturally accommodate a single column of text." >>
       testText(txt => SuiContainer(text = true)(SuiHeader(as = "h2")("Header"), tg.p(txt)))
-    }
   }
   "VARIATIONS" >> {
     "Text Alignment: A container can specify its text alignment." >> {
@@ -33,8 +31,7 @@ class SuiContainerSpec extends Specification {
         testText(SuiContainer(textAlign = SuiTextAlignment.right)(_)) and
         testText(SuiContainer(textAlign = SuiTextAlignment.justified)(tg.b("Justified"), SuiDivider()(), _))
     }
-    "Fluid: A fluid container has no maximum width." >> {
+    "Fluid: A fluid container has no maximum width." >>
       testText(txt => SuiContainer(fluid = true)(SuiHeader(as = "h2")("Header"), tg.p(txt)))
-    }
   }
 }
