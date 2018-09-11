@@ -46,7 +46,8 @@ inThisBuild(
     ),
     scalafmtOnCompile := true,
     scalafmtTestOnCompile := true
-  ))
+  )
+)
 
 lazy val macros = project
   .in(file("macros"))
@@ -108,7 +109,7 @@ lazy val `semantic-ui` = project
         List(
           (npmUpdate in (`generator-semantic-ui`, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",
           sourceManaged.value / "main"
-        ) map (_.absolutePath),
+        ).map(_.absolutePath),
         streams.value.log
       )
       val pathFinder: PathFinder = sourceManaged.value ** "*.scala"
@@ -119,7 +120,7 @@ lazy val `semantic-ui` = project
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`scalajs-react-test`.value % Test,
-      Dependencies.specs2.value               % Test
+      Dependencies.specs2.value % Test
     ),
     npmDependencies in Test := Seq(
       Dependencies.`semantic-ui-react`,

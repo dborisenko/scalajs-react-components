@@ -2,6 +2,7 @@ package com.dbrsn.scalajs.react.semanticui
 
 import java.util.UUID
 
+import com.dbrsn.scalajs.react.semanticui.SuiSpec._
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.component.Js
 import japgolly.scalajs.react.component.Js.{MountedWithRawType, RawMounted}
@@ -14,11 +15,6 @@ import scala.language.existentials
 import scala.scalajs.js
 
 class SuiButtonSpec extends Specification {
-  private type UnmountedDef =
-    Js.UnmountedSimple[js.Object, MountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]]]
-
-  private def testPhrase(token: String): String =
-    s"Lorem ipsum dolor sit amet, $token consectetuer adipiscing elit."
 
   private def testTextAndClick[M](
       unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
