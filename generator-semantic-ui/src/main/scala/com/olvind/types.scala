@@ -28,7 +28,8 @@ object PropComment {
         .map(
           _.trim
             .replaceAll("(^/\\*\\*?|^//|\\*?\\*/$|^\\*)", "")
-            .trim)
+            .trim
+        )
         .filterNot(_.isEmpty)
 
     val (_ans: List[Annotation], _lines: List[String]) =
@@ -49,8 +50,8 @@ object PropComment {
 final case class VarName(value: String) extends Wrapper[String]
 
 final case class Import(
-    varName: VarName,
-    target: Either[Path, String]
+  varName: VarName,
+  target: Either[Path, String]
 )
 
 case class Identifier private (value: String) extends Wrapper[String]

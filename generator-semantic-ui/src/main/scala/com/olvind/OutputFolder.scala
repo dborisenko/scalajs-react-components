@@ -1,7 +1,7 @@
 package com.olvind
 
 import ammonite.ops.FileType.Dir
-import ammonite.ops.{Path, mkdir, pwd}
+import ammonite.ops.{mkdir, pwd, Path}
 
 import scala.util.{Failure, Success, Try}
 

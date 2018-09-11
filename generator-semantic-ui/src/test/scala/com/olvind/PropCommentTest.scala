@@ -22,7 +22,8 @@ class PropCommentTest extends org.scalatest.FunSuite with org.scalatest.Matchers
       |""".stripMargin
 
     PropComment.clean(input) should equal(
-      PropComment(Some("The material-ui theme applied to this component."), Seq(Ignore)))
+      PropComment(Some("The material-ui theme applied to this component."), Seq(Ignore))
+    )
   }
 
   test("comment 2") {
@@ -41,7 +42,8 @@ class PropCommentTest extends org.scalatest.FunSuite with org.scalatest.Matchers
           Param("{number} stepIndex - The index of step is being touched."),
           Param("{node} Step component which is being touched")
         )
-      ))
+      )
+    )
   }
 
   test("comment 3") {
@@ -59,16 +61,13 @@ class PropCommentTest extends org.scalatest.FunSuite with org.scalatest.Matchers
                   |     * @param {string} reason Can be:`"timeout"` (`autoHideDuration` expired) or: `"clickaway"`
                   |     */""".stripMargin
     val expected = PropComment(
-      Some(
-        """Fired when the `Snackbar` is requested to be closed by a click outside the `Snackbar`, or after the
+      Some("""Fired when the `Snackbar` is requested to be closed by a click outside the `Snackbar`, or after the
         |`autoHideDuration` timer expires.
         |Typically `onRequestClose` is used to set state in the parent component, which is used to control the `Snackbar`
         |`open` prop.
         |The `reason` parameter can optionally be used to control the response to `onRequestClose`,
         |for example ignoring `clickaway`.""".stripMargin),
-      Seq(
-        Param(
-          """{string} reason Can be:`"timeout"` (`autoHideDuration` expired) or: `"clickaway"`"""))
+      Seq(Param("""{string} reason Can be:`"timeout"` (`autoHideDuration` expired) or: `"clickaway"`"""))
     )
 
     val actual = PropComment.clean(input)

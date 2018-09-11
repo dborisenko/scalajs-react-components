@@ -48,7 +48,7 @@ object Runner {
             Seq.empty
           } else {
             visited += path
-            val requireds: Seq[Required]       = rs.map(_.run).toList
+            val requireds: Seq[Required] = rs.map(_.run).toList
             val recursive: Seq[FoundComponent] = requireds flatMap flattenScan
             System.err.println(s"Found in path $path: ${recursive.map(_.name.value)}")
 
@@ -75,7 +75,8 @@ object Runner {
       }
 
     val fullOutputPath = outputFolder / RelPath(
-      library.packageName.replaceAll("\\.", if (File.separator == "\\") "\\\\" else File.separator))
+      library.packageName.replaceAll("\\.", if (File.separator == "\\") "\\\\" else File.separator)
+    )
     fullOutputPath.toIO.mkdirs()
 
     val prelude: String =

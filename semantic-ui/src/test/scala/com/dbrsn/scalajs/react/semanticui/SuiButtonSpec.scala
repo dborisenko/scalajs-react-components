@@ -16,10 +16,9 @@ import scala.scalajs.js
 
 class SuiButtonSpec extends Specification {
 
-  private def testTextAndClick[M](
-      unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
+  private def testTextAndClick[M](unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
     val token: String = UUID.randomUUID().toString
-    val clicked       = ReactTestVar(false)
+    val clicked = ReactTestVar(false)
     val rendered =
       ReactTestUtils.renderIntoDocument(unmounted(testPhrase(token), clicked.setStateFn(true)))
     val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
@@ -60,22 +59,15 @@ class SuiButtonSpec extends Specification {
       testTextAndClick { (txt, cb) =>
         SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb))(
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like"),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(
-            txt)
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(txt)
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"),
-                  onClick = wrap(cb),
-                  labelPosition = RightLeft.left)(
-          SuiLabel(as = js.Any.fromString("a"),
-                   basic = true,
-                   pointing = js.Any.fromString("right"))(txt),
+        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.left)(
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("right"))(txt),
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like")
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"),
-                  onClick = wrap(cb),
-                  labelPosition = RightLeft.left)(
+        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.left)(
           SuiLabel(as = js.Any.fromString("a"), basic = true)(txt),
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("fork"))())
         )
@@ -83,52 +75,52 @@ class SuiButtonSpec extends Specification {
     }
     "Colored" >> {
       testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"),
-                  onClick = wrap(cb),
-                  labelPosition = RightLeft.right)(
+        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.right)(
           SuiButton(color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube("red"))(
             SuiIcon(name = SuiIconType("heart"))(),
-            "Like"),
-          SuiLabel(as = js.Any.fromString("a"),
-                   basic = true,
-                   pointing = js.Any.fromString("left"),
-                   color = SuiColor.red)(txt)
+            "Like"
+          ),
+          SuiLabel(
+            as = js.Any.fromString("a"),
+            basic = true,
+            pointing = js.Any.fromString("left"),
+            color = SuiColor.red
+          )(txt)
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"),
-                  onClick = wrap(cb),
-                  labelPosition = RightLeft.right)(
-          SuiButton(color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube("blue"),
-                    basic = true)(SuiIcon(name = SuiIconType("fork"))(), "Fork"),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(
-            txt)
+        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.right)(
+          SuiButton(color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube("blue"), basic = true)(
+            SuiIcon(name = SuiIconType("fork"))(),
+            "Fork"
+          ),
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(txt)
         )
       }
     }
     "Icon: A button can be made of only an icon." >>
-      testTextAndClick((txt, cb) =>
-        SuiButton(icon = true, onClick = wrap(cb))(SuiIcon(name = SuiIconType("world"))(), txt))
+      testTextAndClick(
+        (txt, cb) => SuiButton(icon = true, onClick = wrap(cb))(SuiIcon(name = SuiIconType("world"))(), txt)
+      )
     "Icon: You can do the same using shorthands." >>
       testTextAndClick((txt, cb) => SuiButton(icon = "world", onClick = wrap(cb))(txt))
     "Labeled Icon: A button can use an icon as a label." >> {
       testTextAndClick { (txt, cb) =>
         SuiButton(icon = true, onClick = wrap(cb), labelPosition = RightLeft.left)(
           SuiIcon(name = SuiIconType("pause"))(),
-          txt)
+          txt
+        )
       } and testTextAndClick { (txt, cb) =>
         SuiButton(icon = true, onClick = wrap(cb), labelPosition = RightLeft.right)(
           SuiIcon(name = SuiIconType("right arrow"))(),
-          txt)
+          txt
+        )
       }
     }
     "Labeled Icon: You can do the same using shorthands." >> {
       testTextAndClick { (txt, cb) =>
         SuiButton(icon = "pause", onClick = wrap(cb), labelPosition = RightLeft.left, label = txt)()
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(icon = "right arrow",
-                  onClick = wrap(cb),
-                  labelPosition = RightLeft.right,
-                  label = txt)()
+        SuiButton(icon = "right arrow", onClick = wrap(cb), labelPosition = RightLeft.right, label = txt)()
       }
     }
     "Basic: The basic button has a subtle appearance." >> {
@@ -155,22 +147,24 @@ class SuiButtonSpec extends Specification {
         )()
 
       val rendered = ReactTestUtils
-        .renderIntoDocument(SuiSegment(inverted = true)(
-          SuiButton(inverted = true)("Standard"),
-          genButton("red"),
-          genButton("orange"),
-          genButton("yellow"),
-          genButton("olive"),
-          genButton("green"),
-          genButton("teal"),
-          genButton("blue"),
-          genButton("violet"),
-          genButton("purple"),
-          genButton("pink"),
-          genButton("brown"),
-          genButton("grey"),
-          genButton("black")
-        ))
+        .renderIntoDocument(
+          SuiSegment(inverted = true)(
+            SuiButton(inverted = true)("Standard"),
+            genButton("red"),
+            genButton("orange"),
+            genButton("yellow"),
+            genButton("olive"),
+            genButton("green"),
+            genButton("teal"),
+            genButton("blue"),
+            genButton("violet"),
+            genButton("purple"),
+            genButton("pink"),
+            genButton("brown"),
+            genButton("grey"),
+            genButton("black")
+          )
+        )
         .outerHtmlScrubbed()
       (rendered must contain("Standard")) and (rendered must contain("violet"))
     }
@@ -184,10 +178,10 @@ class SuiButtonSpec extends Specification {
             SuiButton()("One"),
             SuiButton()("Two"),
             SuiButton()("Three")
-          ))
+          )
+        )
         .outerHtmlScrubbed()
-      (rendered must contain("One")) and (rendered must contain("Two")) and (rendered must contain(
-        "Three"))
+      (rendered must contain("One")) and (rendered must contain("Two")) and (rendered must contain("Three"))
     }
   }
 }

@@ -45,8 +45,7 @@ case class VisitorComponents(n: FunctionNode)
             val foundOpt = founds collectFirst {
               case o: ObjectNode ⇒ o
             }
-            foundOpt.foreach(found ⇒
-              ret(CompName(a.getBase.asInstanceOf[IdentNode].getName)) = found)
+            foundOpt.foreach(found ⇒ ret(CompName(a.getBase.asInstanceOf[IdentNode].getName)) = found)
 
           /* Similar to the above, but we have a ternary node*/
           case ternary: TernaryNode =>

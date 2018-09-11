@@ -33,7 +33,7 @@ object JSMacro {
         flattenUnion(tpe.typeArgs(0)) ++ flattenUnion(tpe.typeArgs(1))
       else List(tpe)
 
-    def getJSValueTree(target: Tree, rt: Type): Tree = {
+    def getJSValueTree(target: Tree, rt: Type): Tree =
       if (rt <:< typeOf[TOJS])
         q"""if ($target != null) $target.toJS else null"""
 
@@ -65,8 +65,7 @@ object JSMacro {
       else if (rt <:< typeOf[Function2[_, _, CallbackTo[_]]])
         q"""js.Any.fromFunction2(((t0: ${rt.typeArgs(0)}, t1: ${rt.typeArgs(1)}) => $target(t0, t1).runNow()))"""
       else if (rt <:< typeOf[Function3[_, _, _, CallbackTo[_]]])
-        q"""js.Any.fromFunction3(((t0: ${rt.typeArgs(0)}, t1: ${rt.typeArgs(1)}, t2: ${rt.typeArgs(
-          2)}) => $target(t0, t1, t2).runNow()))"""
+        q"""js.Any.fromFunction3(((t0: ${rt.typeArgs(0)}, t1: ${rt.typeArgs(1)}, t2: ${rt.typeArgs(2)}) => $target(t0, t1, t2).runNow()))"""
       else if (rt <:< typeOf[Function0[_]])
         q"""js.Any.fromFunction0($target)"""
       else if (rt <:< typeOf[Function1[_, _]])
@@ -113,11 +112,10 @@ object JSMacro {
         val conversion = c.inferImplicitView(target, rt, typeOf[js.Any], silent = false)
         q"""$conversion($target)"""
       }
-    }
 
-    val tpe    = c.weakTypeOf[T]
+    val tpe = c.weakTypeOf[T]
     val target = c.freshName[TermName](TermName("t"))
-    val props  = c.freshName[TermName](TermName("p"))
+    val props = c.freshName[TermName](TermName("p"))
 
     val fieldSymbols: List[Symbol] = tpe.decls
       .collectFirst {
@@ -128,7 +126,7 @@ object JSMacro {
       .head
 
     val fieldUpdates = fieldSymbols.map { f =>
-      val name    = f.asTerm.name
+      val name = f.asTerm.name
       val decoded = name.decodedName.toString
 
       val res = if (isOptional(f.typeSignature)) {

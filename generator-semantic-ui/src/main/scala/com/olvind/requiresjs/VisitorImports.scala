@@ -26,7 +26,6 @@ case class VisitorImports(n: FunctionNode, currentPath: Path)
         ret(VarName(arg.getName)) = ret(VarName(arg.getName)).copy(varName = nameStack.head)
     }
 
-  override protected def fetchValue(): Seq[Import] = {
+  override protected def fetchValue(): Seq[Import] =
     ret.values.toSeq
-  }
 }

@@ -10,6 +10,7 @@ object SuiTypeMapperFunction {
       case (_, "onChange") => "ReactEventFromInput => Callback"
       case _ =>
         throw new Error(
-          s"""case ("${compName.value}", "${name.value}") => Callback  //TODO: Add function type mapping in ${getClass().getName}""")
+          s"""case ("${compName.value}", "${name.value}") => Callback  //TODO: Add function type mapping in ${getClass().getName}"""
+        )
     }
 }

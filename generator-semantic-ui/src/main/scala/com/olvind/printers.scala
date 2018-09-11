@@ -1,8 +1,7 @@
 package com.olvind
 
 sealed trait OutFile
-case class PrimaryOutFile(filename: CompName, content: String, secondaries: Seq[SecondaryOutFile])
-    extends OutFile
+case class PrimaryOutFile(filename: CompName, content: String, secondaries: Seq[SecondaryOutFile]) extends OutFile
 case class SecondaryOutFile(filename: String, content: String) extends OutFile
 
 object Printer {
@@ -118,7 +117,7 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
     val safeName = if (name.contains("-")) s"`$name`" else name
     val safeSubstitutions = Map(
       "super" -> "`super`",
-      "type"  -> "`type`"
+      "type" -> "`type`"
     )
     safeSubstitutions.getOrElse(safeName, safeName)
   }

@@ -14,8 +14,7 @@ case class VisitorComponentMembers(n: FunctionNode)
   /* dig out all member methods from a class variant */
   override def enterCallNode(n: CallNode): Boolean =
     matcher((n.getFunction, n.getArgs.asScala.toList)) {
-      case (createClassName,
-            (compName: IdentNode) :: (members: LiteralNode.ArrayLiteralNode) :: Nil)
+      case (createClassName, (compName: IdentNode) :: (members: LiteralNode.ArrayLiteralNode) :: Nil)
           if createClassName.toString.contains("createClass") ⇒
         members.getValue.collect {
           case member: ObjectNode ⇒
@@ -23,7 +22,7 @@ case class VisitorComponentMembers(n: FunctionNode)
               case (name: PropertyNode) :: (value: PropertyNode) :: Nil ⇒
                 matcher((name.getValue, value.getValue)) {
                   case (fi: LiteralNode[_], f: FunctionNode) ⇒
-                    val m         = MemberMethod(fi.getString, f.getParameters.asScala.map(_.getName))
+                    val m = MemberMethod(fi.getString, f.getParameters.asScala.map(_.getName))
                     val compName_ = CompName(compName.getName)
                     ret.get(compName_) match {
                       case Some(existing) ⇒

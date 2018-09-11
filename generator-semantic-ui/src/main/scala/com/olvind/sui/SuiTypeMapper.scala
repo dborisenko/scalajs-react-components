@@ -2,7 +2,7 @@ package com.olvind
 package sui
 
 object SuiTypeMapper extends TypeMapper {
-  val typeT   = Normal("T").generic("T")
+  val typeT = Normal("T").generic("T")
   val typeTJs = Normal("T").genericJs("T")
 
   def apply(compName: CompName, fieldName: PropName, typeString: String): Type = {
@@ -25,9 +25,7 @@ object SuiTypeMapper extends TypeMapper {
         Enum(compName, Seq("left", "center", "right", "justified"), "SuiTextAlignment")
 
       case (_, "size", _) =>
-        Enum(compName,
-             Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"),
-             "SuiSize")
+        Enum(compName, Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"), "SuiSize")
       case ("IconGroup", "name", "_lib.customsuggest(_lib.SUI.ALL_ICONS_IN_ALL_CONTEXTS)") =>
         Normal("SuiIconType")
       case (_, _, e) if e.contains("oneOfType") || e.contains("some(") => {
@@ -36,27 +34,29 @@ object SuiTypeMapper extends TypeMapper {
       }
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.WIDTHS)") => Normal("Double")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.COLORS)") =>
-        Enum(compName,
-             Seq("red",
-                 "orange",
-                 "yellow",
-                 "olive",
-                 "green",
-                 "teal",
-                 "blue",
-                 "violet",
-                 "purple",
-                 "pink",
-                 "brown",
-                 "grey",
-                 "black"),
-             "SuiColor")
+        Enum(
+          compName,
+          Seq(
+            "red",
+            "orange",
+            "yellow",
+            "olive",
+            "green",
+            "teal",
+            "blue",
+            "violet",
+            "purple",
+            "pink",
+            "brown",
+            "grey",
+            "black"
+          ),
+          "SuiColor"
+        )
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.FLOATS)") =>
         Enum(compName, Seq("left", "right"), "SuiFloat")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.SIZES)") =>
-        Enum(compName,
-             Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"),
-             "SuiSize")
+        Enum(compName, Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"), "SuiSize")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.TEXT_ALIGNMENTS)") =>
         Enum(compName, Seq("left", "center", "right", "justified"), "SuiTextAlignment")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.VERTICAL_ALIGNMENTS)") =>
@@ -101,7 +101,7 @@ object SuiTypeMapper extends TypeMapper {
       case ("RadioButtonGroup", "valueSelected", "any")   => Normal("js.Any")
       case ("Stepper", "children", "arrayOf(node)")       => Normal("js.Any")
       /*Added by roberto@leibman.net*/
-      case ("DatePicker", "utils", "object")              => Normal("DatePickerUtils")   //TODO ???
+      case ("DatePicker", "utils", "object")              => Normal("DatePickerUtils") //TODO ???
       case ("SelectField", "dropDownMenuProps", "object") => Normal("DropDownMenuProps") //TODO ???
 
       case ("Select", "options", _)                                => Normal("js.Array[SuiDropdownItem]")

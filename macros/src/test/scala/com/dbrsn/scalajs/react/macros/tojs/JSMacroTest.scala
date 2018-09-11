@@ -24,32 +24,30 @@ object SeedType {
 
 case class AnyValTest(st: SeedType = SeedType.RICE)
 
-case class Plain(name: String,
-                 category: String,
-                 peracre: js.UndefOr[Int] = js.undefined,
-                 address: Address = null)
+case class Plain(name: String, category: String, peracre: js.UndefOr[Int] = js.undefined, address: Address = null)
 
 case class SeqTest(s: Seq[String] = Seq("dude"), as: Seq[Address] = Seq(Address("India"), null))
 
-case class SeqUndefTest(s: js.UndefOr[Seq[String]] = Seq("dude"),
-                        as: js.UndefOr[Seq[Address]] = Seq(Address("India"), null))
+case class SeqUndefTest(
+  s: js.UndefOr[Seq[String]] = Seq("dude"),
+  as: js.UndefOr[Seq[Address]] = Seq(Address("India"), null)
+)
 
-case class SetTest(s: Set[String] = Set("dude"),
-                   as: js.UndefOr[Set[Address]] = Set(Address("India"), null))
+case class SetTest(s: Set[String] = Set("dude"), as: js.UndefOr[Set[Address]] = Set(Address("India"), null))
 
-case class ArrayTest(s: Array[String] = Array("dude"),
-                     as: js.UndefOr[Array[Address]] = Array(Address("India"), null))
+case class ArrayTest(s: Array[String] = Array("dude"), as: js.UndefOr[Array[Address]] = Array(Address("India"), null))
 
-case class MapTest(m: Map[String, String] = Map("key" -> "0"),
-                   ma: js.UndefOr[Map[String, Address]] =
-                     Map("address" -> Address("India"), "address2" -> null))
+case class MapTest(
+  m: Map[String, String] = Map("key" -> "0"),
+  ma: js.UndefOr[Map[String, Address]] = Map("address" -> Address("India"), "address2" -> null)
+)
 
-case class JSDictTest(m: js.Dictionary[String] = js.Dictionary("key" -> "0"),
-                      ma: js.UndefOr[js.Dictionary[Address]] =
-                        js.Dictionary("address" -> Address("India"), "address2" -> null))
+case class JSDictTest(
+  m: js.Dictionary[String] = js.Dictionary("key" -> "0"),
+  ma: js.UndefOr[js.Dictionary[Address]] = js.Dictionary("address" -> Address("India"), "address2" -> null)
+)
 
-case class FunctionTest(fn0: () => Int = () => 5,
-                        fn1: js.UndefOr[Double => String] = (d: Double) => s"$d x")
+case class FunctionTest(fn0: () => Int = () => 5, fn1: js.UndefOr[Double => String] = (d: Double) => s"$d x")
 
 class SeedType2 private (val value: String) extends AnyVal
 
@@ -72,28 +70,27 @@ case class AnyValTest2(st: SeedType2 = SeedType2.RICE)
 import scala.scalajs.js.UndefOr.{any2undefOrA => u}
 
 case class CallbackTest( //<ocd>
-    f0: CallbackTo[Int] = CallbackTo(0),
-    fu: () => CallbackTo[Int] = () => CallbackTo(0),
-    f1: Int => CallbackTo[Int] = i1 => CallbackTo(i1),
-    f2: (Int, Int) => CallbackTo[Int] = (i1, i2) => CallbackTo(i1 + i2),
-    f3: (Int, Int, Int) => CallbackTo[Int] = (i1, i2, i3) => CallbackTo(i1 + i2 + i3),
-    f0c: Callback = Callback(()),
-    fuc: () => Callback = () => Callback(()),
-    f1c: Int => Callback = i1 => Callback(()),
-    f2c: (Int, Int) => Callback = (i1, i2) => Callback(()),
-    f3c: (Int, Int, Int) => Callback = (i1, i2, i3) => Callback(()),
-    f0u: js.UndefOr[CallbackTo[Int]] = u(CallbackTo(0)),
-    fuu: js.UndefOr[() => CallbackTo[Int]] = u(() => CallbackTo(0)),
-    f1u: js.UndefOr[Int => CallbackTo[Int]] = u(i1 => CallbackTo(i1)),
-    f2u: js.UndefOr[(Int, Int) => CallbackTo[Int]] = u((i1, i2) => CallbackTo(i1 + i2)),
-    f3u: js.UndefOr[(Int, Int, Int) => CallbackTo[Int]] = u(
-      (i1, i2, i3) => CallbackTo(i1 + i2 + i3)))
+  f0: CallbackTo[Int] = CallbackTo(0),
+  fu: () => CallbackTo[Int] = () => CallbackTo(0),
+  f1: Int => CallbackTo[Int] = i1 => CallbackTo(i1),
+  f2: (Int, Int) => CallbackTo[Int] = (i1, i2) => CallbackTo(i1 + i2),
+  f3: (Int, Int, Int) => CallbackTo[Int] = (i1, i2, i3) => CallbackTo(i1 + i2 + i3),
+  f0c: Callback = Callback(()),
+  fuc: () => Callback = () => Callback(()),
+  f1c: Int => Callback = i1 => Callback(()),
+  f2c: (Int, Int) => Callback = (i1, i2) => Callback(()),
+  f3c: (Int, Int, Int) => Callback = (i1, i2, i3) => Callback(()),
+  f0u: js.UndefOr[CallbackTo[Int]] = u(CallbackTo(0)),
+  fuu: js.UndefOr[() => CallbackTo[Int]] = u(() => CallbackTo(0)),
+  f1u: js.UndefOr[Int => CallbackTo[Int]] = u(i1 => CallbackTo(i1)),
+  f2u: js.UndefOr[(Int, Int) => CallbackTo[Int]] = u((i1, i2) => CallbackTo(i1 + i2)),
+  f3u: js.UndefOr[(Int, Int, Int) => CallbackTo[Int]] = u((i1, i2, i3) => CallbackTo(i1 + i2 + i3))
+)
 
 class JSMacroTest[T <: SelectOption] extends FunSuite {
 
-  def printResult(result: js.Any) = {
+  def printResult(result: js.Any) =
     println(s"Result is : ${JSON.stringify(result)}")
-  }
 
   test("simple fields test") {
     val plain = JSMacro[Plain](Plain("bpt", "rice")).asInstanceOf[js.Dynamic]
@@ -103,7 +100,7 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
   }
 
   test("callbacks") {
-    val c   = CallbackTest()
+    val c = CallbackTest()
     val out = JSMacro[CallbackTest](c).asInstanceOf[js.Dynamic]
 
     assert(0 == out.f0.apply().asInstanceOf[Int])
@@ -130,7 +127,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
     assert(
       result.as
         .asInstanceOf[js.Array[js.Dictionary[String]]]
-        .head("country") == "India")
+        .head("country") == "India"
+    )
 
     val result2 = JSMacro[SeqUndefTest](SeqUndefTest()).asInstanceOf[js.Dynamic]
     println(s"result2 array ${JSON.stringify(result2)}")
@@ -138,7 +136,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
     assert(
       result2.as
         .asInstanceOf[js.Array[js.Dictionary[String]]]
-        .head("country") == "India")
+        .head("country") == "India"
+    )
   }
 
   test("should handle sets") {
@@ -147,7 +146,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
     assert(
       result.as
         .asInstanceOf[js.Array[js.Dictionary[String]]]
-        .head("country") == "India")
+        .head("country") == "India"
+    )
   }
 
   test("should handle arrays") {
@@ -156,7 +156,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
     assert(
       result.as
         .asInstanceOf[js.Array[js.Dictionary[String]]]
-        .head("country") == "India")
+        .head("country") == "India"
+    )
   }
 
   test("should handle maps") {
@@ -168,7 +169,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
         .get("address")
         .get
         .country
-        .toString == "India")
+        .toString == "India"
+    )
   }
 
   test("should handle js.Dictionary") {
@@ -180,7 +182,8 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
         .get("address")
         .get
         .country
-        .toString == "India")
+        .toString == "India"
+    )
   }
 
   test("should handle functions") {
