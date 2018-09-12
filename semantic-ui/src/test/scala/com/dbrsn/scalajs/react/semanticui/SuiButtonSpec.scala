@@ -1,7 +1,5 @@
 package com.dbrsn.scalajs.react.semanticui
 
-import java.util.UUID
-
 import com.dbrsn.scalajs.react.semanticui.SuiSpec._
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.test._
@@ -13,17 +11,6 @@ import scala.language.existentials
 import scala.scalajs.js
 
 class SuiButtonSpec extends Specification {
-
-  private def testTextAndClick(unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
-    val token: String = UUID.randomUUID().toString
-    val clicked = ReactTestVar(false)
-    val rendered = ReactTestUtils.renderIntoDocument(
-      unmounted(testPhrase(token), clicked.setStateFn(true))
-    )
-    val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
-    Simulate.click(element.getDOMNode.asElement)
-    (rendered.outerHtmlScrubbed() must contain(token)) and (clicked.value() must_=== true)
-  }
 
   private def wrap(cb: Callback): ReactMouseEventFromInput => Callback = _ => cb
 
