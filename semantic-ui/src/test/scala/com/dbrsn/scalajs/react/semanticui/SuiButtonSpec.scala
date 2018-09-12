@@ -18,7 +18,7 @@ class SuiButtonSpec extends Specification {
     val token: String = UUID.randomUUID().toString
     val clicked = ReactTestVar(false)
     val rendered = ReactTestUtils.renderIntoDocument(
-      statefulWrapper(unmounted(testPhrase(token), clicked.setStateFn(true)))
+      unmounted(testPhrase(token), clicked.setStateFn(true))
     )
     val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
     Simulate.click(element.getDOMNode.asElement)
@@ -147,21 +147,23 @@ class SuiButtonSpec extends Specification {
 
       val rendered = ReactTestUtils
         .renderIntoDocument(
-          SuiSegment(inverted = true)(
-            SuiButton(inverted = true)("Standard"),
-            genButton("red"),
-            genButton("orange"),
-            genButton("yellow"),
-            genButton("olive"),
-            genButton("green"),
-            genButton("teal"),
-            genButton("blue"),
-            genButton("violet"),
-            genButton("purple"),
-            genButton("pink"),
-            genButton("brown"),
-            genButton("grey"),
-            genButton("black")
+          statefulWrapper(
+            SuiSegment(inverted = true)(
+              SuiButton(inverted = true)("Standard"),
+              genButton("red"),
+              genButton("orange"),
+              genButton("yellow"),
+              genButton("olive"),
+              genButton("green"),
+              genButton("teal"),
+              genButton("blue"),
+              genButton("violet"),
+              genButton("purple"),
+              genButton("pink"),
+              genButton("brown"),
+              genButton("grey"),
+              genButton("black")
+            )
           )
         )
         .outerHtmlScrubbed()
@@ -173,10 +175,12 @@ class SuiButtonSpec extends Specification {
     "Group: Buttons can exist together as a group." >> {
       val rendered = ReactTestUtils
         .renderIntoDocument(
-          SuiButtonGroup()(
-            SuiButton()("One"),
-            SuiButton()("Two"),
-            SuiButton()("Three")
+          statefulWrapper(
+            SuiButtonGroup()(
+              SuiButton()("One"),
+              SuiButton()("Two"),
+              SuiButton()("Three")
+            )
           )
         )
         .outerHtmlScrubbed()
