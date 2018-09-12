@@ -10,10 +10,10 @@ import org.specs2.matcher.MatchResult
 import org.specs2.mutable.Specification
 
 class SuiContainerSpec extends Specification {
-  private def testText[M](unmounted: String => UnmountedDef): MatchResult[String] = {
+  private def testText(unmounted: String => UnmountedDef): MatchResult[String] = {
     val token: String = UUID.randomUUID().toString
     val rendered = ReactTestUtils.renderIntoDocument(
-      unmounted(testPhrase(token))
+      stateFullWrapper(unmounted(testPhrase(token)))
     )
     rendered.outerHtmlScrubbed() must contain(token)
   }

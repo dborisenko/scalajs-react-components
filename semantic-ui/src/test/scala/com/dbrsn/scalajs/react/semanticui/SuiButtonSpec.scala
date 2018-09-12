@@ -4,8 +4,6 @@ import java.util.UUID
 
 import com.dbrsn.scalajs.react.semanticui.SuiSpec._
 import japgolly.scalajs.react._
-import japgolly.scalajs.react.component.Js
-import japgolly.scalajs.react.component.Js.{MountedWithRawType, RawMounted}
 import japgolly.scalajs.react.test._
 import japgolly.scalajs.react.vdom.Implicits._
 import org.specs2.matcher.MatchResult
@@ -16,11 +14,12 @@ import scala.scalajs.js
 
 class SuiButtonSpec extends Specification {
 
-  private def testTextAndClick[M](unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
+  private def testTextAndClick(unmounted: (String, Callback) => UnmountedDef): MatchResult[Any] = {
     val token: String = UUID.randomUUID().toString
     val clicked = ReactTestVar(false)
-    val rendered =
-      ReactTestUtils.renderIntoDocument(unmounted(testPhrase(token), clicked.setStateFn(true)))
+    val rendered = ReactTestUtils.renderIntoDocument(
+      stateFullWrapper(unmounted(testPhrase(token), clicked.setStateFn(true)))
+    )
     val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
     Simulate.click(element.getDOMNode.asElement)
     (rendered.outerHtmlScrubbed() must contain(token)) and (clicked.value() must_=== true)
