@@ -13,7 +13,7 @@ class SuiContainerSpec extends Specification {
   private def testText(unmounted: String => UnmountedDef): MatchResult[String] = {
     val token: String = UUID.randomUUID().toString
     val rendered = ReactTestUtils.renderIntoDocument(
-      stateFullWrapper(unmounted(testPhrase(token)))
+      statefulWrapper(unmounted(testPhrase(token)))
     )
     rendered.outerHtmlScrubbed() must contain(token)
   }

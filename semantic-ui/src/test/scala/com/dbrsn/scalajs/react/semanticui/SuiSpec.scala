@@ -25,8 +25,8 @@ object SuiSpec {
     * > Render a ReactElement into the DOM in the supplied container and return a reference to the component
     * > (or returns null for stateless components).
     * We always need to have stateful component, otherwise we have raw element equals to `null` after rendering.
-    * 
+    *
     * @see https://github.com/facebook/react/issues/5455
     */
-  def stateFullWrapper(element: UnmountedDef): Unmounted[UnmountedDef, Int, Unit] = StateFullComponent(element)
+  def statefulWrapper(element: UnmountedDef): Unmounted[UnmountedDef, Int, Unit] = StateFullComponent(element)
 }

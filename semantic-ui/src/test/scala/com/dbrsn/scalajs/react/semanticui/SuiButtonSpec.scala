@@ -18,7 +18,7 @@ class SuiButtonSpec extends Specification {
     val token: String = UUID.randomUUID().toString
     val clicked = ReactTestVar(false)
     val rendered = ReactTestUtils.renderIntoDocument(
-      stateFullWrapper(unmounted(testPhrase(token), clicked.setStateFn(true)))
+      statefulWrapper(unmounted(testPhrase(token), clicked.setStateFn(true)))
     )
     val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
     Simulate.click(element.getDOMNode.asElement)
