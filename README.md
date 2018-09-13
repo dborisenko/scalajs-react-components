@@ -15,9 +15,7 @@ We are trying to make the experience of using javascript components in scala.js 
 Adding types to javascript is a lot of guesswork, and we're certain to have gotten them wrong
  some places. Bug reports and/or pull requests are very much welcome! :)
 
-# Modules
-
-## Semantic UI
+# Semantic UI
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.82.3-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
@@ -25,53 +23,11 @@ Module `semantic-ui` contains scalajs wrapper for [semantic-ui-react](https://re
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % version
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.1"
+)
+npmDependencies in Compile ++= Seq(
+  "semantic-ui-react" -> "0.82.3",
+  "react" -> "16.5.0",
+  "react-dom" -> "16.5.0"
 )
 ```
-
-## Gotchas
-
-#### You have to call `apply` even when components dont have children:
-```scala
-MuiRaisedButton(label = "label")()
-```
-
-## Setup
-
-#### SBT
-Add these dependencies to you sbt build file
-```scala
-libraryDependencies ++= Seq(
-  "com.github.japgolly.scalajs-react" %%% "core" % "1.1.0",
-  "com.github.japgolly.scalajs-react" %%% "extra" % "1.1.0",
-  "com.olvind" %%% "scalajs-react-components" % "1.0.0-M2"
-)
-```
-
-This repository includes an example project, by all means use it as a template for your own.
-
-
-#### ScalaCSS
-In order to use the scala.js components, you need to make sure you load their CSS:
-```scala
-GlobalRegistry.register(<component>.Style)
-```
-See [here](https://japgolly.github.io/scalacss/book/ext/react.html) for more details
-
-## Full Demo With Code Examples
-
-**Online :**
-
-http://chandu0101.github.io/scalajs-react-components
-
-**Local :** This will start a web server on http://localhost:8080
-```
-sbt 
-fastOptJS::webpack
-demo/compile:fastOptJS::startWebpackDevServer
-
-```
-
-## Example project
-
-We've included an example project to give you an idea how to use the components
