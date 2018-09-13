@@ -9,6 +9,8 @@ import japgolly.scalajs.react.vdom.VdomElement
 import org.specs2.matcher.MatchResult
 import org.specs2.matcher.MustMatchers._
 
+import scala.language.existentials
+
 object SuiSpec {
   private def testPhrase(token: String): String =
     s"Lorem ipsum dolor sit amet, $token consectetuer adipiscing elit."
