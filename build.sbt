@@ -197,6 +197,7 @@ lazy val `semantic-ui` = project
 
 lazy val root = project
   .in(file("."))
+  .settings(publishSettings)
   .settings(publishArtifact := false)
   .aggregate(macros)
   .aggregate(`generator-semantic-ui`)
