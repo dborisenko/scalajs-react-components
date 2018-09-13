@@ -5,7 +5,6 @@ import japgolly.scalajs.react.vdom.Implicits._
 import org.specs2.mutable.Specification
 
 class SuiDividerSpec extends Specification {
-
   "TYPES" >> {
     "Divider: A standard divider." >> testExistenceW(SuiDivider()())
     "Vertical Divider: A divider can segment content vertically." >> testTextW { txt =>

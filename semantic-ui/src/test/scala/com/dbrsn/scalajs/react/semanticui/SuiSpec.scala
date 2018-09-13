@@ -3,15 +3,11 @@ package com.dbrsn.scalajs.react.semanticui
 import java.util.UUID
 
 import japgolly.scalajs.react._
-import japgolly.scalajs.react.component.Js
-import japgolly.scalajs.react.component.Js.{MountedWithRawType, RawMounted}
 import japgolly.scalajs.react.component.Scala.Unmounted
 import japgolly.scalajs.react.test._
 import japgolly.scalajs.react.vdom.VdomElement
 import org.specs2.matcher.MatchResult
 import org.specs2.matcher.MustMatchers._
-
-import scala.scalajs.js
 
 object SuiSpec {
   private def testPhrase(token: String): String =
