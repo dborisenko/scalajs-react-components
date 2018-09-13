@@ -53,7 +53,7 @@ inThisBuild(
   )
 )
 
-lazy val publishSettings = Seq(
+lazy val publishSettings = List(
   publishTo := sonatypePublishTo.value,
   licenses += ("Apache 2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
   mappings.in(Compile, packageBin) += baseDirectory.in(ThisBuild).value / "LICENSE" -> "LICENSE",
@@ -155,7 +155,9 @@ lazy val `generator-semantic-ui` = project
     )
   )
   .settings(
-    publishArtifact := false
+    publishArtifact := false,
+    publish := {},
+    packagedArtifacts := Map.empty
   )
 
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")

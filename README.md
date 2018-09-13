@@ -1,6 +1,8 @@
 scalajs-react-components
 ========================
 
+[![Build Status](https://travis-ci.org/dborisenko/scalajs-react-components.svg?branch=master)](https://travis-ci.org/dborisenko/scalajs-react-components)
+[![License](https://img.shields.io/github/license/dborisenko/scalajs-react-components.svg)](LICENSE)
 [![scalajs-react](https://img.shields.io/badge/scalajs--react-1.2.3-blue.svg)](https://github.com/japgolly/scalajs-react)
 [![react](https://img.shields.io/badge/react-16.5.0-blue.svg)](https://reactjs.org)
 
@@ -16,6 +18,7 @@ Adding types to javascript is a lot of guesswork, and we're certain to have gott
 # Modules
 
 ## Semantic UI
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.82.3-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
 Module `semantic-ui` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
