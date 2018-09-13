@@ -1,39 +1,30 @@
 scalajs-react-components
 ========================
 
-[![Join the chat at https://gitter.im/chandu0101/scalajs-react-components](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/chandu0101/scalajs-react-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![scalajs-react](https://img.shields.io/badge/scalajs--react-1.2.3-blue.svg)](https://github.com/japgolly/scalajs-react)
+[![react](https://img.shields.io/badge/react-16.5.0-blue.svg)](https://reactjs.org)
 
 Reusable [scalajs-react](https://github.com/japgolly/scalajs-react) components.
 
-We are trying to make the experience of using javascript components in scala.js
- as good as possible by adding typed wrappers.
+This project was initially a clone of [chandu0101/scalajs-react-components](https://github.com/chandu0101/scalajs-react-components) project, but with updated version of [japgolly/scalajs-react](https://github.com/japgolly/scalajs-react) library. But during the upgrade it was discovered that some of the components cannot be migrated to the latest version of React. Therefore the author took a decision to extract some of the components into separate projcet to simplify the update.
+
+We are trying to make the experience of using javascript components in scala.js as good as possible by adding typed wrappers.
 
 Adding types to javascript is a lot of guesswork, and we're certain to have gotten them wrong
  some places. Bug reports and/or pull requests are very much welcome! :)
 
-### Wrappers for javascript components:
-These components require you to provide javascript yourself.
+# Modules
 
-- Material-ui 0.18.1
-- Elemental-ui 0.6.1
-- Semantic-ui 0.68.5
-- Google maps (downloads js directly from google)
-- React GeomIcon (react-geomicons: 2.1.10)
-- React Infinite (react-infinite, 0.11.0)
-- Spinner (react-spinner, 0.2.7)
-- React Select (react-select: 1.0.0-rc.5)
-- React TagsInput (react-tagsinput, 3.16.1)
-- React Slick (react-slick: 0.14.11)
+## Semantic UI
+[![react](https://img.shields.io/badge/semantic--ui--react-0.82.3-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
-### Components written in scala.js
-- DefaultSelect
-- Pager
-- ReactDraggable
-- ReactListView
-- ReactPopOver
-- ReactSearchBox
-- ReactTable
-- ReactTreeView
+Module `semantic-ui` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % version
+)
+```
 
 ## Gotchas
 
