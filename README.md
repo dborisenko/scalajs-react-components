@@ -21,6 +21,8 @@ Adding types to javascript is a lot of guesswork, and we're certain to have gott
 
 Module `semantic-ui` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
 
+Add dependencies in `build.sbt`:
+
 ```scala
 libraryDependencies ++= Seq(
   "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.1"
@@ -29,5 +31,14 @@ npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.3",
   "react" -> "16.5.0",
   "react-dom" -> "16.5.0"
+)
+```
+
+Example of usage:
+
+```scala
+SuiButton(animated = true, onClick = (_: ReactMouseEventFromInput) => Callback(???))(
+  SuiButtonContent(visible = true)("Hello, World!"),
+  SuiButtonContent(hidden = true)(SuiIcon(name = SuiIconType("arrow right"))())
 )
 ```
