@@ -54,6 +54,7 @@ inThisBuild(
 )
 
 lazy val publishSettings = List(
+  sonatypeProfileName := "com.dbrsn",
   publishTo := sonatypePublishTo.value,
   licenses += ("Apache 2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
   mappings.in(Compile, packageBin) += baseDirectory.in(ThisBuild).value / "LICENSE" -> "LICENSE",
