@@ -1,3 +1,7 @@
+import sbtrelease.ReleaseStateTransformations._
+import xerial.sbt.Sonatype.GitHubHosting
+import xerial.sbt.Sonatype.SonatypeCommand.sonatypeRelease
+
 inThisBuild(
   List(
     scalaVersion := Dependencies.Versions.scala,
@@ -49,9 +53,71 @@ inThisBuild(
   )
 )
 
+lazy val publishSettings = Seq(
+  publishTo := sonatypePublishTo.value,
+  licenses += ("Apache 2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+  mappings.in(Compile, packageBin) += baseDirectory.in(ThisBuild).value / "LICENSE" -> "LICENSE",
+  sonatypeProjectHosting := Some(GitHubHosting("dborisenko", "scalajs-react-components", "dborisenko@gmail.com")),
+  homepage := Some(url("https://github.com/dborisenko/scalajs-react-components")),
+  scmInfo := Some(
+    ScmInfo(
+      url("https://github.com/dborisenko/scalajs-react-components"),
+      "scm:git:git://github.com:dborisenko/scalajs-react-components.git"
+    )
+  ),
+  developers := List(
+    Developer(
+      id = "chandu0101",
+      name = "Chandra Sekhar Kode",
+      email = "chandu.csu2010@gmail.com",
+      url = url("https://github.com/chandu0101")
+    ),
+    Developer(
+      id = "oyvindberg",
+      name = "Øyvind Raddum Berg",
+      email = "elacin@gmail.com",
+      url = url("https://github.com/oyvindberg")
+    ),
+    Developer(
+      id = "fmcgough",
+      name = "Frankie",
+      email = "",
+      url = url("https://github.com/fmcgough")
+    ),
+    Developer(
+      id = "roberto@leibman.net",
+      name = "Roberto Leibman",
+      email = "",
+      url = url("http://leibman.net")
+    ),
+    Developer(
+      id = "dborisenko",
+      name = "Denis Borisenko",
+      email = "dborisenko@gmail.com",
+      url = url("http://dbrsn.com")
+    )
+  )
+)
+
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  releaseStepCommand("publishSigned"),
+  releaseStepCommand(sonatypeRelease),
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
+)
+
 lazy val macros = project
   .in(file("macros"))
   .enablePlugins(ScalaJSPlugin)
+  .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`scalajs-react-core`.value,
@@ -98,6 +164,7 @@ lazy val `semantic-ui` = project
   .in(file("semantic-ui"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(publishSettings)
   .dependsOn(macros)
   .settings(
     generateSui := {
