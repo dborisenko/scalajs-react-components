@@ -129,6 +129,7 @@ lazy val macros = project
 lazy val `generator-semantic-ui` = project
   .in(file("generator-semantic-ui"))
   .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(publishSettings)
   .settings(
     version in webpack := "2.6.1",
     libraryDependencies ++= Seq(
@@ -153,11 +154,6 @@ lazy val `generator-semantic-ui` = project
       "-language:postfixOps",
       "-P:scalajs:sjsDefinedByDefault"
     )
-  )
-  .settings(
-    publishArtifact := false,
-    publish := {},
-    packagedArtifacts := Map.empty
   )
 
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")
