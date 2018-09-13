@@ -1,9 +1,9 @@
 package com.dbrsn.scalajs.react.semanticui
 
 import com.dbrsn.scalajs.react.semanticui.SuiSpec._
-import org.specs2.mutable.Specification
 import japgolly.scalajs.react.vdom.Implicits._
 import japgolly.scalajs.react.vdom.html_<^.{< => tg}
+import org.specs2.mutable.Specification
 
 class SuiIconSpec extends Specification {
   "STATES" >> {
