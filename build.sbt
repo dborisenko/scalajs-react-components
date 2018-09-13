@@ -195,10 +195,10 @@ lazy val `semantic-ui` = project
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
 
-lazy val root = project
+lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(publishSettings)
-  .settings(publishArtifact := false)
   .aggregate(macros)
   .aggregate(`generator-semantic-ui`)
   .aggregate(`semantic-ui`)
+  .dependsOn(`semantic-ui`)
