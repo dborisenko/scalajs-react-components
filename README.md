@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.1"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.2"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.3",
@@ -37,7 +37,7 @@ npmDependencies in Compile ++= Seq(
 Example of usage:
 
 ```scala
-SuiButton(animated = true, onClick = (_: ReactMouseEventFromInput) => Callback(???))(
+SuiButton(animated = true, onClick = (_: ReactMouseEventFromHtml) => Callback(???))(
   SuiButtonContent(visible = true)("Hello, World!"),
   SuiButtonContent(hidden = true)(SuiIcon(name = SuiIconType("arrow right"))())
 )
