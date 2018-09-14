@@ -11,7 +11,7 @@ class PropCommentTest extends org.scalatest.FunSuite with org.scalatest.Matchers
         """ /** arne */""",
         """ /** arne **/"""
       )
-    inputs map PropComment.clean map (_ should equal(PropComment(Some("arne"), Seq.empty)))
+    inputs map PropComment.clean map (_ should equal(PropComment(Some("arne"), Seq.empty[Annotation])))
   }
 
   test("comment 1") {

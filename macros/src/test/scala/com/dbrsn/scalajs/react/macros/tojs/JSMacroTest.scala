@@ -17,9 +17,7 @@ final case class Person(name: String, address: js.UndefOr[Address] = js.undefine
 class SeedType(val value: String) extends AnyVal
 
 object SeedType {
-
-  val RICE = new SeedType("rice")
-
+  val RICE: SeedType = new SeedType("rice")
 }
 
 final case class AnyValTest(st: SeedType = SeedType.RICE)
@@ -41,42 +39,42 @@ final case class ArrayTest(
   as: js.UndefOr[Array[Address]] = Array(Address("India"), null)
 )
 
-case class MapTest(
+final case class MapTest(
   m: Map[String, String] = Map("key" -> "0"),
   ma: js.UndefOr[Map[String, Address]] = Map("address" -> Address("India"), "address2" -> null)
 )
 
-case class JSDictTest(
+final case class JSDictTest(
   m: js.Dictionary[String] = js.Dictionary("key" -> "0"),
   ma: js.UndefOr[js.Dictionary[Address]] = js.Dictionary("address" -> Address("India"), "address2" -> null)
 )
 // scalastyle:on null
 
 // scalastyle:off magic.number
-case class FunctionTest(fn0: () => Int = () => 5, fn1: js.UndefOr[Double => String] = (d: Double) => s"$d x")
+final case class FunctionTest(fn0: () => Int = () => 5, fn1: js.UndefOr[Double => String] = (d: Double) => s"$d x")
 // scalastyle:on magic.number
 
 class SeedType2 private (val value: String) extends AnyVal
 
 object SeedType2 {
-  val RICE = new SeedType2("rice")
+  val RICE: SeedType2 = new SeedType2("rice")
 }
 
 trait SelectOption {
   val toJS: js.Object
 }
 
-case class SampleOption(value: String = "gel", label: String = "kel") extends SelectOption {
+final case class SampleOption(value: String = "gel", label: String = "kel") extends SelectOption {
   override val toJS: js.Object = json(value = value, label = label)
 }
 
-case class TPTest[T <: SelectOption](o: js.UndefOr[js.Array[T]])
+final case class TPTest[T <: SelectOption](o: js.UndefOr[js.Array[T]])
 
-case class AnyValTest2(st: SeedType2 = SeedType2.RICE)
+final case class AnyValTest2(st: SeedType2 = SeedType2.RICE)
 
 import scala.scalajs.js.UndefOr.{any2undefOrA => u}
 
-case class CallbackTest( //<ocd>
+final case class CallbackTest( //<ocd>
   f0: CallbackTo[Int] = CallbackTo(0),
   fu: () => CallbackTo[Int] = () => CallbackTo(0),
   f1: Int => CallbackTo[Int] = i1 => CallbackTo(i1),

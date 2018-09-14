@@ -16,7 +16,7 @@ object SuiSpec {
     s"Lorem ipsum dolor sit amet, $token consectetuer adipiscing elit."
 
   // scalastyle:off magic.number
-  private final val StateFullComponent = ScalaComponent
+  private val StateFullComponent = ScalaComponent
     .builder[VdomElement]("StateFullComponent")
     .initialState(42)
     .render_P(identity)

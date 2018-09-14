@@ -146,7 +146,17 @@ lazy val macros = project
       Wart.ToString,
       Wart.TraversableOps
     ),
-    wartremoverErrors in (Test, compile) := Warts.allBut()
+    wartremoverErrors in (Test, compile) := Warts.allBut(
+      Wart.Any,
+      Wart.ArrayEquals,
+      Wart.AsInstanceOf,
+      Wart.DefaultArguments,
+      Wart.Equals,
+      Wart.IsInstanceOf,
+      Wart.Null,
+      Wart.OptionPartial,
+      Wart.ToString
+    )
   )
 
 lazy val `generator-semantic-ui` = project
@@ -195,7 +205,8 @@ lazy val `generator-semantic-ui` = project
       Wart.AsInstanceOf,
       Wart.Var,
       Wart.Overloading
-    )
+    ),
+    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements)
   )
 
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")
@@ -238,7 +249,8 @@ lazy val `semantic-ui` = project
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
   .settings(
-    wartremoverErrors in (Compile, compile) := Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing)
+    wartremoverErrors in (Compile, compile) := Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing),
+    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
 lazy val `scalajs-react-components` = project
