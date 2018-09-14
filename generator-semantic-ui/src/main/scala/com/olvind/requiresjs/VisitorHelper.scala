@@ -9,7 +9,9 @@ abstract class VisitorHelper[N <: Node, Out](n: N) extends NodeVisitor(new Block
     if (f.isDefinedAt(m)) {
       f(m)
       true
-    } else true
+    } else {
+      true
+    }
 
   protected def assertions(): Unit = ()
   protected def fetchValue(): Out

@@ -53,6 +53,11 @@ inThisBuild(
   )
 )
 
+lazy val commonSettings = List(
+  scalastyleFailOnError := true,
+  scalastyleFailOnWarning := true
+)
+
 lazy val publishSettings = List(
   sonatypeProfileName := "com.dbrsn",
   publishTo := sonatypePublishTo.value,
@@ -118,6 +123,7 @@ releaseProcess := Seq[ReleaseStep](
 lazy val macros = project
   .in(file("macros"))
   .enablePlugins(ScalaJSPlugin)
+  .settings(commonSettings)
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -130,6 +136,7 @@ lazy val macros = project
 lazy val `generator-semantic-ui` = project
   .in(file("generator-semantic-ui"))
   .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
   .settings(publishSettings)
   .settings(
     version in webpack := "2.6.1",
@@ -163,6 +170,7 @@ lazy val `semantic-ui` = project
   .in(file("semantic-ui"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
   .settings(publishSettings)
   .dependsOn(macros)
   .settings(
@@ -198,6 +206,7 @@ lazy val `semantic-ui` = project
 
 lazy val `scalajs-react-components` = project
   .in(file("."))
+  .settings(commonSettings)
   .settings(publishSettings)
   .aggregate(macros)
   .aggregate(`generator-semantic-ui`)

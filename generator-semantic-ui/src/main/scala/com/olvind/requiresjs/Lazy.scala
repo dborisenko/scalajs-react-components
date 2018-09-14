@@ -7,11 +7,11 @@ final class Lazy[+T](_t: => T) {
   def map[U](f: T => U): Lazy[U] =
     new Lazy(f(_t))
 
-  def flatMap[U](f: T => Lazy[U]) =
+  def flatMap[U](f: T => Lazy[U]): Lazy[U] =
     new Lazy(f(_t).run)
 }
 
 object Lazy {
-  def apply[T](_t: => T) =
+  def apply[T](_t: => T): Lazy[T] =
     new Lazy(_t)
 }

@@ -7,7 +7,9 @@ object SuiRunner extends App {
       Runner(SuiLibrary(buildFolder), outputFolder)
 
     case _ =>
+      // scalastyle:off regex
       System.err.println("Syntax: SuiRunner <directory with transpiled javascript> <output folder>")
+      // scalastyle:on regex
       System.exit(1)
   }
 }

@@ -12,6 +12,7 @@ case class VisitorComponents(n: FunctionNode)
   private val ret: mutable.Map[CompName, ObjectNode] =
     mutable.Map.empty[CompName, ObjectNode]
 
+  //scalastyle:off cyclomatic.complexity method.length
   override def enterBinaryNode(bn: BinaryNode): Boolean = {
     bn.lhs match {
       case a: AccessNode if a.getProperty == "exports" =>
@@ -27,7 +28,9 @@ case class VisitorComponents(n: FunctionNode)
                 }
             }
           case right =>
+            // scalastyle:off regex
             println(right)
+          // scalastyle:on regex
         }
       case a: AccessNode if a.getProperty == "propTypes" ⇒
         bn.rhs match {
@@ -77,6 +80,7 @@ case class VisitorComponents(n: FunctionNode)
     }
     true
   }
+  //scalastyle:on cyclomatic.complexity method.length
 
   /* old style createClass way of creating react components.
       We dig out `propTypes` out of the structure */

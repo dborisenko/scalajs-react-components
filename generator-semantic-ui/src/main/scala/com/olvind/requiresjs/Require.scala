@@ -7,6 +7,7 @@ import jdk.nashorn.internal.ir.{FunctionNode, Node, ObjectNode}
 import scala.language.postfixOps
 
 object Require {
+  // scalastyle:off method.length
   def apply(p: Path, indexNames: Set[String]): Required = {
     val ctx = new ScanCtx
 
@@ -58,11 +59,14 @@ object Require {
           }
 
         case other =>
+          // scalastyle:off regex
           println(other)
+          // scalastyle:on regex
           Required(requiredPath, Nil)
       }
     }
 
     recurse(p, ctx).run
   }
+  // scalastyle:on method.length
 }

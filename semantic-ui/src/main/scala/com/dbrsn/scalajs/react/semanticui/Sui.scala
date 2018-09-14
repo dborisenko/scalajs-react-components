@@ -3,6 +3,7 @@ package com.dbrsn.scalajs.react.semanticui
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
+// scalastyle:off number.of.types number.of.methods
 object Sui {
   // Addons
   @js.native @JSImport("semantic-ui-react/dist/commonjs/addons/Confirm", JSImport.Default)
@@ -334,3 +335,4 @@ object Sui {
   @js.native @JSImport("semantic-ui-react/dist/commonjs/views/Statistic/StatisticValue", JSImport.Default)
   object StatisticValue extends js.Any
 }
+// scalastyle:on number.of.types number.of.methods

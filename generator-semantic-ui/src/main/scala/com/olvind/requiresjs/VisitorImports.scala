@@ -16,8 +16,11 @@ case class VisitorImports(n: FunctionNode, currentPath: Path)
     matcher((n.getFunction, n.getArgs.asScala.toList)) {
       case (i: IdentNode, List(o: LiteralNode[_])) if i.getName == "require" =>
         val target =
-          if (o.getString.startsWith(".")) Left(add(currentPath, o.getString))
-          else Right(o.getString)
+          if (o.getString.startsWith(".")) {
+            Left(add(currentPath, o.getString))
+          } else {
+            Right(o.getString)
+          }
 
         val name = nameStack.headOption.getOrElse(VarName(o.getString))
         ret(name) = Import(name, target)

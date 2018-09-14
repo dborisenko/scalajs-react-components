@@ -14,7 +14,9 @@ object SuiTypeMemberMethodMapper extends MemberMapper {
       case ("DatePicker", 0, "getDate") => "getDate(): js.Date"
 
       case other ⇒
+        // scalastyle:off regex
         println("missing types for method: " + other)
+        // scalastyle:on regex
         m + args.map(sanitize(_) + ": js.Any").mkString("(", ", ", ")") + ": js.Dynamic"
     }
   def sanitize(s: String): String =

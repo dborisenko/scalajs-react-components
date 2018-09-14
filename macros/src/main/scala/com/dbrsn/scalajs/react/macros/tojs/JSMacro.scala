@@ -13,84 +13,96 @@ import scala.scalajs.js
   * via https://github.com/chandu0101/macros/blob/master/src/main/scala/chandu0101/macros/tojs/JSMacro.scala
   */
 object JSMacro {
+  // scalastyle:off structural.type
   type TOJS = {
     val toJS: js.Object
   }
+  // scalastyle:on structural.type
 
   def apply[T]: T => js.Object = macro applyImpl[T]
 
+  // scalastyle:off cyclomatic.complexity method.length
   def applyImpl[T: c.WeakTypeTag](c: blackbox.Context): c.Tree = {
     import c.universe._
 
     def isOptional(tpe: Type): Boolean =
       tpe <:< typeOf[Option[_]] || tpe <:< typeOf[js.UndefOr[_]]
 
-    def isNotPrimitiveAnyVal(tpe: Type) =
+    def isNotPrimitiveAnyVal(tpe: Type): Boolean =
       !tpe.typeSymbol.fullName.startsWith("scala.")
 
     def flattenUnion(tpe: Type): List[Type] =
-      if (tpe <:< typeOf[js.|[_, _]])
-        flattenUnion(tpe.typeArgs(0)) ++ flattenUnion(tpe.typeArgs(1))
-      else List(tpe)
+      if (tpe <:< typeOf[js.|[_, _]]) {
+        flattenUnion(tpe.typeArgs.head) ++ flattenUnion(tpe.typeArgs(1))
+      } else {
+        List(tpe)
+      }
 
     def getJSValueTree(target: Tree, rt: Type): Tree =
-      if (rt <:< typeOf[TOJS])
+      if (rt <:< typeOf[TOJS]) {
         q"""if ($target != null) $target.toJS else null"""
+      }
 
       /* scala collections */
-      else if (rt <:< typeOf[GenMap[String, _]])
-        if (rt.typeArgs(1) <:< typeOf[TOJS])
+      else if (rt <:< typeOf[GenMap[String, _]]) {
+        if (rt.typeArgs(1) <:< typeOf[TOJS]) {
           q"""$target.map{ case (k, o) => k -> (if(o == null) null else o.toJS)}.toJSDictionary"""
-        else
+        } else {
           q"""$target.toJSDictionary"""
-      else if (rt <:< typeOf[GenTraversableOnce[_]] || (rt <:< typeOf[Array[_]]))
-        if (rt.typeArgs.head <:< typeOf[TOJS])
+        }
+      } else if (rt <:< typeOf[GenTraversableOnce[_]] || (rt <:< typeOf[Array[_]])) {
+        if (rt.typeArgs.head <:< typeOf[TOJS]) {
           q"""$target.map(o => if(o == null) null else o.toJS).toJSArray"""
-        else
+        } else {
           q"""$target.toJSArray"""
+        }
+      }
 
       /* javascript collections. Only need to rewrite if type parameter is <:< TOJS */
-      else if (rt <:< typeOf[js.Dictionary[_]] && rt.typeArgs.head <:< typeOf[TOJS])
+      else if (rt <:< typeOf[js.Dictionary[_]] && rt.typeArgs.head <:< typeOf[TOJS]) {
         q"""$target.map{case(k, o) => (k, if(o == null) null else o.toJS)}.toJSDictionary"""
-      else if (rt <:< typeOf[js.Array[_]] && rt.typeArgs.head <:< typeOf[TOJS])
+      } else if (rt <:< typeOf[js.Array[_]] && rt.typeArgs.head <:< typeOf[TOJS]) {
         q"""$target.map(o => if(o == null) null else o.toJS)"""
+      }
 
       /* rewrite functions returning a Callback so that javascript land can call them */
-      else if (rt <:< typeOf[CallbackTo[_]])
+      else if (rt <:< typeOf[CallbackTo[_]]) {
         q"""$target.toJsFn"""
-      else if (rt <:< typeOf[Function0[CallbackTo[_]]])
+      } else if (rt <:< typeOf[Function0[CallbackTo[_]]]) {
         q"""$target().toJsFn"""
-      else if (rt <:< typeOf[Function1[_, CallbackTo[_]]])
-        q"""js.Any.fromFunction1(((t0: ${rt.typeArgs(0)}) => $target(t0).runNow()))"""
-      else if (rt <:< typeOf[Function2[_, _, CallbackTo[_]]])
-        q"""js.Any.fromFunction2(((t0: ${rt.typeArgs(0)}, t1: ${rt.typeArgs(1)}) => $target(t0, t1).runNow()))"""
-      else if (rt <:< typeOf[Function3[_, _, _, CallbackTo[_]]])
-        q"""js.Any.fromFunction3(((t0: ${rt.typeArgs(0)}, t1: ${rt.typeArgs(1)}, t2: ${rt.typeArgs(2)}) => $target(t0, t1, t2).runNow()))"""
-      else if (rt <:< typeOf[Function0[_]])
+      } else if (rt <:< typeOf[Function1[_, CallbackTo[_]]]) {
+        q"""js.Any.fromFunction1(((t0: ${rt.typeArgs.head}) => $target(t0).runNow()))"""
+      } else if (rt <:< typeOf[Function2[_, _, CallbackTo[_]]]) {
+        q"""js.Any.fromFunction2(((t0: ${rt.typeArgs.head}, t1: ${rt.typeArgs(1)}) => $target(t0, t1).runNow()))"""
+      } else if (rt <:< typeOf[Function3[_, _, _, CallbackTo[_]]]) {
+        q"""js.Any.fromFunction3(((t0: ${rt.typeArgs.head}, t1: ${rt.typeArgs(1)}, t2: ${rt.typeArgs(2)}) => $target(t0, t1, t2).runNow()))"""
+      } else if (rt <:< typeOf[Function0[_]]) {
         q"""js.Any.fromFunction0($target)"""
-      else if (rt <:< typeOf[Function1[_, _]])
+      } else if (rt <:< typeOf[Function1[_, _]]) {
         q"""js.Any.fromFunction1($target)"""
-      else if (rt <:< typeOf[Function2[_, _, _]])
+      } else if (rt <:< typeOf[Function2[_, _, _]]) {
         q"""js.Any.fromFunction2($target)"""
-      else if (rt <:< typeOf[Function3[_, _, _, _]])
+      } else if (rt <:< typeOf[Function3[_, _, _, _]]) {
         q"""js.Any.fromFunction3($target)"""
+      }
 
       /* other scalajs-react things we need to rewrite */
-      else if (rt <:< typeOf[VdomElement])
+      else if (rt <:< typeOf[VdomElement]) {
         q"""$target.rawElement.asInstanceOf[js.Any]"""
-      else if (rt <:< typeOf[VdomNode])
+      } else if (rt <:< typeOf[VdomNode]) {
         q"""$target.rawNode.asInstanceOf[js.Any]"""
-      else if (rt <:< typeOf[TagOf[_]])
+      } else if (rt <:< typeOf[TagOf[_]]) {
         q"""$target.render.rawElement.asInstanceOf[js.Any]"""
+      }
 
       /* Other values. Keep AnyVal below at least CallbackTo */
-      else if (rt <:< typeOf[AnyVal] && isNotPrimitiveAnyVal(rt))
+      else if (rt <:< typeOf[AnyVal] && isNotPrimitiveAnyVal(rt)) {
         q"""$target.value.asInstanceOf[js.Any]"""
-      else if (rt <:< typeOf[AnyVal] || rt <:< typeOf[String] || rt <:< typeOf[js.Any])
+      } else if (rt <:< typeOf[AnyVal] || rt <:< typeOf[String] || rt <:< typeOf[js.Any]) {
         q"""$target.asInstanceOf[js.Any]"""
-      else if (rt <:< typeOf[Enumeration#Value])
+      } else if (rt <:< typeOf[Enumeration#Value]) {
         q"""$target.toString.asInstanceOf[js.Any]"""
-      else if (rt <:< typeOf[js.|[_, _]]) {
+      } else if (rt <:< typeOf[js.|[_, _]]) {
 
         val (jsTypes, scalaTypes) = flattenUnion(rt).distinct.partition(_ <:< typeOf[js.Any])
 
@@ -102,7 +114,7 @@ object JSMacro {
           c.warning(target.pos, s"Cannot differentiate ${jsTypes.mkString(", ")}")
         }
 
-        val jsCase = jsTypes.take(1).map(tpe => cq"""x => x.asInstanceOf[js.Any]""")
+        val jsCase = jsTypes.take(1).map(_ => cq"""x => x.asInstanceOf[js.Any]""")
 
         q"""($target: scala.Any) match {
           case ..$scalaCases
@@ -145,4 +157,5 @@ object JSMacro {
       $props
     }"""
   }
+  // scalastyle:on cyclomatic.complexity method.length
 }

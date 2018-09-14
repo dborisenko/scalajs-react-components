@@ -18,10 +18,14 @@ object OutputFolder {
       case Success((p, Dir)) =>
         Some(p)
       case Success((_, _)) =>
+        // scalastyle:off regex
         System.err.println(s"Illegal argument: s. must be folder")
+        // scalastyle:on regex
         None
       case Failure(th) =>
+        // scalastyle:off regex
         System.err.println(s"Illegal argument $s: ${th.getMessage}")
+        // scalastyle:on regex
         None
     }
 }

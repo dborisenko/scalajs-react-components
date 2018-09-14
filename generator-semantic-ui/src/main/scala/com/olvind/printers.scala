@@ -75,8 +75,11 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
            |${indent(2)}${hack(comp)}
            |${indent(2)}val props = JSMacro[${comp.nameDef(prefix)}](this)
            |${indent(2)}val f = JsComponent[js.Object, Children.Varargs, Null]($prefix.${comp.name.value})
-           |${indent(2)}${if (childrenProp.isRequired) "f(props)(child)"
-           else "child.fold(f(props)())(ch => f(props)(ch))"}
+           |${indent(2)}${if (childrenProp.isRequired) {
+             "f(props)(child)"
+           } else {
+             "child.fold(f(props)())(ch => f(props)(ch))"
+           }}
            |${indent(1)}}
            |}""".stripMargin
     }
@@ -109,8 +112,11 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
           comment.value.toSeq ++ inheritedLine ++ (if (anns.isEmpty) Nil else Seq("\n")) ++ anns
       }
 
-    if (lines.isEmpty) ""
-    else lines.flatMap(_.split("\n")).mkString(s"${indent(1)}/** ", s"\n${indent(2)} ", " */\n")
+    if (lines.isEmpty) {
+      ""
+    } else {
+      lines.flatMap(_.split("\n")).mkString(s"${indent(1)}/** ", s"\n${indent(2)} ", " */\n")
+    }
   }
 
   def safeName(name: String): String = {
@@ -168,9 +174,11 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
          |${c.methods
            .map { m =>
              val deprecated: String =
-               if (m.toString.toLowerCase.contains("deprecated"))
+               if (m.toString.toLowerCase.contains("deprecated")) {
                  s"""${indent(1)}@deprecated("", "")\n"""
-               else ""
+               } else {
+                 ""
+               }
              val comment = outComment(m.commentOpt, None)
              s"$comment$deprecated${indent(1)}def ${m.definition} = js.native"
            }

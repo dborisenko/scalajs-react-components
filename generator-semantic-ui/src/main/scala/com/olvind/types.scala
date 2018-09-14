@@ -9,7 +9,7 @@ trait Wrapper[A] {
 case class MemberMethod(name: String, paramNames: Seq[String])
 
 final case class CompName(value: String) extends Wrapper[String] {
-  def map(f: String => String) =
+  def map(f: String => String): CompName =
     CompName(f(value))
 }
 
@@ -44,7 +44,7 @@ object PropComment {
     PropComment(if (_lines.nonEmpty) Some(_lines.mkString("\n")) else None, _ans.reverse)
   }
 
-  def apply(str: String) = new PropComment(Some(str), Seq.empty)
+  def apply(str: String): PropComment = new PropComment(Some(str), Seq.empty)
 }
 
 final case class VarName(value: String) extends Wrapper[String]

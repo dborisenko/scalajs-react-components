@@ -37,7 +37,9 @@ object Runner {
     def flattenScan(r: Required): Seq[FoundComponent] =
       r match {
         case NotFound(path) =>
+          // scalastyle:off regex
           System.err.println(s"not found required path: $path")
+          // scalastyle:on regex
           Seq.empty
 
         case Single(n, c) =>
@@ -50,7 +52,9 @@ object Runner {
             visited += path
             val requireds: Seq[Required] = rs.map(_.run).toList
             val recursive: Seq[FoundComponent] = requireds flatMap flattenScan
+            // scalastyle:off regex
             System.err.println(s"Found in path $path: ${recursive.map(_.name.value)}")
+            // scalastyle:on regex
 
             recursive
           }
@@ -59,6 +63,7 @@ object Runner {
     library.locations.map(requiresjs.Require(_, library.indexNames)).flatMap(flattenScan)
   }
 
+  // scalastyle:off method.length
   def apply(library: Library, outputFolder: Path): Seq[Path] = {
     val foundComponents: Seq[FoundComponent] = foundComponentsFor(library)
 
@@ -84,10 +89,14 @@ object Runner {
 
     val secondary: Path = fullOutputPath / "gen-types.scala"
     printToFile(secondary) { w =>
+      // scalastyle:off regex
       w.println(prelude)
+      // scalastyle:on regex
       secondaryFiles.sortBy(_.content).distinct.foreach { file =>
+        // scalastyle:off regex
         w.println(file.content)
         w.println("")
+        // scalastyle:on regex
       }
     }
 
@@ -97,14 +106,19 @@ object Runner {
     outs.foreach {
       case (PrimaryOutFile(compName, content, secondaries), file) =>
         printToFile(file) { w =>
+          // scalastyle:off regex
           w.println(prelude + content)
+          // scalastyle:on regex
           secondaries.foreach {
             case SecondaryOutFile(_, c) =>
+              // scalastyle:off regex
               w.println("")
               w.println(c)
+            // scalastyle:on regex
           }
         }
     }
     outs.map(_._2) :+ secondary
   }
+  // scalastyle:off method.length
 }

@@ -5,6 +5,7 @@ object SuiTypeMapper extends TypeMapper {
   val typeT: Normal = Normal("T").generic("T")
   val typeTJs: Normal = Normal("T").genericJs("T")
 
+  // scalastyle:off cyclomatic.complexity method.length
   def apply(compName: CompName, fieldName: PropName, typeString: String): Type = {
     def is(s: String) =
       fieldName.value.toLowerCase contains s.toLowerCase
@@ -106,10 +107,12 @@ object SuiTypeMapper extends TypeMapper {
       case ("DropdownItem", "text", "_lib.customcontentShorthand") => Normal("String")
 
       case (_, _, "_propTypes.default.func") => Normal(SuiTypeMapperFunction(compName, fieldName))
-      case (a, b, c) =>
+      case (a, b, c)                         =>
+        // scalastyle:off regex
         println(s"""case ("$a","$b","$c") => Normal("") //TODO write this Missing in TypeMapper""")
+        // scalastyle:on regex
         Normal("js.Any /*//TODO: fix this in the TypeMapper*/")
-
     }
+    // scalastyle:on cyclomatic.complexity method.length
   }
 }

@@ -13,6 +13,7 @@ object ParseComponent {
       "shouldComponentUpdate"
     )
 
+  // scalastyle:off method.length
   def apply(
     scope: Map[CompName, requiresjs.FoundComponent],
     library: Library,
@@ -92,6 +93,7 @@ object ParseComponent {
 
     ParsedComponent(comp, basicFields ++ parsedProps ++ domProps, methodClassOpt)
   }
+  // scalastyle:on method.length
 }
 
 object ParseProp {

@@ -44,8 +44,9 @@ final case class ParsedComponent(
 
   def nameDef(prefix: String, withBounds: Boolean = false): String = {
     val tpeParam =
-      if (genericParams.isEmpty) ""
-      else
+      if (genericParams.isEmpty) {
+        ""
+      } else {
         genericParams
           .map { p ⇒
             val bounds: String =
@@ -57,6 +58,7 @@ final case class ParsedComponent(
             s"${p.name}$bounds"
           }
           .mkString("[", ", ", "]")
+      }
 
     s"$prefix$name$tpeParam"
   }
@@ -87,8 +89,11 @@ final case class ParsedProp(
 ) {
 
   val typeName: String =
-    if (isRequired) baseType.name
-    else s"js.UndefOr[${baseType.name}]"
+    if (isRequired) {
+      baseType.name
+    } else {
+      s"js.UndefOr[${baseType.name}]"
+    }
 }
 
 final case class ParsedGeneric(name: String, jsObject: Boolean)
