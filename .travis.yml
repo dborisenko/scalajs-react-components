@@ -17,7 +17,7 @@ before_install:
   - npm install -g yarn
 
 script:
-- sbt ++$TRAVIS_SCALA_VERSION scalastyle test
+- sbt ++$TRAVIS_SCALA_VERSION scalastyle test:scalastyle test
 # Tricks to avoid unnecessary cache updates, from
 # http://www.scala-sbt.org/0.13/docs/Travis-CI-with-sbt.html
 - find $HOME/.sbt -name "*.lock" | xargs rm

@@ -15,11 +15,13 @@ object SuiSpec {
   private def testPhrase(token: String): String =
     s"Lorem ipsum dolor sit amet, $token consectetuer adipiscing elit."
 
+  // scalastyle:off magic.number
   private final val StateFullComponent = ScalaComponent
     .builder[VdomElement]("StateFullComponent")
     .initialState(42)
     .render_P(identity)
     .build
+  // scalastyle:on magic.number
 
   /**
     * Due to this feature of react test:

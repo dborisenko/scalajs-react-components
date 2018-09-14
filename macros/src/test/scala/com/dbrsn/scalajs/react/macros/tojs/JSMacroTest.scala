@@ -8,11 +8,11 @@ import scala.scalajs.js.Dynamic.{literal => json}
 import scala.scalajs.js.JSON
 import scala.scalajs.js.JSConverters._
 
-case class Address(country: String) {
+final case class Address(country: String) {
   val toJS: js.Object = JSMacro[Address](this)
 }
 
-case class Person(name: String, address: js.UndefOr[Address] = js.undefined)
+final case class Person(name: String, address: js.UndefOr[Address] = js.undefined)
 
 class SeedType(val value: String) extends AnyVal
 
@@ -22,20 +22,24 @@ object SeedType {
 
 }
 
-case class AnyValTest(st: SeedType = SeedType.RICE)
+final case class AnyValTest(st: SeedType = SeedType.RICE)
 
-case class Plain(name: String, category: String, peracre: js.UndefOr[Int] = js.undefined, address: Address = null)
+// scalastyle:off null
+final case class Plain(name: String, category: String, peracre: js.UndefOr[Int] = js.undefined, address: Address = null)
 
-case class SeqTest(s: Seq[String] = Seq("dude"), as: Seq[Address] = Seq(Address("India"), null))
+final case class SeqTest(s: Seq[String] = Seq("dude"), as: Seq[Address] = Seq(Address("India"), null))
 
-case class SeqUndefTest(
+final case class SeqUndefTest(
   s: js.UndefOr[Seq[String]] = Seq("dude"),
   as: js.UndefOr[Seq[Address]] = Seq(Address("India"), null)
 )
 
-case class SetTest(s: Set[String] = Set("dude"), as: js.UndefOr[Set[Address]] = Set(Address("India"), null))
+final case class SetTest(s: Set[String] = Set("dude"), as: js.UndefOr[Set[Address]] = Set(Address("India"), null))
 
-case class ArrayTest(s: Array[String] = Array("dude"), as: js.UndefOr[Array[Address]] = Array(Address("India"), null))
+final case class ArrayTest(
+  s: Array[String] = Array("dude"),
+  as: js.UndefOr[Array[Address]] = Array(Address("India"), null)
+)
 
 case class MapTest(
   m: Map[String, String] = Map("key" -> "0"),
@@ -46,8 +50,11 @@ case class JSDictTest(
   m: js.Dictionary[String] = js.Dictionary("key" -> "0"),
   ma: js.UndefOr[js.Dictionary[Address]] = js.Dictionary("address" -> Address("India"), "address2" -> null)
 )
+// scalastyle:on null
 
+// scalastyle:off magic.number
 case class FunctionTest(fn0: () => Int = () => 5, fn1: js.UndefOr[Double => String] = (d: Double) => s"$d x")
+// scalastyle:on magic.number
 
 class SeedType2 private (val value: String) extends AnyVal
 
@@ -89,8 +96,8 @@ case class CallbackTest( //<ocd>
 
 class JSMacroTest[T <: SelectOption] extends FunSuite {
 
-  def printResult(result: js.Any) =
-    println(s"Result is : ${JSON.stringify(result)}")
+  def printResult(result: js.Any): Unit =
+    info(s"Result is : ${JSON.stringify(result)}")
 
   test("simple fields test") {
     val plain = JSMacro[Plain](Plain("bpt", "rice")).asInstanceOf[js.Dynamic]
@@ -122,7 +129,7 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
 
   test("should handle seq") {
     val result = JSMacro[SeqTest](SeqTest()).asInstanceOf[js.Dynamic]
-    println(s"result array ${JSON.stringify(result)}")
+    info(s"result array ${JSON.stringify(result)}")
     assert(result.s.asInstanceOf[js.Array[String]].head == "dude")
     assert(
       result.as
@@ -131,7 +138,7 @@ class JSMacroTest[T <: SelectOption] extends FunSuite {
     )
 
     val result2 = JSMacro[SeqUndefTest](SeqUndefTest()).asInstanceOf[js.Dynamic]
-    println(s"result2 array ${JSON.stringify(result2)}")
+    info(s"result2 array ${JSON.stringify(result2)}")
     assert(result2.s.asInstanceOf[js.Array[String]].head == "dude")
     assert(
       result2.as
