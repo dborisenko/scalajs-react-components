@@ -82,18 +82,17 @@ object SuiTypeMapper extends TypeMapper {
       case (_, _, "number")                    => Normal("Double")
       case (_, "children", "arrayOf(element)") => Normal("js.Array[React.Element]")
 
-      case (_, _, "Mui.arrayOf")                         => Normal("js.Array[js.Any]")
-      case (_, "valueLink", "_propTypes.default.object") => Normal("js.Any")
-      case (_, _, "_propTypes.default.string")           => Normal("String")
-      case (_, _, "_propTypes.default.bool")             => Normal("Boolean")
-      case (_, "children", "_propTypes.default.element") => Normal("VdomElement")
-      case (_, _, "_propTypes.default.element")          => Normal("React.Element")
-      case (_, "children", "_propTypes.default.node")    => Normal("VdomNode")
-      case (_, _, "_propTypes.default.node")             => Normal("React.Node")
-      case (_, _, "_propTypes.default.object")           => Normal("js.Object")
-      case (_, _, "_propTypes.default.number")           => Normal("Double")
-      case (_, "children", "Mui.arrayOf(_propTypes.default.element)") =>
-        Normal("js.Array[React.Element]")
+      case (_, _, "Mui.arrayOf")                                      => Normal("js.Array[js.Any]")
+      case (_, "valueLink", "_propTypes.default.object")              => Normal("js.Any")
+      case (_, _, "_propTypes.default.string")                        => Normal("String")
+      case (_, _, "_propTypes.default.bool")                          => Normal("Boolean")
+      case (_, "children", "_propTypes.default.element")              => Normal("VdomElement")
+      case (_, _, "_propTypes.default.element")                       => Normal("React.Element")
+      case (_, "children", "_propTypes.default.node")                 => Normal("VdomNode")
+      case (_, _, "_propTypes.default.node")                          => Normal("React.Node")
+      case (_, _, "_propTypes.default.object")                        => Normal("js.Object")
+      case (_, _, "_propTypes.default.number")                        => Normal("Double")
+      case (_, "children", "Mui.arrayOf(_propTypes.default.element)") => Normal("js.Array[React.Element]")
 
       case ("AutoComplete", "popoverProps", "object")     => Normal("js.Any")
       case ("RadioButtonGroup", "defaultSelected", "any") => Normal("js.Any")
@@ -105,13 +104,8 @@ object SuiTypeMapper extends TypeMapper {
 
       case ("Select", "options", _)                                => Normal("js.Array[SuiDropdownItem]")
       case ("DropdownItem", "text", "_lib.customcontentShorthand") => Normal("String")
-      case ("Button", "onClick", "_propTypes.default.func") =>
-        Normal(SuiTypeMapperFunction(compName, fieldName))
 
-      case (_, _, "Mui.func") =>
-        Normal(SuiTypeMapperFunction(compName, fieldName))
-      case (_, _, "func") =>
-        Normal(SuiTypeMapperFunction(compName, fieldName))
+      case (_, _, "_propTypes.default.func") => Normal(SuiTypeMapperFunction(compName, fieldName))
       case (a, b, c) =>
         println(s"""case ("$a","$b","$c") => Normal("") //TODO write this Missing in TypeMapper""")
         Normal("js.Any /*//TODO: fix this in the TypeMapper*/")

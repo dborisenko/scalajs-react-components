@@ -12,7 +12,7 @@ import scala.scalajs.js
 
 class SuiButtonSpec extends Specification {
 
-  private def wrap(cb: Callback): ReactMouseEventFromInput => Callback = _ => cb
+  private def wrap(cb: Callback): ReactMouseEventFromHtml => Callback = _ => cb
 
   "TYPES" >> {
     "Button: A standard button." >>
