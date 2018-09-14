@@ -2,6 +2,7 @@ package com.dbrsn.scalajs.react.semanticui
 
 import com.dbrsn.scalajs.react.semanticui.SuiSpec._
 import japgolly.scalajs.react._
+import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
 import japgolly.scalajs.react.test._
 import japgolly.scalajs.react.vdom.Implicits._
 import org.specs2.matcher.MatchResult
@@ -125,7 +126,7 @@ class SuiButtonSpec extends Specification {
         testColor("black")
     }
     "Inverted: A button can be formatted to appear on a dark background." >> {
-      def genButton(color: String) =
+      def genButton(color: String): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] =
         SuiButton(
           color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube(color),
           label = color,

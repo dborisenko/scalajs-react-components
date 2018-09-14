@@ -223,7 +223,7 @@ case object DomInput extends DomType("FromInput") {
 case object DomTextArea extends DomType("FromTextArea")
 
 sealed abstract class DomType(val suffix: String) {
-  def props: Seq[ParsedProp] = Seq()
+  def props: Seq[ParsedProp] = Seq.empty[ParsedProp]
 
   private def handler(name: String, param: String): ParsedProp =
     ParsedProp(

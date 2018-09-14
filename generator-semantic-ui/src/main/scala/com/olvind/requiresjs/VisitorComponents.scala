@@ -7,7 +7,7 @@ import jdk.nashorn.internal.parser.TokenType
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-case class VisitorComponents(n: FunctionNode)
+final case class VisitorComponents(n: FunctionNode)
     extends VisitorHelperNameStack[FunctionNode, Map[CompName, ObjectNode]](n) {
   private val ret: mutable.Map[CompName, ObjectNode] =
     mutable.Map.empty[CompName, ObjectNode]

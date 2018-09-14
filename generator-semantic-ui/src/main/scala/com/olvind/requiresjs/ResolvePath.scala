@@ -3,7 +3,7 @@ package requiresjs
 
 import ammonite.ops.{exists, Path}
 
-case class ResolvedPath(file: Path, folder: Path)
+final case class ResolvedPath(file: Path, folder: Path)
 
 object ResolvePath {
   def apply(p: Path, indexNames: Set[String]): ResolvedPath =

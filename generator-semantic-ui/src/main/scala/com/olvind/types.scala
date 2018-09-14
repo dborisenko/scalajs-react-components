@@ -6,7 +6,7 @@ trait Wrapper[A] {
   def value: A
   override def toString: String = value.toString
 }
-case class MemberMethod(name: String, paramNames: Seq[String])
+final case class MemberMethod(name: String, paramNames: Seq[String])
 
 final case class CompName(value: String) extends Wrapper[String] {
   def map(f: String => String): CompName =
@@ -18,7 +18,7 @@ final case class PropName(value: String) extends AnyVal {
     PropName(value.replaceAll("Deprecated:", "").replaceAll("or children", "").trim)
 }
 
-final case class PropComment(value: Option[String], anns: Seq[Annotation] = Seq.empty)
+final case class PropComment(value: Option[String], anns: Seq[Annotation] = Seq.empty[Annotation])
 
 object PropComment {
 
@@ -44,7 +44,7 @@ object PropComment {
     PropComment(if (_lines.nonEmpty) Some(_lines.mkString("\n")) else None, _ans.reverse)
   }
 
-  def apply(str: String): PropComment = new PropComment(Some(str), Seq.empty)
+  def apply(str: String): PropComment = new PropComment(Some(str), Seq.empty[Annotation])
 }
 
 final case class VarName(value: String) extends Wrapper[String]
@@ -54,7 +54,7 @@ final case class Import(
   target: Either[Path, String]
 )
 
-case class Identifier private (value: String) extends Wrapper[String]
+final case class Identifier private (value: String) extends Wrapper[String]
 
 object Identifier {
   def safe(m: String): Identifier = {

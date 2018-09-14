@@ -14,6 +14,7 @@ object Runner {
        |
        |import com.dbrsn.scalajs.react.macros.tojs.JSMacro
        |import japgolly.scalajs.react._
+       |import japgolly.scalajs.react.component.Js._
        |import japgolly.scalajs.react.raw._
        |import japgolly.scalajs.react.vdom._
        |import org.scalajs.dom
@@ -40,14 +41,14 @@ object Runner {
           // scalastyle:off regex
           System.err.println(s"not found required path: $path")
           // scalastyle:on regex
-          Seq.empty
+          Seq.empty[FoundComponent]
 
         case Single(n, c) =>
           Seq(c)
 
         case Multiple(path, rs) =>
           if (visited.contains(path)) {
-            Seq.empty
+            Seq.empty[FoundComponent]
           } else {
             visited += path
             val requireds: Seq[Required] = rs.map(_.run).toList

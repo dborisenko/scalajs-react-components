@@ -5,10 +5,10 @@ import jdk.nashorn.internal.ir._
 
 import scala.collection.mutable
 
-case class VisitorExports(n: FunctionNode) extends VisitorHelper[FunctionNode, Seq[Node]](n) {
+final case class VisitorExports(n: FunctionNode) extends VisitorHelper[FunctionNode, Seq[Node]](n) {
   // Left if something is exported at `exported.default` for now
   private var ret: Either[Node, mutable.ArrayBuffer[Node]] =
-    Right(mutable.ArrayBuffer.empty)
+    Right[Node, mutable.ArrayBuffer[Node]](mutable.ArrayBuffer.empty[Node])
 
   def filterNode(rhs: Node): Option[Node] =
     rhs match {
@@ -29,10 +29,10 @@ case class VisitorExports(n: FunctionNode) extends VisitorHelper[FunctionNode, S
               case (_, None, _) ⇒
                 ()
               case (_, Some(node), true) ⇒
-                ret = Left(node)
+                ret = Left[Node, mutable.ArrayBuffer[Node]](node)
               case (Right(existing), Some(node), false) ⇒
                 existing += node
-              case other ⇒
+              case _ ⇒
                 ???
             }
         }

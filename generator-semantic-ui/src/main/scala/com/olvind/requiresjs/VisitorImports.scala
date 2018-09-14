@@ -7,7 +7,7 @@ import jdk.nashorn.internal.ir._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-case class VisitorImports(n: FunctionNode, currentPath: Path)
+final case class VisitorImports(n: FunctionNode, currentPath: Path)
     extends VisitorHelperNameStack[FunctionNode, Seq[Import]](n) {
   private val ret: mutable.Map[VarName, Import] =
     mutable.Map.empty[VarName, Import]
@@ -17,9 +17,9 @@ case class VisitorImports(n: FunctionNode, currentPath: Path)
       case (i: IdentNode, List(o: LiteralNode[_])) if i.getName == "require" =>
         val target =
           if (o.getString.startsWith(".")) {
-            Left(add(currentPath, o.getString))
+            Left[Path, String](add(currentPath, o.getString))
           } else {
-            Right(o.getString)
+            Right[Path, String](o.getString)
           }
 
         val name = nameStack.headOption.getOrElse(VarName(o.getString))

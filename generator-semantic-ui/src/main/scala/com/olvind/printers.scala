@@ -1,11 +1,11 @@
 package com.olvind
 
 sealed trait OutFile
-case class PrimaryOutFile(filename: CompName, content: String, secondaries: Seq[SecondaryOutFile]) extends OutFile
-case class SecondaryOutFile(filename: String, content: String) extends OutFile
+final case class PrimaryOutFile(filename: CompName, content: String, secondaries: Seq[SecondaryOutFile]) extends OutFile
+final case class SecondaryOutFile(filename: String, content: String) extends OutFile
 
 object Printer {
-  case class FieldStats(maxFieldNameLen: Int, maxTypeNameLen: Int)
+  final case class FieldStats(maxFieldNameLen: Int, maxTypeNameLen: Int)
 
   def apply(prefix: String, comp: ParsedComponent): (PrimaryOutFile, Seq[SecondaryOutFile]) = {
     val fs: FieldStats =
@@ -18,7 +18,7 @@ object Printer {
       PrimaryOutFile(
         comp.name,
         Seq(
-          s"\ncase class ${comp.nameDef(prefix, withBounds = true)}(",
+          s"\nfinal case class ${comp.nameDef(prefix, withBounds = true)}(",
           comp.fields
             .filterNot(_.name == PropName("children"))
             .map(
@@ -45,7 +45,7 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
       case (None, _) =>
         s"""{
           |
-          |${indent(1)}def apply() = {
+          |${indent(1)}def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
           |${indent(2)}${hack(comp)}
           |${indent(2)}val props = JSMacro[${comp.nameDef(prefix)}](this)
           |${indent(2)}val f = JsComponent[js.Object, Children.None, Null]($prefix.${comp.name.value})
@@ -58,7 +58,7 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
         s"""{
            |
            |${outChildrenComment(childrenProp.commentOpt)}
-           |${indent(1)}def apply(children: ${childrenProp.baseType.name}*) = {
+           |${indent(1)}def apply(children: ${childrenProp.baseType.name}*): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
            |${indent(2)}${hack(comp)}
            |${indent(2)}val props = JSMacro[${comp.nameDef(prefix)}](this)
            |${indent(2)}val f = JsComponent[js.Object, Children.Varargs, Null]($prefix.${comp.name.value})
@@ -70,7 +70,7 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
         s"""{
            |
            |${outChildrenComment(childrenProp.commentOpt)}
-           |${indent(1)}def apply(child: ${childrenProp.typeName} = js.undefined) = {
+           |${indent(1)}def apply(child: ${childrenProp.typeName} = js.undefined): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
            |${indent(2)}${if (!childrenProp.isRequired) "import js.UndefOr._"}
            |${indent(2)}${hack(comp)}
            |${indent(2)}val props = JSMacro[${comp.nameDef(prefix)}](this)
@@ -158,10 +158,10 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
          |${c.identifiers
            .map {
              case (ident, original) =>
-               s"""${indent(1)}val ${safeName(ident.value)} = new ${c.name}("$original")"""
+               s"""${indent(1)}val ${safeName(ident.value)}: ${c.name} = new ${c.name}("$original")"""
            }
            .mkString("\n")}
-         |${indent(1)}val values = ${c.identifiers.map(_._1.value).map(safeName).toList}
+         |${indent(1)}val values: List[${c.name}] = ${c.identifiers.map(_._1.value).map(safeName).toList}
          |}""".stripMargin
     )
 

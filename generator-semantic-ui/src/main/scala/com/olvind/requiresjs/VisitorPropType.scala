@@ -5,7 +5,7 @@ import jdk.nashorn.internal.ir._
 
 import scala.collection.JavaConverters._
 
-case class VisitorPropType(
+final case class VisitorPropType(
   n: CompName,
   o: ObjectNode,
   jsContent: String,

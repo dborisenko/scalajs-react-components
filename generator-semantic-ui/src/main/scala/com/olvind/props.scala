@@ -75,9 +75,9 @@ final case class ParsedEnumClass(
 )
 
 sealed trait Annotation
-case class Deprecated(reason: String) extends Annotation
-case class Param(value: String) extends Annotation
-case object Ignore extends Annotation
+final case class Deprecated(reason: String) extends Annotation
+final case class Param(value: String) extends Annotation
+final case object Ignore extends Annotation
 
 final case class ParsedProp(
   name: PropName,
@@ -102,9 +102,9 @@ sealed trait Type {
   def name: String
 }
 
-case class Generic(name: String, jsObject: Boolean = false)
+final case class Generic(name: String, jsObject: Boolean = false)
 
-case class Normal(name: String, genericOpt: Option[Generic] = None) extends Type {
+final case class Normal(name: String, genericOpt: Option[Generic] = None) extends Type {
   def generic(name: String): Normal =
     copy(genericOpt = Some(Generic(name)))
 
@@ -112,7 +112,7 @@ case class Normal(name: String, genericOpt: Option[Generic] = None) extends Type
     copy(genericOpt = Some(Generic(name, jsObject = true)))
 }
 
-case class Enum(component: CompName, ss: Seq[String], specialName: String = "") extends Type {
+final case class Enum(component: CompName, ss: Seq[String], specialName: String = "") extends Type {
   val fixedNames: Seq[(Identifier, String)] =
     ss.map { m =>
       (Identifier.safe(m), m)

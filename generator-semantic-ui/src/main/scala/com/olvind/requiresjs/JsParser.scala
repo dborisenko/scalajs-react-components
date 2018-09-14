@@ -8,7 +8,7 @@ import jdk.nashorn.internal.runtime.{Context, ErrorManager, Source}
 
 object JsParser {
 
-  val options = new Options("nashorn")
+  val options: Options = new Options("nashorn")
   options.set("anon.functions", true)
   options.set("parse.only", true)
   options.set("scripting", true)

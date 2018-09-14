@@ -1,13 +1,13 @@
 package com.dbrsn.scalajs.react.semanticui
 
-case class ButtonAnimatedType private (value: String) extends AnyVal
+final case class ButtonAnimatedType private (value: String) extends AnyVal
 
 object ButtonAnimatedType {
-  val fade = ButtonAnimatedType("fade")
-  val vertical = ButtonAnimatedType("vertical")
-  val values = List(fade, vertical)
+  val fade: ButtonAnimatedType = ButtonAnimatedType("fade")
+  val vertical: ButtonAnimatedType = ButtonAnimatedType("vertical")
+  val values: List[ButtonAnimatedType] = List(fade, vertical)
 }
 
-case class SuiIconType(value: String) extends AnyVal
+final case class SuiIconType(value: String) extends AnyVal
 
-case class SuiCountry(value: String) extends AnyVal
+final case class SuiCountry(value: String) extends AnyVal

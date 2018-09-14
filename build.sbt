@@ -55,7 +55,9 @@ inThisBuild(
 
 lazy val commonSettings = List(
   scalastyleFailOnError := true,
-  scalastyleFailOnWarning := true
+  scalastyleFailOnWarning := true,
+  wartremoverErrors in (Compile, compile) := Warts.all,
+  wartremoverErrors in (Test, compile) := Warts.all
 )
 
 lazy val publishSettings = List(
@@ -132,6 +134,20 @@ lazy val macros = project
       Dependencies.scalatest.value % Test
     )
   )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts.allBut(
+      Wart.Any,
+      Wart.AnyVal,
+      Wart.NonUnitStatements,
+      Wart.Nothing,
+      Wart.Null,
+      Wart.OptionPartial,
+      Wart.Recursion,
+      Wart.ToString,
+      Wart.TraversableOps
+    ),
+    wartremoverErrors in (Test, compile) := Warts.allBut()
+  )
 
 lazy val `generator-semantic-ui` = project
   .in(file("generator-semantic-ui"))
@@ -161,6 +177,24 @@ lazy val `generator-semantic-ui` = project
       "-language:implicitConversions", // Allow definition of implicit functions called views
       "-language:postfixOps",
       "-P:scalajs:sjsDefinedByDefault"
+    )
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts.allBut(
+      Wart.Any,
+      Wart.Equals,
+      Wart.MutableDataStructures,
+      Wart.NonUnitStatements,
+      Wart.Recursion,
+      Wart.Option2Iterable,
+      Wart.DefaultArguments,
+      Wart.ToString,
+      Wart.Throw,
+      Wart.TraversableOps,
+      Wart.OptionPartial,
+      Wart.AsInstanceOf,
+      Wart.Var,
+      Wart.Overloading
     )
   )
 
@@ -202,6 +236,9 @@ lazy val `semantic-ui` = project
       Dependencies.`react-dom`
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing)
   )
 
 lazy val `scalajs-react-components` = project

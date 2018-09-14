@@ -30,7 +30,7 @@ object ParseComponent {
 
     val inheritedProps: Map[PropName, PropUnparsed] =
       comp.shared match {
-        case None => Map.empty
+        case None => Map.empty[PropName, PropUnparsed]
         case Some(shared) =>
           scope
             .get(shared.name)
@@ -49,7 +49,7 @@ object ParseComponent {
         .map(
           members ⇒
             ParsedMethodClass(
-              library.prefixOpt.getOrElse("") + comp.name + "M",
+              library.prefixOpt.getOrElse("") + comp.name.toString + "M",
               members.toSeq.sortBy(_.name).map(library.memberMapper(comp.name))
           )
         )

@@ -5,7 +5,7 @@ import ammonite.ops._
 
 import scala.language.implicitConversions
 
-case class SuiLibrary(base: Path) extends Library {
+final case class SuiLibrary(base: Path) extends Library {
   /* todo: make requiresjs clever enough to figure this out by itself */
   override val locations =
     Seq(
@@ -19,7 +19,7 @@ case class SuiLibrary(base: Path) extends Library {
   override val indexNames = Set("index.js")
   override val packageName = "com.dbrsn.scalajs.react.semanticui"
 
-  val icon = ComponentDef(CompName("Icon"))
+  val icon: ComponentDef = ComponentDef(CompName("Icon"))
 
   val components: Seq[ComponentDef] =
     Seq(
