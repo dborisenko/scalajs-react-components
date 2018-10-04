@@ -6,21 +6,21 @@ object Dependencies extends DependencyBuilders {
   type NpmDependency = (String, String)
 
   object Versions {
-    lazy val scala = "2.12.6"
+    lazy val scala = "2.12.7"
 
     // Scala: JVM libraries
     lazy val `ammonite-ops` = "1.0.1"
 
     // Scala: JS libraries
-    lazy val `scalajs-react` = "1.2.3"
+    lazy val `scalajs-react` = "1.3.1"
 
     // Scala: JVM + JS libraries
     lazy val scalatest = "3.0.5"
     lazy val specs2 = "4.3.4"
 
     // JavaScript: Node.js libraries
-    lazy val `semantic-ui-react` = "0.82.3"
-    lazy val react = "16.5.0"
+    lazy val `semantic-ui-react` = "0.82.5"
+    lazy val react = "16.5.2"
   }
 
   // Scala: JVM libraries

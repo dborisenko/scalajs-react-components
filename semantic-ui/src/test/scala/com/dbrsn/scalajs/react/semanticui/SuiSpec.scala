@@ -41,7 +41,7 @@ object SuiSpec {
       unmounted(testPhrase(token), clicked.setStateFn(true))
     )
     val element = ReactTestUtils.findRenderedDOMComponentWithTag(rendered, "button")
-    Simulate.click(element.getDOMNode.asElement)
+    Simulate.click(element.getDOMNode.asMounted().asElement())
     (rendered.outerHtmlScrubbed() must contain(token)) and (clicked.value() must_=== true)
   }
 
