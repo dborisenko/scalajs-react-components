@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.2"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.3"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.5",
