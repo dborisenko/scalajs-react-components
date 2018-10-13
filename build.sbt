@@ -211,8 +211,8 @@ lazy val `generator-semantic-ui` = project
 
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")
 
-lazy val `semantic-ui` = project
-  .in(file("semantic-ui"))
+lazy val `semantic-ui-react` = project
+  .in(file("semantic-ui-react"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
   .settings(commonSettings)
@@ -253,8 +253,24 @@ lazy val `semantic-ui` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
-lazy val `sortable-hoc` = project
-  .in(file("sortable-hoc"))
+lazy val `react-sortable-hoc` = project
+  .in(file("react-sortable-hoc"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value
+    )
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing)
+  )
+
+lazy val `beautiful-dnd` = project
+  .in(file("beautiful-dnd"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
   .settings(commonSettings)
@@ -275,7 +291,9 @@ lazy val `scalajs-react-components` = project
   .settings(publishSettings)
   .aggregate(macros)
   .aggregate(`generator-semantic-ui`)
-  .aggregate(`semantic-ui`)
-  .aggregate(`sortable-hoc`)
-  .dependsOn(`semantic-ui`)
-  .dependsOn(`sortable-hoc`)
+  .aggregate(`semantic-ui-react`)
+  .aggregate(`react-sortable-hoc`)
+  .aggregate(`beautiful-dnd`)
+  .dependsOn(`semantic-ui-react`)
+  .dependsOn(`react-sortable-hoc`)
+  .dependsOn(`beautiful-dnd`)

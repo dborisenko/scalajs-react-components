@@ -16,16 +16,16 @@ Adding types to javascript is a lot of guesswork, and we're certain to have gott
  some places. Bug reports and/or pull requests are very much welcome! :)
 
 # Semantic UI
-[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui_sjs0.6_2.12)
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.82.5-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
-Module `semantic-ui` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
+Module `semantic-ui-react` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
 
 Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.4"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.4"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.5",
@@ -44,16 +44,16 @@ SuiButton(animated = true, onClick = (_: ReactMouseEventFromHtml) => Callback(??
 ```
 
 # React Sortable (HOC)
-[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/sortable-hoc_sjs0.6_2.12)
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.8.3-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
 
-Module `sortable-hoc` contains scalajs wrapper for [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) component.
+Module `react-sortable-hoc` contains scalajs wrapper for [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) component.
 
 Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "sortable-hoc" % "0.0.4"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.4"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "0.8.3",
