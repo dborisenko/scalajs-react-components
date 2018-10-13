@@ -190,8 +190,8 @@ lazy val generator = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements)
   )
 
-lazy val `generator-semantic-ui` = project
-  .in(file("generator-semantic-ui"))
+lazy val `generator-semantic-ui-react` = project
+  .in(file("generator-semantic-ui-react"))
   .enablePlugins(ScalaJSBundlerPlugin)
   .settings(commonSettings)
   .settings(publishSettings)
@@ -230,9 +230,9 @@ lazy val `semantic-ui-react` = project
       genDir.mkdirs()
       val res = runner.value.run(
         "com.dbrsn.generator.sui.SuiRunner",
-        (fullClasspath in (`generator-semantic-ui`, Runtime)).value.files,
+        (fullClasspath in (`generator-semantic-ui-react`, Runtime)).value.files,
         List(
-          (npmUpdate in (`generator-semantic-ui`, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",
+          (npmUpdate in (`generator-semantic-ui-react`, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",
           sourceManaged.value / "main"
         ).map(_.absolutePath),
         streams.value.log
@@ -280,7 +280,7 @@ lazy val `scalajs-react-components` = project
   .settings(commonSettings)
   .settings(publishSettings)
   .aggregate(macros)
-  .aggregate(`generator-semantic-ui`)
+  .aggregate(`generator-semantic-ui-react`)
   .aggregate(`semantic-ui-react`)
   .aggregate(`react-sortable-hoc`)
   .dependsOn(`semantic-ui-react`)
