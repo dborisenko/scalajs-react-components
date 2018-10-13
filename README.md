@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.4"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.5"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.5",
@@ -53,7 +53,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.4"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.5"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "0.8.3",
