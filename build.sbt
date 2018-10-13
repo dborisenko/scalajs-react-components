@@ -159,34 +159,15 @@ lazy val macros = project
     )
   )
 
-lazy val `generator-semantic-ui` = project
-  .in(file("generator-semantic-ui"))
+lazy val generator = project
+  .in(file("generator"))
   .enablePlugins(ScalaJSBundlerPlugin)
   .settings(commonSettings)
   .settings(publishSettings)
   .settings(
-    version in webpack := "2.6.1",
     libraryDependencies ++= Seq(
       Dependencies.`ammonite-ops`,
       Dependencies.scalatest.value % Test
-    )
-  )
-  .settings(
-    useYarn := true,
-    npmDependencies in Compile := Seq(
-      Dependencies.`semantic-ui-react`,
-      Dependencies.react,
-      Dependencies.`react-dom`
-    )
-  )
-  .settings(
-    scalacOptions := Seq(
-      "-deprecation", // Emit warning and location for usages of deprecated APIs.
-      "-feature", // Emit warning and location for usages of features that should be imported explicitly.
-      "-unchecked", // Enable additional warnings where generated code depends on assumptions.
-      "-language:implicitConversions", // Allow definition of implicit functions called views
-      "-language:postfixOps",
-      "-P:scalajs:sjsDefinedByDefault"
     )
   )
   .settings(
@@ -209,6 +190,31 @@ lazy val `generator-semantic-ui` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements)
   )
 
+lazy val `generator-semantic-ui` = project
+  .in(file("generator-semantic-ui"))
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .settings(
+    version in webpack := Dependencies.Versions.webpack,
+    libraryDependencies ++= Seq(
+      Dependencies.scalatest.value % Test
+    )
+  )
+  .settings(
+    useYarn := true,
+    npmDependencies in Compile := Seq(
+      Dependencies.`semantic-ui-react`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    )
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.NonUnitStatements, Wart.Recursion, Wart.TraversableOps, Wart.Overloading, Wart.Equals, Wart.Throw)
+  )
+  .dependsOn(generator)
+
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")
 
 lazy val `semantic-ui-react` = project
@@ -223,7 +229,7 @@ lazy val `semantic-ui-react` = project
       val genDir = sourceManaged.value
       genDir.mkdirs()
       val res = runner.value.run(
-        "com.olvind.sui.SuiRunner",
+        "com.dbrsn.generator.sui.SuiRunner",
         (fullClasspath in (`generator-semantic-ui`, Runtime)).value.files,
         List(
           (npmUpdate in (`generator-semantic-ui`, Compile)).value / "node_modules" / "semantic-ui-react" / "dist" / "commonjs",

@@ -7,6 +7,8 @@ object Dependencies extends DependencyBuilders {
 
   object Versions {
     lazy val scala = "2.12.7"
+    
+    lazy val webpack = "2.6.1"
 
     // Scala: JVM libraries
     lazy val `ammonite-ops` = "1.0.1"
