@@ -253,6 +253,22 @@ lazy val `semantic-ui` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
+lazy val `sortable-hoc` = project
+  .in(file("sortable-hoc"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value
+    )
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing)
+  )
+
 lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(commonSettings)
@@ -260,4 +276,6 @@ lazy val `scalajs-react-components` = project
   .aggregate(macros)
   .aggregate(`generator-semantic-ui`)
   .aggregate(`semantic-ui`)
+  .aggregate(`sortable-hoc`)
   .dependsOn(`semantic-ui`)
+  .dependsOn(`sortable-hoc`)

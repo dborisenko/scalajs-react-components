@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.3"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui" % "0.0.4"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.5",
@@ -40,5 +40,24 @@ Example of usage:
 SuiButton(animated = true, onClick = (_: ReactMouseEventFromHtml) => Callback(???))(
   SuiButtonContent(visible = true)("Hello, World!"),
   SuiButtonContent(hidden = true)(SuiIcon(name = SuiIconType("arrow right"))())
+)
+```
+
+# React Sortable (HOC)
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/sortable-hoc_sjs0.6_2.12)
+[![react](https://img.shields.io/badge/semantic--ui--react-0.8.3-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
+
+Module `sortable-hoc` contains scalajs wrapper for [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) component.
+
+Add dependencies in `build.sbt`:
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "sortable-hoc" % "0.0.4"
+)
+npmDependencies in Compile ++= Seq(
+  "react-sortable-hoc" -> "0.8.3",
+  "react" -> "16.5.2",
+  "react-dom" -> "16.5.2"
 )
 ```
