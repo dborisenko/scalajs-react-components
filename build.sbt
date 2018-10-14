@@ -267,12 +267,23 @@ lazy val `react-sortable-hoc` = project
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
-      Dependencies.`scalajs-react-core`.value
-    )
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`react-sortable-hoc`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
   .settings(
     wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing)
+      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
+    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
+  )
+
   )
 
 lazy val `scalajs-react-components` = project

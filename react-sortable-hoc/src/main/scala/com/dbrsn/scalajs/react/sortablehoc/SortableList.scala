@@ -16,16 +16,18 @@ class SortableList[Element, ExternalProps] {
     listToDisplay: List[Element],
     sortableContainerProps: SortableContainer.Props,
     externalProps: Element => ExternalProps,
-    componentToDisplay: ComponentRaw#Raw,
+    itemComponent: ComponentRaw#Raw,
     itemRenderer: Seq[TagMod] => TagMod = tags => <.li(tags: _*),
     listRenderer: Seq[TagMod] => VdomElement = list => <.ul(list: _*),
     handle: Unmounted[js.Object, Null] = SortableHandleIcon.handle
-  )
+  ) {
+    @inline def render: Unmounted[js.Object, Null] = apply(this)
+  }
 
   private def render(props: Props): VdomElement = {
     val list: Seq[TagMod] = props.listToDisplay.zipWithIndex.map {
       case (value, index) =>
-        val item = SortableElement(props.componentToDisplay)(SortableElement.Props(index = index))(
+        val item = SortableElement(props.itemComponent)(SortableElement.Props(index = index))(
           props.externalProps(value)
         )()
         props.itemRenderer(Seq(props.handle, item))
@@ -40,4 +42,8 @@ class SortableList[Element, ExternalProps] {
 
   def apply(props: Props): Unmounted[js.Object, Null] =
     SortableContainer(component)(props.sortableContainerProps)(props)
+}
+
+object SortableList {
+  def apply[Element, ExternalProps]: SortableList[Element, ExternalProps] = new SortableList[Element, ExternalProps]
 }
