@@ -36,5 +36,5 @@ final case class DropReason private (value: String) extends AnyVal
 
 object DropReason {
   val drop: DropReason = DropReason("DROP")
-  val vertical: DropReason = DropReason("CANCEL")
+  val cancel: DropReason = DropReason("CANCEL")
 }

@@ -30,7 +30,7 @@ final case class DndDraggable(
 ) {
   def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
     val props = JSMacro[DndDraggable](this)
-    val f = JsComponent[js.Object, Children.None, Null](BeautifulDnd.DragDropContext)
+    val f = JsComponent[js.Object, Children.None, Null](BeautifulDnd.Draggable)
     f(props)
   }
 }
