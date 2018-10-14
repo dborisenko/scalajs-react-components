@@ -1,0 +1,8 @@
+package com.dbrsn.scalajs.react.beautifuldnd
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSImport
+
+object BeautifulDnd {
+  @js.native @JSImport("react-beautiful-dnd/dist/DragDropContext", JSImport.Default)
+  object DragDropContext extends js.Any
+}

@@ -284,6 +284,28 @@ lazy val `react-sortable-hoc` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
+lazy val `react-beautiful-dnd` = project
+  .in(file("react-beautiful-dnd"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .dependsOn(macros)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`react-beautiful-dnd`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing)
   )
 
 lazy val `scalajs-react-components` = project
@@ -294,5 +316,7 @@ lazy val `scalajs-react-components` = project
   .aggregate(`generator-semantic-ui-react`)
   .aggregate(`semantic-ui-react`)
   .aggregate(`react-sortable-hoc`)
+  .aggregate(`react-beautiful-dnd`)
   .dependsOn(`semantic-ui-react`)
   .dependsOn(`react-sortable-hoc`)
+  .dependsOn(`react-beautiful-dnd`)
