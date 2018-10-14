@@ -15,13 +15,11 @@ object SuiSpec {
   private def testPhrase(token: String): String =
     s"Lorem ipsum dolor sit amet, $token consectetuer adipiscing elit."
 
-  // scalastyle:off magic.number
   private val StateFullComponent = ScalaComponent
     .builder[VdomElement]("StateFullComponent")
-    .initialState(42)
+    .initialState("Hello, world!")
     .render_P(identity)
     .build
-  // scalastyle:on magic.number
 
   /**
     * Due to this feature of react test:
@@ -31,7 +29,7 @@ object SuiSpec {
     *
     * @see https://github.com/facebook/react/issues/5455
     */
-  def statefulWrapper(element: VdomElement): Unmounted[VdomElement, Int, Unit] =
+  def statefulWrapper(element: VdomElement): Unmounted[VdomElement, String, Unit] =
     StateFullComponent(element)
 
   def testTextAndClick(unmounted: (String, Callback) => VdomElement): MatchResult[Any] = {
