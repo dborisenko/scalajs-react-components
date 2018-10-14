@@ -7,10 +7,7 @@ import scala.language.implicitConversions
 
 final case class SuiLibrary(base: Path) extends Library {
   /* todo: make requiresjs clever enough to figure this out by itself */
-  override val locations: Seq[Path] =
-    Seq(
-      base
-    )
+  override val locations: Seq[Path] = Seq(base)
 
   override val prefixOpt = Some("Sui")
   override val name = "semanticui"

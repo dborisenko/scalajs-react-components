@@ -20,6 +20,7 @@ object SuiTypeMemberMethodMapper extends MemberMapper {
         // scalastyle:on regex
         m + args.map(sanitize(_) + ": js.Any").mkString("(", ", ", ")") + ": js.Dynamic"
     }
+
   def sanitize(s: String): String =
     if (s == "val") "`val`" else s
 }

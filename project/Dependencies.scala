@@ -7,7 +7,7 @@ object Dependencies extends DependencyBuilders {
 
   object Versions {
     lazy val scala = "2.12.7"
-    
+
     lazy val webpack = "2.6.1"
 
     // Scala: JVM libraries
@@ -24,6 +24,7 @@ object Dependencies extends DependencyBuilders {
     lazy val `semantic-ui-react` = "0.82.5"
     lazy val react = "16.5.2"
     lazy val `react-sortable-hoc` = "0.8.3"
+    lazy val `react-beautiful-dnd` = "9.0.2"
   }
 
   // Scala: JVM libraries
@@ -41,6 +42,7 @@ object Dependencies extends DependencyBuilders {
   // JavaScript: Node.js libraries
   lazy val `semantic-ui-react`: NpmDependency = "semantic-ui-react" -> Versions.`semantic-ui-react`
   lazy val `react-sortable-hoc`: NpmDependency = "react-sortable-hoc" -> Versions.`react-sortable-hoc`
+  lazy val `react-beautiful-dnd`: NpmDependency = "react-beautiful-dnd" -> Versions.`react-beautiful-dnd`
   lazy val react: NpmDependency = "react" -> Versions.react
   lazy val `react-dom`: NpmDependency = "react-dom" -> Versions.react
 }

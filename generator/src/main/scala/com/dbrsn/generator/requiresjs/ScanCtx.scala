@@ -1,7 +1,6 @@
 package com.dbrsn.generator.requiresjs
 
 import ammonite.ops.Path
-import com.dbrsn.generator.CompName
 
 import scala.collection.mutable
 
