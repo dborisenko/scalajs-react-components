@@ -8,6 +8,11 @@ trait Position extends js.Object {
   def y: Int = js.native
 }
 
+object Position {
+  def apply(x: Int = 0, y: Int = 0): Position =
+    js.Dynamic.literal(x = x, y = y).asInstanceOf[Position]
+}
+
 @js.native
 trait Rect extends js.Object {
   def top: Int = js.native

@@ -18,12 +18,12 @@ final case class DndDraggable(
     */
   shouldAnimateDisplacement: Boolean = true,
   isDropAnimating: Boolean = false,
-  offset: Position,
+  offset: Position = Position(),
   /** only provided when dragging **/
   dimension: js.UndefOr[DraggableDimension] = js.undefined,
   draggingOver: js.UndefOr[DroppableId] = js.undefined,
   draggableId: DraggableId,
-  children: (DraggableProvided, DraggableStateSnapshot) => js.UndefOr[Node] = (_, _) => js.undefined,
+  children: (DraggableProvided, DraggableStateSnapshot) => js.UndefOr[Node],
   index: Int,
   isDragDisabled: Boolean = false,
   disableInteractiveElementBlocking: Boolean = false
