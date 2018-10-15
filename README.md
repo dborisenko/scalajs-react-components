@@ -61,3 +61,21 @@ npmDependencies in Compile ++= Seq(
   "react-dom" -> "16.5.2"
 )
 ```
+
+Example of usage:
+
+```scala
+case class Model(text: String)
+case class Props(model: Model)
+
+val item1 = "Test 1"
+val item2 = "Test 2"
+
+SortableList[Model, Props].Props(
+  listToDisplay = List(Model(item1), Model(item2)),
+  sortableContainerProps = SortableContainer.Props(),
+  externalProps = Props,
+  itemComponent = raw
+).render
+
+```
