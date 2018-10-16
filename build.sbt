@@ -284,8 +284,6 @@ lazy val `react-sortable-hoc` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
-  )
-
 lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(commonSettings)
