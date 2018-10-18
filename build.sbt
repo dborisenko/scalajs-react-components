@@ -284,6 +284,32 @@ lazy val `react-sortable-hoc` = project
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
+lazy val `react-trello` = project
+  .in(file("react-trello"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`react-trello`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
+    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
+  )
+  .dependsOn(macros)
+
 lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(commonSettings)
@@ -292,5 +318,7 @@ lazy val `scalajs-react-components` = project
   .aggregate(`generator-semantic-ui-react`)
   .aggregate(`semantic-ui-react`)
   .aggregate(`react-sortable-hoc`)
+  .aggregate(`react-trello`)
   .dependsOn(`semantic-ui-react`)
   .dependsOn(`react-sortable-hoc`)
+  .dependsOn(`react-trello`)
