@@ -293,6 +293,7 @@ lazy val `react-trello` = project
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalacss-ext-react`.value,
       Dependencies.`scalajs-react-test`.value % Test,
       Dependencies.specs2.value % Test
     ),

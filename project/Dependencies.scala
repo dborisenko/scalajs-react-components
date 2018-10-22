@@ -15,6 +15,7 @@ object Dependencies extends DependencyBuilders {
 
     // Scala: JS libraries
     lazy val `scalajs-react` = "1.3.1"
+    lazy val scalacss = "0.5.5"
 
     // Scala: JVM + JS libraries
     lazy val scalatest = "3.0.5"
@@ -34,6 +35,7 @@ object Dependencies extends DependencyBuilders {
   lazy val `scalajs-react-core` = Def.setting("com.github.japgolly.scalajs-react" %%% "core" % Versions.`scalajs-react`)
   lazy val `scalajs-react-extra` = Def.setting("com.github.japgolly.scalajs-react" %%% "extra" % Versions.`scalajs-react`)
   lazy val `scalajs-react-test` = Def.setting("com.github.japgolly.scalajs-react" %%% "test" % Versions.`scalajs-react`)
+  lazy val `scalacss-ext-react` = Def.setting("com.github.japgolly.scalacss" %%% "ext-react" % Versions.scalacss)
 
   // Scala: JVM + JS libraries
   lazy val scalatest = Def.setting("org.scalatest" %%% "scalatest" % Versions.scalatest)
