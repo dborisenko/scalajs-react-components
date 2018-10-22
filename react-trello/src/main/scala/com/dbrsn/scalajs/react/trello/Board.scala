@@ -9,20 +9,20 @@ import japgolly.scalajs.react.{Callback, Children, JsComponent}
 
 import scala.scalajs.js
 
-final case class Board(
+final case class Board[Metadata](
   id: js.UndefOr[BoardId] = js.undefined,
   actions: js.UndefOr[RawAction] = js.undefined,
-  data: Data,
-  reducerData: js.UndefOr[Data] = js.undefined,
-  onDataChange: js.UndefOr[Data => Callback] = js.undefined,
+  data: Data[Metadata],
+  reducerData: js.UndefOr[Data[Metadata]] = js.undefined,
+  onDataChange: js.UndefOr[Data[Metadata] => Callback] = js.undefined,
   eventBusHandle: js.UndefOr[js.Any => Callback] = js.undefined,
   onLaneScroll: js.UndefOr[(Int, LaneId) => Callback] = js.undefined,
   onCardClick: js.UndefOr[(CardId, Metadata, LaneId) => Callback] = js.undefined,
   onCardDelete: js.UndefOr[(CardId, LaneId) => Callback] = js.undefined,
-  onCardAdd: js.UndefOr[(Card, LaneId) => Callback] = js.undefined,
+  onCardAdd: js.UndefOr[(Card[Metadata], LaneId) => Callback] = js.undefined,
   addCardLink: js.UndefOr[Element] = js.undefined,
   onLaneClick: js.UndefOr[LaneId => Callback] = js.undefined,
-  laneSortFunction: js.UndefOr[(Card, Card) => Callback] = js.undefined,
+  laneSortFunction: js.UndefOr[(Card[Metadata], Card[Metadata]) => Callback] = js.undefined,
   draggable: js.UndefOr[Boolean] = js.undefined,
   collapsibleLanes: js.UndefOr[Boolean] = js.undefined,
   editable: js.UndefOr[Boolean] = js.undefined,
@@ -44,7 +44,7 @@ final case class Board(
   newLaneTemplate: js.UndefOr[Element] = js.undefined
 ) {
   def apply(children: VdomNode*): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
-    val props = JSMacro[Board](this)
+    val props = JSMacro[Board[Metadata]](this)
     val f = JsComponent[js.Object, Children.Varargs, Null](ReactTrello.Board)
     f(props)(children: _*)
   }

@@ -1,11 +1,12 @@
 package com.dbrsn.scalajs.react.trello.data
 
 import scala.scalajs.js
+import scala.scalajs.js.JSConverters._
 
-final class Data(
-  val lanes: js.Array[Lane]
+final class Data[Metadata](
+  val lanes: js.Array[Lane[Metadata]]
 ) extends js.Object
 
 object Data {
-  def apply(lanes: js.Array[Lane] = js.Array()): Data = new Data(lanes)
+  def apply[Metadata](lanes: Lane[Metadata]*): Data[Metadata] = new Data[Metadata](lanes.toJSArray)
 }

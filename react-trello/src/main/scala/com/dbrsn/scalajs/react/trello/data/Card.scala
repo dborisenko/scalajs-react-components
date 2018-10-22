@@ -1,8 +1,10 @@
 package com.dbrsn.scalajs.react.trello.data
 
+import scalacss.internal.StyleS
+
 import scala.scalajs.js
 
-final class Card(
+final class Card[Metadata](
   val id: CardId,
   val title: String,
   val label: String,
@@ -12,12 +14,12 @@ final class Card(
 ) extends js.Object
 
 object Card {
-  def apply(
+  def apply[Metadata](
     id: CardId,
     title: String,
     label: String,
     description: String,
-    cardStyle: RawStyle,
+    cardStyle: StyleS = StyleS.empty,
     metadata: Option[Metadata] = None
-  ): Card = new Card(id, title, label, description, cardStyle, metadata)
+  ): Card[Metadata] = new Card[Metadata](id, title, label, description, cardStyle.toJsAny, metadata)
 }

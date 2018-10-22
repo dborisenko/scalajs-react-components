@@ -1,5 +1,6 @@
 package com.dbrsn.scalajs.react.trello
 
+import com.dbrsn.scalajs.react.trello.data.Tag.@@
 import scalacss.internal.StyleS
 
 import scala.scalajs.js
@@ -12,15 +13,12 @@ package object data {
     def empty: RawStyle = new js.Object()
   }
 
-  type BoardId = String
-  type CardId = String
-  type LaneId = String
+  type BoardId = String @@ BoardId.Tag
+  type CardId = String @@ CardId.Tag
+  type LaneId = String @@ LaneId.Tag
 
   type SourceLaneId = LaneId
   type TargetLaneId = LaneId
-
-  type Tag = js.Object
-  type Metadata = js.Object
 
   final def styleS2JsAny(style: StyleS): js.Any = {
     val result = js.Dictionary.empty[String]

@@ -3,23 +3,25 @@ package com.dbrsn.scalajs.react.trello.data
 import scalacss.internal.StyleS
 
 import scala.scalajs.js
+import scala.scalajs.js.JSConverters._
 
-final class Lane(
+final class Lane[Metadata](
   val id: LaneId,
   val title: String,
   val label: String,
   val style: RawStyle,
-  val cards: js.Array[Card],
+  val cards: js.Array[Card[Metadata]],
   val droppable: Boolean
 ) extends js.Object
 
 object Lane {
-  def apply(
+  def apply[Metadata](
     id: LaneId,
     title: String,
     label: String,
     style: StyleS = StyleS.empty,
-    cards: js.Array[Card] = js.Array(),
     droppable: Boolean = true
-  ): Lane = new Lane(id, title, label, style.toJsAny, cards, droppable)
+  )(
+    cards: Card[Metadata]*
+  ): Lane[Metadata] = new Lane[Metadata](id, title, label, style.toJsAny, cards.toJSArray, droppable)
 }
