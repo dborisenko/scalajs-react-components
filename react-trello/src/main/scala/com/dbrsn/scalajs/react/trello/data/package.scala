@@ -6,7 +6,7 @@ import scalacss.internal.StyleS
 import scala.scalajs.js
 
 package object data {
-  type RawAction = js.Object
+  type RawAction = js.Any
   type RawStyle = js.Any
 
   object RawStyle {
