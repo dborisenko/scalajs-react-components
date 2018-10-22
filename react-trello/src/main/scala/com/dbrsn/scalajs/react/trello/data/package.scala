@@ -1,10 +1,10 @@
-package com.dbrsn.scalajs.react
+package com.dbrsn.scalajs.react.trello
 
 import scalacss.internal.StyleS
 
 import scala.scalajs.js
 
-package object trello {
+package object data {
   type RawAction = js.Object
   type RawStyle = js.Any
 

@@ -1,6 +1,18 @@
 package com.dbrsn.scalajs.react.trello
 
 import com.dbrsn.scalajs.react.macros.tojs.JSMacro
+import com.dbrsn.scalajs.react.trello.data.{
+  BoardId,
+  Card,
+  CardId,
+  Data,
+  LaneId,
+  Metadata,
+  RawAction,
+  RawStyle,
+  SourceLaneId,
+  TargetLaneId
+}
 import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
 import japgolly.scalajs.react.raw.React.Element
 import japgolly.scalajs.react.vdom.VdomNode
