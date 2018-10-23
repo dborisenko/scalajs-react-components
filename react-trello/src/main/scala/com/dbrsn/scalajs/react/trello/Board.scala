@@ -4,8 +4,8 @@ import com.dbrsn.scalajs.react.macros.tojs.JSMacro
 import com.dbrsn.scalajs.react.trello.data._
 import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
 import japgolly.scalajs.react.raw.React.Element
-import japgolly.scalajs.react.vdom.VdomNode
 import japgolly.scalajs.react.{Callback, Children, JsComponent}
+import scalacss.internal.StyleS
 
 import scala.scalajs.js
 
@@ -43,9 +43,13 @@ final case class Board[Metadata](
   addCardTitle: js.UndefOr[String] = js.undefined,
   newLaneTemplate: js.UndefOr[Element] = js.undefined
 ) {
-  def apply(children: VdomNode*): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
+
+  def withStyle(style: StyleS): Board[Metadata] = copy(style = style.toJsAny)
+  def withTagStyle(style: StyleS): Board[Metadata] = copy(tagStyle = style.toJsAny)
+
+  def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
     val props = JSMacro[Board[Metadata]](this)
-    val f = JsComponent[js.Object, Children.Varargs, Null](ReactTrello.Board)
-    f(props)(children: _*)
+    val f = JsComponent[js.Object, Children.None, Null](ReactTrello.Board)
+    f(props)
   }
 }
