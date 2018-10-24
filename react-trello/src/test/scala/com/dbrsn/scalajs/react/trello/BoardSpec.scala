@@ -2,7 +2,7 @@ package com.dbrsn.scalajs.react.trello
 
 import java.util.UUID
 
-import com.dbrsn.scalajs.react.trello.data.{Card, CardId, Data, Lane, LaneId}
+import com.dbrsn.scalajs.react.trello.data._
 import japgolly.scalajs.react.test._
 import org.specs2.mutable.Specification
 import scalacss.DevDefaults._
@@ -13,10 +13,11 @@ class BoardSpec extends Specification {
 
   private object Style extends StyleSheet.Inline {
     import dsl._
-    val laneStyle: StyleS = style(width(280.px)).style
+    val laneStyle: RawAction = style(width(280.px)).style.toJsAny
   }
   import Style.laneStyle
 
+  // scalastyle:off method.length
   private def baseData(token: String): Data[js.Object] = Data(
     Lane(id = LaneId("PLANNED"), title = "Planned Tasks", label = "20/70", style = laneStyle)(
       Card(
@@ -43,12 +44,12 @@ class BoardSpec extends Specification {
       )
     ),
     Lane(id = LaneId("BLOCKED"), title = "Blocked", label = "0/0", style = laneStyle)(),
-    Lane(id = LaneId("COMPLETED"), title = "Completed", label = "2/5", style = laneStyle)(
+    Lane(id = LaneId("COMPLETED"), title = s"Completed $token", label = "2/5", style = laneStyle)(
       Card(
         id = CardId("Completed1"),
         title = "Practice Meditation",
         label = "15 mins",
-        description = s"Use Headspace $token app"
+        description = "Use Headspace app"
       ),
       Card(
         id = CardId("Completed2"),
@@ -70,6 +71,7 @@ class BoardSpec extends Specification {
       Card(id = CardId("Archived3"), title = "Go Cycling", label = "300 mins", description = "Completed 10km on cycle")
     )
   )
+  // scalastyle:on method.length
 
   "Full Board example" >> {
     val token = UUID.randomUUID().toString

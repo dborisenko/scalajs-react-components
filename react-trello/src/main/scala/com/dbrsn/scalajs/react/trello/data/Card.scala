@@ -16,7 +16,7 @@ trait Card[Metadata] extends js.Object {
 }
 
 object Card {
-  def apply[Metadata](
+  def apply[Metadata <: js.Any](
     id: CardId,
     title: String,
     label: String = "",
@@ -35,7 +35,7 @@ object Card {
       )
       .asInstanceOf[Card[Metadata]]
 
-  def styled[Metadata](
+  def styled[Metadata <: js.Any](
     id: CardId,
     title: String,
     label: String = "",
