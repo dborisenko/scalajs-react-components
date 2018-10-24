@@ -4,6 +4,7 @@ import java.util.UUID
 
 import com.dbrsn.scalajs.react.trello.data._
 import japgolly.scalajs.react.test._
+import japgolly.scalajs.react.ScalaComponent
 import org.specs2.mutable.Specification
 import scalacss.DevDefaults._
 
@@ -73,12 +74,32 @@ class BoardSpec extends Specification {
   )
   // scalastyle:on method.length
 
-  "Full Board example" >> {
-    val token = UUID.randomUUID().toString
-    val rendered = ReactTestUtils.renderIntoDocument(
-      Board(data = baseData(token))()
-    )
-    val text = rendered.outerHtmlScrubbed()
-    text must contain(token)
+  "Basic Functions" >> {
+    "Full Board example" >> {
+      val token = UUID.randomUUID().toString
+      val rendered = ReactTestUtils.renderIntoDocument(
+        Board(data = baseData(token))()
+      )
+      rendered.outerHtmlScrubbed() must contain(token)
+    }
+  }
+
+  "Advanced Features" >> {
+    "Async Load data" >> {
+      case class State(boardData: Data[js.Object])
+
+      val token = UUID.randomUUID().toString
+      val component = ScalaComponent
+        .builder[Unit]("AsyncBoard")
+        .initialState(State(Data()))
+        .render_S(s => Board(data = s.boardData)().vdomElement)
+        .componentWillMount(_.modState(_ => State(baseData(token))))
+        .build
+
+      val rendered = ReactTestUtils.renderIntoDocument(
+        component()
+      )
+      rendered.outerHtmlScrubbed() must contain(token)
+    }
   }
 }
