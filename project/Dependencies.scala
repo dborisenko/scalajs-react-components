@@ -26,6 +26,7 @@ object Dependencies extends DependencyBuilders {
     lazy val react = "16.5.2"
     lazy val `react-sortable-hoc` = "0.8.3"
     lazy val `react-trello` = "2.0.1"
+    lazy val `babel-runtime` = "7.1.2"
   }
 
   // Scala: JVM libraries
@@ -47,4 +48,5 @@ object Dependencies extends DependencyBuilders {
   lazy val `react-trello`: NpmDependency = "react-trello" -> Versions.`react-trello`
   lazy val react: NpmDependency = "react" -> Versions.react
   lazy val `react-dom`: NpmDependency = "react-dom" -> Versions.react
+  lazy val `babel-runtime` = "@babel/runtime" -> Versions.`babel-runtime`
 }

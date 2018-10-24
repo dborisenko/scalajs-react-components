@@ -299,6 +299,7 @@ lazy val `react-trello` = project
     ),
     npmDependencies in Test := Seq(
       Dependencies.`react-trello`,
+      Dependencies.`babel-runtime`,
       Dependencies.react,
       Dependencies.`react-dom`
     ),
