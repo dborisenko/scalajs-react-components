@@ -3,6 +3,7 @@ package com.dbrsn.scalajs.react.trello.data
 import scalacss.internal.StyleS
 
 import scala.scalajs.js
+import scala.scalajs.js.JSConverters._
 import scala.scalajs.js.UndefOr
 
 @js.native
@@ -31,7 +32,8 @@ object Lane {
         title = title,
         label = label,
         style = style,
-        droppable = droppable
+        droppable = droppable,
+        cards = cards.toJSArray
       )
       .asInstanceOf[Lane[Metadata]]
 
