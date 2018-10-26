@@ -9,7 +9,7 @@ object BaseData {
   import BaseStyle.laneStyle
 
   // scalastyle:off method.length
-  def baseData: Data[js.Object] = Data(
+  val baseData: Data[js.Object] = Data(
     Lane(id = LaneId("PLANNED"), title = "Planned Tasks", label = "20/70", style = laneStyle)(
       Card(
         id = CardId("Milk"),

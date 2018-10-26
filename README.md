@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.5"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.6"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.82.5",
@@ -45,7 +45,7 @@ SuiButton(animated = true, onClick = (_: ReactMouseEventFromHtml) => Callback(??
 
 # React Sortable (HOC)
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12)
-[![react](https://img.shields.io/badge/semantic--ui--react-0.8.3-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
+[![react](https://img.shields.io/badge/react--sortable--hoc-0.8.3-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
 
 Module `react-sortable-hoc` contains scalajs wrapper for [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) component.
 
@@ -53,7 +53,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.5"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.6"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "0.8.3",
@@ -77,5 +77,47 @@ SortableList[Model, Props].Props(
   externalProps = Props,
   itemComponent = raw
 ).render
+```
 
+# react-trello
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12)
+[![react](https://img.shields.io/badge/semantic--ui--react-0.8.3-blue.svg)](https://www.npmjs.com/package/react-trello)
+
+Module `react-trello` contains scalajs wrapper for [react-trello](https://www.npmjs.com/package/react-trello) component.
+
+Add dependencies in `build.sbt`:
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.0.6"
+)
+npmDependencies in Compile ++= Seq(
+  "react-trello" -> "2.0.1",
+  "@babel/runtime" -> "7.1.2",
+  "react" -> "16.5.2",
+  "react-dom" -> "16.5.2"
+)
+```
+
+Example of usage:
+
+```scala
+val data: Data[js.Object] = Data(
+  Lane(id = LaneId("REPEAT"), title = "Repeat", label = "1/1", style = laneStyle)(
+    Card(id = CardId("Repeat1"), title = "Morning Jog", label = "30 mins", description = "Track using fitbit")
+  ),
+  Lane(id = LaneId("ARCHIVED"), title = "Archived", label = "1/1", style = laneStyle)(
+    Card(id = CardId("Archived1"), title = "Go Trekking", label = "300 mins", description = "Completed 10km on cycle")
+  )
+)
+
+def onDataChange(nextData: Data[js.Object]): Callback =
+  Callback.log("data has changed") >> Callback.log(s"next data: $nextData")
+
+Board(
+  data = data,
+  draggable = true,
+  collapsibleLanes = true,
+  onDataChange = onDataChange _
+)()
 ```
