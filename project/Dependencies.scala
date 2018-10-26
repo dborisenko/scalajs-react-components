@@ -15,6 +15,7 @@ object Dependencies extends DependencyBuilders {
 
     // Scala: JS libraries
     lazy val `scalajs-react` = "1.3.1"
+    lazy val scalacss = "0.5.5"
 
     // Scala: JVM + JS libraries
     lazy val scalatest = "3.0.5"
@@ -24,7 +25,8 @@ object Dependencies extends DependencyBuilders {
     lazy val `semantic-ui-react` = "0.82.5"
     lazy val react = "16.5.2"
     lazy val `react-sortable-hoc` = "0.8.3"
-    lazy val `react-beautiful-dnd` = "9.0.2"
+    lazy val `react-trello` = "2.0.1"
+    lazy val `babel-runtime` = "7.1.2"
   }
 
   // Scala: JVM libraries
@@ -34,6 +36,7 @@ object Dependencies extends DependencyBuilders {
   lazy val `scalajs-react-core` = Def.setting("com.github.japgolly.scalajs-react" %%% "core" % Versions.`scalajs-react`)
   lazy val `scalajs-react-extra` = Def.setting("com.github.japgolly.scalajs-react" %%% "extra" % Versions.`scalajs-react`)
   lazy val `scalajs-react-test` = Def.setting("com.github.japgolly.scalajs-react" %%% "test" % Versions.`scalajs-react`)
+  lazy val `scalacss-ext-react` = Def.setting("com.github.japgolly.scalacss" %%% "ext-react" % Versions.scalacss)
 
   // Scala: JVM + JS libraries
   lazy val scalatest = Def.setting("org.scalatest" %%% "scalatest" % Versions.scalatest)
@@ -42,7 +45,8 @@ object Dependencies extends DependencyBuilders {
   // JavaScript: Node.js libraries
   lazy val `semantic-ui-react`: NpmDependency = "semantic-ui-react" -> Versions.`semantic-ui-react`
   lazy val `react-sortable-hoc`: NpmDependency = "react-sortable-hoc" -> Versions.`react-sortable-hoc`
-  lazy val `react-beautiful-dnd`: NpmDependency = "react-beautiful-dnd" -> Versions.`react-beautiful-dnd`
+  lazy val `react-trello`: NpmDependency = "react-trello" -> Versions.`react-trello`
   lazy val react: NpmDependency = "react" -> Versions.react
   lazy val `react-dom`: NpmDependency = "react-dom" -> Versions.react
+  lazy val `babel-runtime` = "@babel/runtime" -> Versions.`babel-runtime`
 }
