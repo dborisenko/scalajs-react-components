@@ -3,12 +3,13 @@ package com.dbrsn.scalajs.react.trello
 import com.dbrsn.scalajs.react.trello.data._
 
 import scala.scalajs.js
+import scala.util.Random
 
 object BaseData {
   import BaseStyle.laneStyle
 
   // scalastyle:off method.length
-  def baseData(token: String): Data[js.Object] = Data(
+  def baseData: Data[js.Object] = Data(
     Lane(id = LaneId("PLANNED"), title = "Planned Tasks", label = "20/70", style = laneStyle)(
       Card(
         id = CardId("Milk"),
@@ -34,7 +35,7 @@ object BaseData {
       )
     ),
     Lane(id = LaneId("BLOCKED"), title = "Blocked", label = "0/0", style = laneStyle)(),
-    Lane(id = LaneId("COMPLETED"), title = s"Completed $token", label = "2/5", style = laneStyle)(
+    Lane(id = LaneId("COMPLETED"), title = "Completed", label = "2/5", style = laneStyle)(
       Card(
         id = CardId("Completed1"),
         title = "Practice Meditation",
@@ -62,4 +63,14 @@ object BaseData {
     )
   )
   // scalastyle:on method.length
+
+  def randomTokenFromBaseData: String = {
+    val lane = baseData.lanes(Random.nextInt(baseData.lanes.size))
+    if (lane.cards.isEmpty || Random.nextBoolean()) {
+      if (Random.nextBoolean()) lane.title else lane.label
+    } else {
+      val card = lane.cards(Random.nextInt(lane.cards.size))
+      if (Random.nextBoolean()) card.title else card.label
+    }
+  }
 }
