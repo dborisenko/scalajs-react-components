@@ -81,7 +81,7 @@ SortableList[Model, Props].Props(
 
 # react-trello
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12)
-[![react](https://img.shields.io/badge/semantic--ui--react-0.8.3-blue.svg)](https://www.npmjs.com/package/react-trello)
+[![react](https://img.shields.io/badge/react--trello-2.0.1-blue.svg)](https://www.npmjs.com/package/react-trello)
 
 Module `react-trello` contains scalajs wrapper for [react-trello](https://www.npmjs.com/package/react-trello) component.
 
