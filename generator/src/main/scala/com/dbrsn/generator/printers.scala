@@ -123,7 +123,9 @@ implicit def ev2${p.name}(${p.name.toLowerCase}: ${p.name} | js.Array[${p.name}]
     val safeName = if (name.contains("-")) s"`$name`" else name
     val safeSubstitutions = Map(
       "super" -> "`super`",
-      "type" -> "`type`"
+      "type" -> "`type`",
+      "true" -> "`true`",
+      "false" -> "`false`"
     )
     safeSubstitutions.getOrElse(safeName, safeName)
   }

@@ -35,6 +35,19 @@ object SuiTypeMapperFunction {
       case ("Sidebar", "onVisible")         => "ReactMouseEventFromHtml => Callback"
       case ("TextArea", "onChange")         => "ReactEventFromTextArea => Callback"
       case ("TextArea", "onInput")          => "ReactEventFromTextArea => Callback"
+      case ("Modal", "onActionClick")       => "ReactMouseEventFromHtml => Callback"
+      case ("Modal", "onOpen")              => "ReactMouseEventFromHtml => Callback"
+      case ("Modal", "onClose")             => "ReactMouseEventFromHtml => Callback"
+      case ("Modal", "onMount")             => "Callback"
+      case ("Modal", "onUnmount")           => "Callback"
+      case ("Popup", "onOpen")              => "ReactMouseEventFromHtml => Callback"
+      case ("Popup", "onClose")             => "ReactMouseEventFromHtml => Callback"
+      case ("Popup", "onMount")             => "Callback"
+      case ("Popup", "onUnmount")           => "Callback"
+      case ("Portal", "onOpen")             => "ReactMouseEventFromHtml => Callback"
+      case ("Portal", "onClose")            => "ReactMouseEventFromHtml => Callback"
+      case ("Portal", "onMount")            => "Callback"
+      case ("Portal", "onUnmount")          => "Callback"
 
       case _ =>
         throw new Error(
