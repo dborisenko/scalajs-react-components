@@ -4,7 +4,7 @@ scalajs-react-components
 [![Build Status](https://travis-ci.org/dborisenko/scalajs-react-components.svg?branch=master)](https://travis-ci.org/dborisenko/scalajs-react-components)
 [![License](https://img.shields.io/github/license/dborisenko/scalajs-react-components.svg)](LICENSE)
 [![scalajs-react](https://img.shields.io/badge/scalajs--react-1.3.1-blue.svg)](https://github.com/japgolly/scalajs-react)
-[![react](https://img.shields.io/badge/react-16.5.2-blue.svg)](https://reactjs.org)
+[![react](https://img.shields.io/badge/react-16.6.1-blue.svg)](https://reactjs.org)
 
 Reusable [scalajs-react](https://github.com/japgolly/scalajs-react) components.
 
@@ -17,7 +17,7 @@ Adding types to javascript is a lot of guesswork, and we're certain to have gott
 
 # Semantic UI
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12)
-[![react](https://img.shields.io/badge/semantic--ui--react-0.82.5-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
+[![react](https://img.shields.io/badge/semantic--ui--react-0.83.0-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
 Module `semantic-ui-react` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
 
@@ -28,9 +28,9 @@ libraryDependencies ++= Seq(
   "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.6"
 )
 npmDependencies in Compile ++= Seq(
-  "semantic-ui-react" -> "0.82.5",
-  "react" -> "16.5.2",
-  "react-dom" -> "16.5.2"
+  "semantic-ui-react" -> "0.83.0",
+  "react" -> "16.6.1",
+  "react-dom" -> "16.6.1"
 )
 ```
 
@@ -57,8 +57,8 @@ libraryDependencies ++= Seq(
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "0.8.3",
-  "react" -> "16.5.2",
-  "react-dom" -> "16.5.2"
+  "react" -> "16.6.1",
+  "react-dom" -> "16.6.1"
 )
 ```
 
@@ -81,7 +81,7 @@ SortableList[Model, Props].Props(
 
 # react-trello
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12)
-[![react](https://img.shields.io/badge/react--trello-2.0.1-blue.svg)](https://www.npmjs.com/package/react-trello)
+[![react](https://img.shields.io/badge/react--trello-2.0.4-blue.svg)](https://www.npmjs.com/package/react-trello)
 
 Module `react-trello` contains scalajs wrapper for [react-trello](https://www.npmjs.com/package/react-trello) component.
 
@@ -92,10 +92,10 @@ libraryDependencies ++= Seq(
   "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.0.6"
 )
 npmDependencies in Compile ++= Seq(
-  "react-trello" -> "2.0.1",
-  "@babel/runtime" -> "7.1.2",
-  "react" -> "16.5.2",
-  "react-dom" -> "16.5.2"
+  "react-trello" -> "2.0.4",
+  "@babel/runtime" -> "7.1.5",
+  "react" -> "16.6.1",
+  "react-dom" -> "16.6.1"
 )
 ```
 

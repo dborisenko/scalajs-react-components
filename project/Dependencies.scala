@@ -22,11 +22,11 @@ object Dependencies extends DependencyBuilders {
     lazy val specs2 = "4.3.5"
 
     // JavaScript: Node.js libraries
-    lazy val `semantic-ui-react` = "0.82.5"
-    lazy val react = "16.5.2"
+    lazy val `semantic-ui-react` = "0.83.0"
+    lazy val react = "16.6.1"
     lazy val `react-sortable-hoc` = "0.8.3"
-    lazy val `react-trello` = "2.0.1"
-    lazy val `babel-runtime` = "7.1.2"
+    lazy val `react-trello` = "2.0.4"
+    lazy val `babel-runtime` = "7.1.5"
   }
 
   // Scala: JVM libraries
