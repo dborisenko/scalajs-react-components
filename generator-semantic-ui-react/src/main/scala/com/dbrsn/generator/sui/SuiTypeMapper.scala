@@ -24,6 +24,46 @@ object SuiTypeMapper extends TypeMapper {
       case (_, "textAlign", _) =>
         Enum(compName, Seq("left", "center", "right", "justified"), "SuiTextAlignment")
 
+      case (_, "computer" | "largeScreen" | "mobile" | "tablet" | "widescreen" | "width", _) =>
+        Enum(
+          compName,
+          Seq(
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen"
+          ),
+          "SuiDeviceWidth"
+        )
+
       case (_, "size", _) =>
         Enum(compName, Seq("mini", "tiny", "small", "medium", "large", "big", "huge", "massive"), "SuiSize")
       case ("IconGroup", "name", "_lib.customsuggest(_lib.SUI.ALL_ICONS_IN_ALL_CONTEXTS)") =>
