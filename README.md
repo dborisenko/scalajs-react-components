@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.6"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.7"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.83.0",
@@ -53,7 +53,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.6"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.7"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "0.8.3",
@@ -89,7 +89,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.0.6"
+  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.0.7"
 )
 npmDependencies in Compile ++= Seq(
   "react-trello" -> "2.0.4",
