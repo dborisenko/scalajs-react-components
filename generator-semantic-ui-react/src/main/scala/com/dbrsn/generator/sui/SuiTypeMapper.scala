@@ -12,6 +12,8 @@ object SuiTypeMapper extends TypeMapper {
       s.split("[\'\"\\(\\)\\[\\],\\s]").map(_.trim).filterNot(_.isEmpty).drop(drop)
 
     (compName.value, fieldName.value, typeString) match {
+      case ("Modal", "closeIcon", _) => Normal("VdomNode")
+
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
       case ("Header", "as", _)       => Normal("String | js.Function")
@@ -129,7 +131,7 @@ object SuiTypeMapper extends TypeMapper {
       case (_, "children", "_propTypes.default.element")              => Normal("VdomElement")
       case (_, _, "_propTypes.default.element")                       => Normal("dom.Element")
       case (_, "children", "_propTypes.default.node")                 => Normal("VdomNode")
-      case (_, _, "_propTypes.default.node")                          => Normal("React.Node")
+      case (_, _, "_propTypes.default.node")                          => Normal("VdomNode")
       case (_, _, "_propTypes.default.object")                        => Normal("js.Object")
       case (_, _, "_propTypes.default.number")                        => Normal("Double")
       case (_, "children", "Mui.arrayOf(_propTypes.default.element)") => Normal("js.Array[dom.Element]")
