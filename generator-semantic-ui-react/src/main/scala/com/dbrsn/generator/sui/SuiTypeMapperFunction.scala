@@ -5,7 +5,7 @@ import com.dbrsn.generator.{CompName, PropName}
 object SuiTypeMapperFunction {
   val Callback = "Callback"
 
-  // scalastyle:off cyclomatic.complexity
+  // scalastyle:off cyclomatic.complexity method.length
   def apply(compName: CompName, name: PropName): String =
     (compName.value, name.value) match {
       case ("AccordionTitle", "onClick")    => "ReactMouseEventFromHtml => Callback"
@@ -65,5 +65,5 @@ object SuiTypeMapperFunction {
           s"""case ("${compName.value}", "${name.value}") => Callback  //TODO: Add function type mapping in ${getClass.getName}"""
         )
     }
-  // scalastyle:on cyclomatic.complexity
+  // scalastyle:on cyclomatic.complexity method.length
 }
