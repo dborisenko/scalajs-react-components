@@ -48,6 +48,17 @@ object SuiTypeMapperFunction {
       case ("Portal", "onClose")            => "ReactMouseEventFromHtml => Callback"
       case ("Portal", "onMount")            => "Callback"
       case ("Portal", "onUnmount")          => "Callback"
+      case ("Dropdown", "onAddItem")        => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onBlur")           => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onChange")         => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onClick")          => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onClose")          => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onFocus")          => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onLabelClick")     => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onMouseDown")      => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onOpen")           => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "onSearchChange")   => "ReactMouseEventFromHtml => Callback"
+      case ("Dropdown", "renderLabel")      => "(js.Any, Int, js.Any) => String"
 
       case _ =>
         throw new Error(

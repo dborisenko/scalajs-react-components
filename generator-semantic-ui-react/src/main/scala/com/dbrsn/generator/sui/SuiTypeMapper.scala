@@ -12,7 +12,13 @@ object SuiTypeMapper extends TypeMapper {
       s.split("[\'\"\\(\\)\\[\\],\\s]").map(_.trim).filterNot(_.isEmpty).drop(drop)
 
     (compName.value, fieldName.value, typeString) match {
-      case ("Modal", "closeIcon", _) => Normal("VdomNode")
+      case ("Modal", "closeIcon", _)               => Normal("VdomNode")
+      case ("Dropdown", "search", _)               => Normal("Boolean | js.Function")
+      case ("Dropdown", "defaultSelectedLabel", _) => Normal("Int | String")
+      case ("Dropdown", "defaultValue", _)         => Normal("Int | String | Boolean")
+      case ("Dropdown", "selectedLabel", _)        => Normal("Int | String")
+      case ("Dropdown", "value", _)                => Normal("Boolean | String | Int")
+      case ("Dropdown", "children", _)             => Normal("VdomNode")
 
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
