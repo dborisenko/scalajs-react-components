@@ -8,8 +8,10 @@ import scala.scalajs.js.annotation.JSImport
 @js.native
 @JSImport("storm-react-diagrams", JSImport.Namespace)
 object StormReactDiagrams extends js.Object {
+  // scalastyle:off method.name
   def DiagramWidget: Element = js.native
   def DefaultPortLabel: Element = js.native
+  // scalastyle:on method.name
 
   @js.native
   trait BaseEntity extends js.Object {
