@@ -54,6 +54,7 @@ class StormReactDiagramWidgetSpec extends Specification {
       StormReactDiagramWidget.Props(engine).render
     )
     val text = rendered.outerHtmlScrubbed()
-    (text must contain(text1)) and (text must contain(text2))
+    (text must contain(text1)) and (text must contain(text2)) and (text must contain(text3)) and
+      (text must contain(text4))
   }
 }
