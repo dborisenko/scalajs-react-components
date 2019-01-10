@@ -1,5 +1,5 @@
 // Scala.js, the Scala to JavaScript compiler
-addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.25")
+addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.26")
 
 // Module bundler for Scala.js projects that use NPM packages
 addSbtPlugin("ch.epfl.scala" % "sbt-scalajs-bundler" % "0.13.1")
@@ -17,7 +17,7 @@ addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "1.0.0")
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.3.7")
 
 // A release plugin for sbt
-addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.9")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.11")
 
 // A sbt plugin for publishing Scala/Java projects to the Maven central
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")

@@ -15,6 +15,7 @@ object SuiTypeMapperFunction {
       case ("Checkbox", "onChange")         => "ReactEventFromInput => Callback"
       case ("Checkbox", "onClick")          => "ReactMouseEventFromInput => Callback"
       case ("Checkbox", "onMouseDown")      => "ReactMouseEventFromInput => Callback"
+      case ("Checkbox", "onMouseUp")        => "ReactMouseEventFromInput => Callback"
       case ("Confirm", "onCancel")          => "ReactMouseEventFromHtml => Callback"
       case ("Confirm", "onConfirm")         => "ReactMouseEventFromHtml => Callback"
       case ("DropdownItem", "onClick")      => "ReactMouseEventFromHtml => Callback"

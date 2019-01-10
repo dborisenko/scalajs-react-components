@@ -6,7 +6,7 @@ object Dependencies extends DependencyBuilders {
   type NpmDependency = (String, String)
 
   object Versions {
-    lazy val scala = "2.12.7"
+    lazy val scala = "2.12.8"
 
     lazy val webpack = "2.6.1"
 
@@ -19,14 +19,14 @@ object Dependencies extends DependencyBuilders {
 
     // Scala: JVM + JS libraries
     lazy val scalatest = "3.0.5"
-    lazy val specs2 = "4.3.5"
+    lazy val specs2 = "4.3.6"
 
     // JavaScript: Node.js libraries
-    lazy val `semantic-ui-react` = "0.83.0"
-    lazy val react = "16.6.1"
-    lazy val `react-sortable-hoc` = "0.8.3"
-    lazy val `react-trello` = "2.0.4"
-    lazy val `babel-runtime` = "7.1.5"
+    lazy val react = "16.7.0"
+    lazy val `semantic-ui-react` = "0.84.0"
+    lazy val `react-sortable-hoc` = "1.4.0"
+    lazy val `react-trello` = "2.0.8"
+    lazy val `babel-runtime` = "7.2.0"
   }
 
   // Scala: JVM libraries
