@@ -17,6 +17,9 @@ class StormReactDiagramWidgetSpec extends Specification {
     val text3 = UUID.randomUUID().toString
     val text4 = UUID.randomUUID().toString
 
+    val (pos1x, pos1y) = (100, 100)
+    val (pos2x, pos2y) = (400, 100)
+
     val engine: DiagramEngine = {
       // 1) setup the diagram engine
       val engine = new DiagramEngine()
@@ -28,12 +31,12 @@ class StormReactDiagramWidgetSpec extends Specification {
       // 3) create a default node
       val node1 = new DefaultNodeModel(s"Node $text1 1", "rgb(0,192,255)")
       val port1 = node1.addOutPort(s"Out $text2")
-      node1.setPosition(100, 100)
+      node1.setPosition(pos1x, pos1y)
 
       // 4) create another default node
       val node2 = new DefaultNodeModel(s"Node $text3 2", "rgb(192,255,0)")
       val port2 = node2.addInPort(s"In $text4")
-      node2.setPosition(400, 100)
+      node2.setPosition(pos2x, pos2y)
 
       // 5) link the ports
       val link1 = port1.link(port2)
