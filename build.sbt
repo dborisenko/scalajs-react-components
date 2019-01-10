@@ -312,6 +312,31 @@ lazy val `react-trello` = project
   )
   .dependsOn(macros)
 
+lazy val `storm-react-diagrams` = project
+  .in(file("storm-react-diagrams"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(commonSettings)
+  .settings(publishSettings)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`storm-react-diagrams`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .settings(
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing),
+    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.NonUnitStatements)
+  )
+
 lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(commonSettings)
@@ -321,6 +346,8 @@ lazy val `scalajs-react-components` = project
   .aggregate(`semantic-ui-react`)
   .aggregate(`react-sortable-hoc`)
   .aggregate(`react-trello`)
+  .aggregate(`storm-react-diagrams`)
   .dependsOn(`semantic-ui-react`)
   .dependsOn(`react-sortable-hoc`)
   .dependsOn(`react-trello`)
+  .dependsOn(`storm-react-diagrams`)

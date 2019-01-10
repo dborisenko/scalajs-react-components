@@ -27,6 +27,7 @@ object Dependencies extends DependencyBuilders {
     lazy val `react-sortable-hoc` = "1.4.0"
     lazy val `react-trello` = "2.0.8"
     lazy val `babel-runtime` = "7.2.0"
+    lazy val `storm-react-diagrams` = "5.2.1"
   }
 
   // Scala: JVM libraries
@@ -43,10 +44,11 @@ object Dependencies extends DependencyBuilders {
   lazy val specs2 = Def.setting("org.specs2" %%% "specs2-core" % Versions.specs2)
 
   // JavaScript: Node.js libraries
+  lazy val react: NpmDependency = "react" -> Versions.react
+  lazy val `react-dom`: NpmDependency = "react-dom" -> Versions.react
   lazy val `semantic-ui-react`: NpmDependency = "semantic-ui-react" -> Versions.`semantic-ui-react`
   lazy val `react-sortable-hoc`: NpmDependency = "react-sortable-hoc" -> Versions.`react-sortable-hoc`
   lazy val `react-trello`: NpmDependency = "react-trello" -> Versions.`react-trello`
-  lazy val react: NpmDependency = "react" -> Versions.react
-  lazy val `react-dom`: NpmDependency = "react-dom" -> Versions.react
   lazy val `babel-runtime` = "@babel/runtime" -> Versions.`babel-runtime`
+  lazy val `storm-react-diagrams` = "storm-react-diagrams" -> Versions.`storm-react-diagrams`
 }
