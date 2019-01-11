@@ -17,8 +17,8 @@ class StormReactDiagramWidgetSpec extends Specification {
     val text3 = UUID.randomUUID().toString
     val text4 = UUID.randomUUID().toString
 
-    val (pos1x, pos1y) = (100, 100)
-    val (pos2x, pos2y) = (400, 100)
+    val (pos1x, pos1y) = (100.0, 100.0)
+    val (pos2x, pos2y) = (400.0, 100.0)
 
     val engine: DiagramEngine = {
       // 1) setup the diagram engine

@@ -9,14 +9,16 @@ object StormReactDiagramWidget {
 
   @js.native
   trait Props extends js.Object {
-    var diagramEngine: DiagramEngine = js.native
-
-    @inline def render: JsComponent.Unmounted[js.Object, js.Object] = apply(this)
+    def diagramEngine: DiagramEngine = js.native
   }
 
   object Props {
     def apply(diagramEngine: DiagramEngine): Props =
       js.Dynamic.literal(diagramEngine = diagramEngine).asInstanceOf[Props]
+  }
+
+  implicit class PropsOps(val props: Props) extends AnyVal {
+    @inline def render: JsComponent.Unmounted[js.Object, js.Object] = apply(props)
   }
 
   def apply(props: Props): JsComponent.Unmounted[js.Object, js.Object] = {
