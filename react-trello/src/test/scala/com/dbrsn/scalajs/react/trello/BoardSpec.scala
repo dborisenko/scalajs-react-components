@@ -1,7 +1,5 @@
 package com.dbrsn.scalajs.react.trello
 
-import java.util.UUID
-
 import com.dbrsn.scalajs.react.trello.BaseData.{baseData, randomTokenFromBaseData}
 import com.dbrsn.scalajs.react.trello.data._
 import japgolly.scalajs.react.test._
