@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.0.8"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.1.0"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.84.0",
@@ -53,7 +53,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.0.8"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.1.0"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "1.4.0",
@@ -89,7 +89,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.0.8"
+  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.1.0"
 )
 npmDependencies in Compile ++= Seq(
   "react-trello" -> "2.0.8",
@@ -120,4 +120,55 @@ Board(
   collapsibleLanes = true,
   onDataChange = onDataChange _
 )()
+```
+
+# storm-react-diagrams
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12)
+[![react](https://img.shields.io/badge/storm--react--diagrams-5.2.1-blue.svg)](https://www.npmjs.com/package/storm-react-diagrams)
+
+Module `storm-react-diagrams` contains scalajs wrapper for [storm-react-diagrams](https://www.npmjs.com/package/storm-react-diagrams) component.
+
+Add dependencies in `build.sbt`:
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "storm-react-diagrams" % "0.1.0"
+)
+npmDependencies in Compile ++= Seq(
+  "storm-react-diagrams" -> "5.2.1",
+  "react" -> "16.7.0",
+  "react-dom" -> "16.7.0"
+)
+```
+
+Example of usage:
+
+```scala
+// 1) setup the diagram engine
+val engine = new DiagramEngine()
+engine.installDefaultFactories()
+
+// 2) setup the diagram model
+val model = new DiagramModel()
+
+// 3) create a default node
+val node1 = new DefaultNodeModel(s"Node $text1 1", "rgb(0,192,255)")
+val port1 = node1.addOutPort(s"Out $text2")
+node1.setPosition(pos1x, pos1y)
+
+// 4) create another default node
+val node2 = new DefaultNodeModel(s"Node $text3 2", "rgb(192,255,0)")
+val port2 = node2.addInPort(s"In $text4")
+node2.setPosition(pos2x, pos2y)
+
+// 5) link the ports
+val link1 = port1.link(port2)
+
+// 6) add the models to the root graph
+model.addAll(node1, node2, link1)
+
+// 7) load model into engine
+engine.setDiagramModel(model)
+
+StormReactDiagramWidget.Props(engine).render
 ```
