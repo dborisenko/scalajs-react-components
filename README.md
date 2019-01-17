@@ -15,7 +15,7 @@ We are trying to make the experience of using javascript components in scala.js 
 Adding types to javascript is a lot of guesswork, and we're certain to have gotten them wrong
  some places. Bug reports and/or pull requests are very much welcome! :)
 
-# Semantic UI
+# Semantic UI React
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.84.0-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
@@ -122,7 +122,7 @@ Board(
 )()
 ```
 
-# storm-react-diagrams
+# STORM React Diagrams
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/storm--react--diagrams-5.2.1-blue.svg)](https://www.npmjs.com/package/storm-react-diagrams)
 
@@ -152,13 +152,13 @@ engine.installDefaultFactories()
 val model = new DiagramModel()
 
 // 3) create a default node
-val node1 = new DefaultNodeModel(s"Node $text1 1", "rgb(0,192,255)")
-val port1 = node1.addOutPort(s"Out $text2")
+val node1 = new DefaultNodeModel("Node 1", "rgb(0,192,255)")
+val port1 = node1.addOutPort(s"Out")
 node1.setPosition(pos1x, pos1y)
 
 // 4) create another default node
-val node2 = new DefaultNodeModel(s"Node $text3 2", "rgb(192,255,0)")
-val port2 = node2.addInPort(s"In $text4")
+val node2 = new DefaultNodeModel("Node 2", "rgb(192,255,0)")
+val port2 = node2.addInPort(s"In")
 node2.setPosition(pos2x, pos2y)
 
 // 5) link the ports
