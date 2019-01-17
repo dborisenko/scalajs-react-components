@@ -43,6 +43,11 @@ SuiButton(animated = true, onClick = (_: ReactMouseEventFromHtml) => Callback(??
 )
 ```
 
+Don't forget to add styles to your html:
+```html
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.1/dist/semantic.min.css" />
+```
+
 # React Sortable (HOC)
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/react--sortable--hoc-1.4.0-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
@@ -171,4 +176,10 @@ model.addAll(node1, node2, link1)
 engine.setDiagramModel(model)
 
 StormReactDiagramWidget.Props(engine).render
+```
+
+Don't forget to add styles to your html:
+
+```html
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/storm-react-diagrams@5.2.1/dist/style.min.css" />
 ```
