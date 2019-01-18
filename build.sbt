@@ -333,7 +333,7 @@ lazy val `storm-react-diagrams` = project
   )
   .settings(
     wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing, Wart.DefaultArguments),
+      .allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing),
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.NonUnitStatements)
   )
 

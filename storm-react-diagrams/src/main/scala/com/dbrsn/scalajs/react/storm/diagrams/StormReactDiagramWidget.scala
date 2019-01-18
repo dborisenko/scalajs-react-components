@@ -10,11 +10,11 @@ object StormReactDiagramWidget {
   @js.native
   trait Props extends js.Object {
     def diagramEngine: DiagramEngine = js.native
-    def className: js.UndefOr[String] = js.native
+    def className: js.UndefOr[String] = js.undefined
   }
 
   object Props {
-    def apply(diagramEngine: DiagramEngine, className: js.UndefOr[String] = js.undefined): Props =
+    def apply(diagramEngine: DiagramEngine, className: js.UndefOr[String]): Props =
       js.Dynamic.literal(diagramEngine = diagramEngine, className = className).asInstanceOf[Props]
   }
 
