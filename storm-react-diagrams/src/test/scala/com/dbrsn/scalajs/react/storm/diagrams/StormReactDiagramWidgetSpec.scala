@@ -16,6 +16,7 @@ class StormReactDiagramWidgetSpec extends Specification {
     val text2 = UUID.randomUUID().toString
     val text3 = UUID.randomUUID().toString
     val text4 = UUID.randomUUID().toString
+    val text5 = UUID.randomUUID().toString
 
     val (pos1x, pos1y) = (100.0, 100.0)
     val (pos2x, pos2y) = (400.0, 100.0)
@@ -47,10 +48,10 @@ class StormReactDiagramWidgetSpec extends Specification {
     engine.setDiagramModel(model)
 
     val rendered = ReactTestUtils.renderIntoDocument(
-      StormReactDiagramWidget.Props(engine).render
+      StormReactDiagramWidget.Props(diagramEngine = engine, className = text5).render
     )
     val text = rendered.outerHtmlScrubbed()
     (text must contain(text1)) and (text must contain(text2)) and (text must contain(text3)) and
-      (text must contain(text4))
+      (text must contain(text4)) and (text must contain(text5))
   }
 }

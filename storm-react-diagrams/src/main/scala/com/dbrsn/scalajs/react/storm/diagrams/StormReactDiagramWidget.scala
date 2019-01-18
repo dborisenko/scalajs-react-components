@@ -1,6 +1,7 @@
 package com.dbrsn.scalajs.react.storm.diagrams
 
 import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.DiagramEngine
+import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
 import japgolly.scalajs.react.{Children, JsComponent}
 
 import scala.scalajs.js
@@ -27,6 +28,7 @@ object StormReactDiagramWidget {
     val component = JsComponent[js.Object, Children.None, js.Object](reactElement)
     val mergedProps = js.Dynamic.literal()
     mergedProps.updateDynamic("diagramEngine")(props.diagramEngine)
+    mergedProps.updateDynamic("className")(props.className)
     component(mergedProps.asInstanceOf[js.Object])
   }
 }
