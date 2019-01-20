@@ -33,7 +33,6 @@ object SuiTypeMapper extends TypeMapper {
 
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
-      case ("Header", "as", _)       => Normal("String | js.Function")
       case ("Header", "image", _)    => Normal("String | dom.Element")
       case ("Header", "icon", _)     => Normal("String | js.Object | dom.Element")
       case ("Button", "children", _) => Normal("VdomNode")
@@ -42,6 +41,8 @@ object SuiTypeMapper extends TypeMapper {
         Normal("SuiIconType")
       case (_, "textAlign", _) =>
         Enum(compName, Seq("left", "center", "right", "justified"), "SuiTextAlignment")
+
+      case (_, "as" | "cellAs", "_lib.customas") => Normal("String | js.Function")
 
       case (_, "computer" | "largeScreen" | "mobile" | "tablet" | "widescreen" | "width", _) =>
         Enum(
@@ -127,8 +128,6 @@ object SuiTypeMapper extends TypeMapper {
         Enum(compName, array)
       case (_, _, enum) if enum.contains("oneOf(") && !enum.contains(']') =>
         Enum(compName, split(1, enum))
-
-      case (_, _, "_lib.customas") => Normal("js.Any") //TODO: what to do with this?
 
       /* general */
       case (_, "valueLink", "object")          => Normal("js.Any")
