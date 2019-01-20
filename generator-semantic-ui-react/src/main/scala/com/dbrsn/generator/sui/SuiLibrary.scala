@@ -159,7 +159,7 @@ final case class SuiLibrary(base: Path) extends Library {
       ComponentDef(CompName("Table")),
       ComponentDef(CompName("TableBody")),
       ComponentDef(CompName("TableCell")),
-      ComponentDef(CompName("TableFooter")),
+      ComponentDef(CompName("TableFooter"), forceChildren = true),
       ComponentDef(CompName("TableHeader")),
       ComponentDef(CompName("TableHeaderCell"), forceChildren = true),
       ComponentDef(CompName("TableRow")),
