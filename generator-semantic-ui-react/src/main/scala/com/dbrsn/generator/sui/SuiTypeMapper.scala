@@ -19,7 +19,17 @@ object SuiTypeMapper extends TypeMapper {
       case ("Dropdown", "selectedLabel", _)        => Normal("Int | String")
       case ("Dropdown", "value", _)                => Normal("Boolean | String | Int")
       case ("Dropdown", "children", _)             => Normal("VdomNode")
-      case ("Menu", "floated", _)                  => Normal("Boolean | SuiMenuFloated")
+
+      case ("Popup", "on", _)        => Enum(compName, Seq("hover", "click", "focus"), "SuiPopupOn")
+      case ("MenuItem", "fitted", _) => Enum(compName, Seq("horizontally", "vertically"), "SuiDirection")
+      case ("Grid", "padded", _)     => Enum(compName, Seq("horizontally", "vertically"), "SuiDirection")
+      case ("Label", "pointing", _)  => Enum(compName, Seq("above", "below", "left", "right"), "SuiLabelPointing")
+
+      case ("Rating", "clearable", "auto")   => Normal("SuiAuto")
+      case ("Menu", "icon", "labeled")       => Normal("SuiLabeled")
+      case ("Loader", "inline", "centered")  => Normal("SuiCentered")
+      case ("Grid", "celled", "internally")  => Normal("SuiInternally")
+      case ("Grid", "divided", "vertically") => Normal("SuiVertically")
 
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
@@ -78,7 +88,7 @@ object SuiTypeMapper extends TypeMapper {
       case ("IconGroup", "name", "_lib.customsuggest(_lib.SUI.ALL_ICONS_IN_ALL_CONTEXTS)") =>
         Normal("SuiIconType")
       case (_, _, e) if e.contains("oneOfType") || e.contains("some(") =>
-        val splitted = split(1, e)
+        val splitted = split(1, e).filter(_ != "_propTypes.default.oneOf")
         Normal(splitted.map(t => apply(compName, fieldName, t)) map (_.name) mkString " | ")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.WIDTHS)") => Normal("Double")
       case (_, _, "_propTypes.default.oneOf(_lib.SUI.COLORS)") =>
@@ -153,6 +163,12 @@ object SuiTypeMapper extends TypeMapper {
 
       case ("Select", "options", _)                                => Normal("js.Array[SuiDropdownItem]")
       case ("DropdownItem", "text", "_lib.customcontentShorthand") => Normal("String")
+
+      case (_, _, "left")   => Normal("SuiLeftSide")
+      case (_, _, "right")  => Normal("SuiRightSide")
+      case (_, _, "bottom") => Normal("SuiBottomSide")
+      case (_, _, "top")    => Normal("SuiTopSide")
+      case (_, _, "very")   => Normal("SuiVery")
 
       case (_, _, "_propTypes.default.func") => Normal(SuiTypeMapperFunction(compName, fieldName))
       case (a, b, c)                         =>

@@ -255,7 +255,8 @@ lazy val `semantic-ui-react` = project
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
   .settings(
-    wartremoverErrors in (Compile, compile) := Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing),
+    wartremoverErrors in (Compile, compile) := Warts
+      .allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing, Wart.Overloading),
     wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
   )
 
