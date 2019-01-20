@@ -1,7 +1,6 @@
 package com.dbrsn.scalajs.react.storm.diagrams
 
 import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.DiagramEngine
-import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
 import japgolly.scalajs.react.{Children, JsComponent}
 
 import scala.scalajs.js

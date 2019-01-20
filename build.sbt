@@ -1,4 +1,5 @@
 import sbtrelease.ReleaseStateTransformations._
+import wartremover.Wart
 import xerial.sbt.Sonatype.GitHubHosting
 import xerial.sbt.Sonatype.SonatypeCommand.sonatypeRelease
 
@@ -53,12 +54,13 @@ inThisBuild(
   )
 )
 
-lazy val commonSettings = List(
-  scalastyleFailOnError := true,
-  scalastyleFailOnWarning := true,
-  wartremoverErrors in (Compile, compile) := Warts.all,
-  wartremoverErrors in (Test, compile) := Warts.all
-)
+def staticAnalysisSettings(compileWarts: Seq[Wart] = Warts.all, testWarts: Seq[Wart] = Warts.all): List[Setting[_]] =
+  List(
+    scalastyleFailOnError := true,
+    scalastyleFailOnWarning := true,
+    wartremoverErrors in (Compile, compile) := compileWarts,
+    wartremoverErrors in (Test, compile) := testWarts
+  )
 
 lazy val publishSettings = List(
   sonatypeProfileName := "com.dbrsn",
@@ -125,7 +127,32 @@ releaseProcess := Seq[ReleaseStep](
 lazy val macros = project
   .in(file("macros"))
   .enablePlugins(ScalaJSPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(
+        Wart.Any,
+        Wart.AnyVal,
+        Wart.NonUnitStatements,
+        Wart.Nothing,
+        Wart.Null,
+        Wart.OptionPartial,
+        Wart.Recursion,
+        Wart.ToString,
+        Wart.TraversableOps
+      ),
+      testWarts = Warts.allBut(
+        Wart.Any,
+        Wart.ArrayEquals,
+        Wart.AsInstanceOf,
+        Wart.DefaultArguments,
+        Wart.Equals,
+        Wart.IsInstanceOf,
+        Wart.Null,
+        Wart.OptionPartial,
+        Wart.ToString
+      )
+    )
+  )
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -134,35 +161,31 @@ lazy val macros = project
       Dependencies.scalatest.value % Test
     )
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts.allBut(
-      Wart.Any,
-      Wart.AnyVal,
-      Wart.NonUnitStatements,
-      Wart.Nothing,
-      Wart.Null,
-      Wart.OptionPartial,
-      Wart.Recursion,
-      Wart.ToString,
-      Wart.TraversableOps
-    ),
-    wartremoverErrors in (Test, compile) := Warts.allBut(
-      Wart.Any,
-      Wart.ArrayEquals,
-      Wart.AsInstanceOf,
-      Wart.DefaultArguments,
-      Wart.Equals,
-      Wart.IsInstanceOf,
-      Wart.Null,
-      Wart.OptionPartial,
-      Wart.ToString
-    )
-  )
 
 lazy val generator = project
   .in(file("generator"))
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(
+        Wart.Any,
+        Wart.Equals,
+        Wart.MutableDataStructures,
+        Wart.NonUnitStatements,
+        Wart.Recursion,
+        Wart.Option2Iterable,
+        Wart.DefaultArguments,
+        Wart.ToString,
+        Wart.Throw,
+        Wart.TraversableOps,
+        Wart.OptionPartial,
+        Wart.AsInstanceOf,
+        Wart.Var,
+        Wart.Overloading
+      ),
+      testWarts = Warts.allBut(Wart.Any, Wart.NonUnitStatements)
+    )
+  )
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -170,30 +193,16 @@ lazy val generator = project
       Dependencies.scalatest.value % Test
     )
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts.allBut(
-      Wart.Any,
-      Wart.Equals,
-      Wart.MutableDataStructures,
-      Wart.NonUnitStatements,
-      Wart.Recursion,
-      Wart.Option2Iterable,
-      Wart.DefaultArguments,
-      Wart.ToString,
-      Wart.Throw,
-      Wart.TraversableOps,
-      Wart.OptionPartial,
-      Wart.AsInstanceOf,
-      Wart.Var,
-      Wart.Overloading
-    ),
-    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements)
-  )
 
 lazy val `generator-semantic-ui-react` = project
   .in(file("generator-semantic-ui-react"))
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts
+        .allBut(Wart.NonUnitStatements, Wart.Recursion, Wart.TraversableOps, Wart.Overloading, Wart.Equals, Wart.Throw)
+    )
+  )
   .settings(publishSettings)
   .settings(
     version in webpack := Dependencies.Versions.webpack,
@@ -209,10 +218,6 @@ lazy val `generator-semantic-ui-react` = project
       Dependencies.`react-dom`
     )
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.NonUnitStatements, Wart.Recursion, Wart.TraversableOps, Wart.Overloading, Wart.Equals, Wart.Throw)
-  )
   .dependsOn(generator)
 
 lazy val generateSui = TaskKey[Seq[File]]("generateSui")
@@ -221,7 +226,12 @@ lazy val `semantic-ui-react` = project
   .in(file("semantic-ui-react"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing, Wart.Overloading),
+      testWarts = Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
+    )
+  )
   .settings(publishSettings)
   .dependsOn(macros)
   .settings(
@@ -254,17 +264,18 @@ lazy val `semantic-ui-react` = project
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing, Wart.Overloading),
-    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
-  )
 
 lazy val `react-sortable-hoc` = project
   .in(file("react-sortable-hoc"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts =
+        Warts.allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
+      testWarts = Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
+    )
+  )
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -279,17 +290,18 @@ lazy val `react-sortable-hoc` = project
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
-    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
-  )
 
 lazy val `react-trello` = project
   .in(file("react-trello"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts
+        .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
+      testWarts = Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
+    )
+  )
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -306,18 +318,18 @@ lazy val `react-trello` = project
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
-  .settings(
-    wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.MutableDataStructures, Wart.Any, Wart.AsInstanceOf, Wart.DefaultArguments, Wart.Nothing),
-    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.Any, Wart.NonUnitStatements, Wart.Nothing)
-  )
   .dependsOn(macros)
 
 lazy val `storm-react-diagrams` = project
   .in(file("storm-react-diagrams"))
   .enablePlugins(ScalaJSPlugin)
   .enablePlugins(ScalaJSBundlerPlugin)
-  .settings(commonSettings)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing, Wart.DefaultArguments),
+      testWarts = Warts.allBut(Wart.NonUnitStatements)
+    )
+  )
   .settings(publishSettings)
   .settings(
     libraryDependencies ++= Seq(
@@ -332,15 +344,36 @@ lazy val `storm-react-diagrams` = project
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
+
+lazy val `react-markdown` = project
+  .in(file("react-markdown"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
   .settings(
-    wartremoverErrors in (Compile, compile) := Warts
-      .allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing, Wart.DefaultArguments),
-    wartremoverErrors in (Test, compile) := Warts.allBut(Wart.NonUnitStatements)
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing),
+      testWarts = Warts.allBut(Wart.NonUnitStatements, Wart.Any, Wart.Nothing)
+    )
   )
+  .settings(publishSettings)
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`react-markdown`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .dependsOn(macros)
 
 lazy val `scalajs-react-components` = project
   .in(file("."))
-  .settings(commonSettings)
+  .settings(staticAnalysisSettings())
   .settings(publishSettings)
   .aggregate(macros)
   .aggregate(`generator-semantic-ui-react`)

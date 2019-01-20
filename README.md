@@ -25,7 +25,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.1.2"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.2.0"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.84.0",
@@ -58,7 +58,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.1.2"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.2.0"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "1.4.0",
@@ -94,7 +94,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.1.2"
+  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.2.0"
 )
 npmDependencies in Compile ++= Seq(
   "react-trello" -> "2.0.8",
@@ -137,7 +137,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "storm-react-diagrams" % "0.1.2"
+  "com.dbrsn.scalajs.react.components" %%% "storm-react-diagrams" % "0.2.0"
 )
 npmDependencies in Compile ++= Seq(
   "storm-react-diagrams" -> "5.2.1",
@@ -182,4 +182,29 @@ Don't forget to add styles to your html:
 
 ```html
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/storm-react-diagrams@5.2.1/dist/style.min.css" />
+```
+
+# react-markdown
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-markdown_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-markdown_sjs0.6_2.12)
+[![react](https://img.shields.io/badge/react--markdown-4.0.6-blue.svg)](https://www.npmjs.com/package/react-markdown)
+
+Module `react-markdown` contains scalajs wrapper for [react-markdown](https://www.npmjs.com/package/react-markdown) component.
+
+Add dependencies in `build.sbt`:
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "react-markdown" % "0.2.0"
+)
+npmDependencies in Compile ++= Seq(
+  "react-markdown" -> "4.0.6",
+  "react" -> "16.7.0",
+  "react-dom" -> "16.7.0"
+)
+```
+
+Example of usage:
+
+```scala
+ReactMarkdown(source = "# This is a header\n\nAnd this is a paragraph")()
 ```

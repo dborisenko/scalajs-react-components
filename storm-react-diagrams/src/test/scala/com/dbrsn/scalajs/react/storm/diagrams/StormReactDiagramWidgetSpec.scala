@@ -7,10 +7,6 @@ import japgolly.scalajs.react.test._
 import org.specs2.mutable.Specification
 
 class StormReactDiagramWidgetSpec extends Specification {
-
-  case class Model(text: String)
-  case class Props(model: Model)
-
   "StormReactDiagramWidget should render nodes" >> {
     val text1 = UUID.randomUUID().toString
     val text2 = UUID.randomUUID().toString
