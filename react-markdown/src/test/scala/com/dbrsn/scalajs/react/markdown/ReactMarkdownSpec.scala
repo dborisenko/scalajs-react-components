@@ -2,7 +2,7 @@ package com.dbrsn.scalajs.react.markdown
 
 import japgolly.scalajs.react.ScalaComponent
 import japgolly.scalajs.react.component.Scala.Unmounted
-import japgolly.scalajs.react.test.{ReactTestUtils, _}
+import japgolly.scalajs.react.test._
 import japgolly.scalajs.react.vdom.VdomElement
 import org.specs2.mutable.Specification
 
@@ -32,7 +32,6 @@ class ReactMarkdownSpec extends Specification {
       )
     )
     val text = rendered.outerHtmlScrubbed()
-    println(text)
     text must contain("This is a header")
   }
 }
