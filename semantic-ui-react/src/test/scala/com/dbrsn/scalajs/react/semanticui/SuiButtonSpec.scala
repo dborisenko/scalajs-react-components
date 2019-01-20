@@ -46,11 +46,11 @@ class SuiButtonSpec extends Specification {
       testTextAndClick { (txt, cb) =>
         SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb))(
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like"),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(txt)
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.left)(txt)
         )
       } and testTextAndClick { (txt, cb) =>
         SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.left)(
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("right"))(txt),
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.right)(txt),
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like")
         )
       } and testTextAndClick { (txt, cb) =>
@@ -70,7 +70,7 @@ class SuiButtonSpec extends Specification {
           SuiLabel(
             as = js.Any.fromString("a"),
             basic = true,
-            pointing = js.Any.fromString("left"),
+            pointing = SuiLabelPointing.left,
             color = SuiColor.red
           )(txt)
         )
@@ -80,7 +80,7 @@ class SuiButtonSpec extends Specification {
             SuiIcon(name = SuiIconType("fork"))(),
             "Fork"
           ),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = js.Any.fromString("left"))(txt)
+          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.left)(txt)
         )
       }
     }
