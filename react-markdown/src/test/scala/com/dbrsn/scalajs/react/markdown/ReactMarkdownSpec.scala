@@ -33,6 +33,6 @@ class ReactMarkdownSpec extends Specification {
     )
     val text = rendered.outerHtmlScrubbed()
     println(text)
-    (text must contain("This is a header"))
+    text must contain("This is a header")
   }
 }
