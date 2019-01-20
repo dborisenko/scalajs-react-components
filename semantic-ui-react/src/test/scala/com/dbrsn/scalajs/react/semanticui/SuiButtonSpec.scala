@@ -44,43 +44,43 @@ class SuiButtonSpec extends Specification {
     }
     "Labeled: A button can be accompanied by a label." >> {
       testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb))(
+        SuiButton(as = "div", onClick = wrap(cb))(
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like"),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.left)(txt)
+          SuiLabel(as = "a", basic = true, pointing = SuiLabelPointing.left)(txt)
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.left)(
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.right)(txt),
+        SuiButton(as = "div", onClick = wrap(cb), labelPosition = RightLeft.left)(
+          SuiLabel(as = "a", basic = true, pointing = SuiLabelPointing.right)(txt),
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("heart"))(), "Like")
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.left)(
-          SuiLabel(as = js.Any.fromString("a"), basic = true)(txt),
+        SuiButton(as = "div", onClick = wrap(cb), labelPosition = RightLeft.left)(
+          SuiLabel(as = "a", basic = true)(txt),
           SuiButton(icon = true)(SuiIcon(name = SuiIconType("fork"))())
         )
       }
     }
     "Colored" >> {
       testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.right)(
+        SuiButton(as = "div", onClick = wrap(cb), labelPosition = RightLeft.right)(
           SuiButton(color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube("red"))(
             SuiIcon(name = SuiIconType("heart"))(),
             "Like"
           ),
           SuiLabel(
-            as = js.Any.fromString("a"),
+            as = "a",
             basic = true,
             pointing = SuiLabelPointing.left,
             color = SuiColor.red
           )(txt)
         )
       } and testTextAndClick { (txt, cb) =>
-        SuiButton(as = js.Any.fromString("div"), onClick = wrap(cb), labelPosition = RightLeft.right)(
+        SuiButton(as = "div", onClick = wrap(cb), labelPosition = RightLeft.right)(
           SuiButton(color = new FacebookGoogleplusInstagramLinkedinTwitterVkYoutube("blue"), basic = true)(
             SuiIcon(name = SuiIconType("fork"))(),
             "Fork"
           ),
-          SuiLabel(as = js.Any.fromString("a"), basic = true, pointing = SuiLabelPointing.left)(txt)
+          SuiLabel(as = "a", basic = true, pointing = SuiLabelPointing.left)(txt)
         )
       }
     }
