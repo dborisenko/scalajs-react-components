@@ -19,6 +19,7 @@ object SuiTypeMapper extends TypeMapper {
       case ("Dropdown", "selectedLabel", _)        => Normal("Int | String")
       case ("Dropdown", "value", _)                => Normal("Boolean | String | Int")
       case ("Dropdown", "children", _)             => Normal("VdomNode")
+      case ("Menu", "floated", _)                  => Normal("Boolean | SuiMenuFloated")
 
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
