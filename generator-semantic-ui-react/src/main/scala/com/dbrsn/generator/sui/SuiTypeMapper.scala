@@ -39,7 +39,7 @@ object SuiTypeMapper extends TypeMapper {
       case ("Input", "icon", _)      => Normal("SuiIconType")
       case ("Flag", "name", _)       => Normal("String | SuiCountry")
       case ("Header", "image", _)    => Normal("String | dom.Element")
-      case ("Header", "icon", _)     => Normal("String | js.Object | dom.Element")
+      case ("Header", "icon", _)     => Normal("String | Boolean | js.Object | dom.Element")
       case ("Button", "children", _) => Normal("VdomNode")
       case ("Button", "animated", _) => Normal("Boolean | ButtonAnimatedType")
       case ("Icon", "name", "_lib.customsuggest(_lib.SUI.ALL_ICONS_IN_ALL_CONTEXTS)") =>
