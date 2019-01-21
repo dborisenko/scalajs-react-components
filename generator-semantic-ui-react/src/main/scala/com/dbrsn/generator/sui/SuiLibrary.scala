@@ -128,7 +128,6 @@ final case class SuiLibrary(base: Path) extends Library {
       ComponentDef(CompName("ModalDescription")),
       ComponentDef(CompName("ModalHeader")),
       ComponentDef(CompName("Pagination")),
-      ComponentDef(CompName("PaginationItem")),
       ComponentDef(CompName("Popup")),
       ComponentDef(CompName("PopupContent")),
       ComponentDef(CompName("PopupHeader")),

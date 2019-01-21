@@ -26,15 +26,9 @@ object SuiTypeMapper extends TypeMapper {
       case ("Label", "pointing", _)  => Enum(compName, Seq("above", "below", "left", "right"), "SuiLabelPointing")
 
       case ("Pagination", "ellipsisItem" | "firstItem" | "lastItem" | "nextItem" | "pageItem" | "prevItem", _) =>
-        Normal("VdomNode")
+        Normal("String | VdomNode")
       case ("Pagination", "activePage" | "boundaryRange" | "defaultActivePage" | "siblingRange" | "totalPages", _) =>
         Normal("Int | String")
-      case ("PaginationItem", "type", _) =>
-        Enum(
-          compName,
-          Seq("ellipsisItem", "firstItem", "prevItem", "pageItem", "nextItem", "lastItem"),
-          "SuiPaginationItemType"
-        )
 
       case ("Rating", "clearable", "auto")   => Normal("SuiAuto")
       case ("Menu", "icon", "labeled")       => Normal("SuiLabeled")
