@@ -54,7 +54,7 @@ final case class SuiLibrary(base: Path) extends Library {
       ComponentDef(CompName("CommentText")),
       ComponentDef(CompName("Confirm")),
       ComponentDef(CompName("Container")),
-      ComponentDef(CompName("Dimmer")),
+      ComponentDef(CompName("Dimmer"), forceChildren = true),
       ComponentDef(CompName("DimmerDimmable")),
       ComponentDef(CompName("Divider")),
       ComponentDef(CompName("Dropdown")),
