@@ -25,6 +25,13 @@ object SuiTypeMapper extends TypeMapper {
       case ("Grid", "padded", _)     => Enum(compName, Seq("horizontally", "vertically"), "SuiDirection")
       case ("Label", "pointing", _)  => Enum(compName, Seq("above", "below", "left", "right"), "SuiLabelPointing")
 
+      case ("PaginationItem", "type", _) =>
+        Enum(
+          compName,
+          Seq("ellipsisItem", "firstItem", "prevItem", "pageItem", "nextItem", "lastItem"),
+          "SuiPaginationItemType"
+        )
+
       case ("Rating", "clearable", "auto")   => Normal("SuiAuto")
       case ("Menu", "icon", "labeled")       => Normal("SuiLabeled")
       case ("Loader", "inline", "centered")  => Normal("SuiCentered")
