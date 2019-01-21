@@ -25,6 +25,8 @@ object SuiTypeMapper extends TypeMapper {
       case ("Grid", "padded", _)     => Enum(compName, Seq("horizontally", "vertically"), "SuiDirection")
       case ("Label", "pointing", _)  => Enum(compName, Seq("above", "below", "left", "right"), "SuiLabelPointing")
 
+      case ("Pagination", "activePage" | "boundaryRange" | "defaultActivePage" | "siblingRange" | "totalPages", _) =>
+        Normal("Int | String")
       case ("PaginationItem", "type", _) =>
         Enum(
           compName,

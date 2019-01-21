@@ -41,7 +41,7 @@ object SuiTypeMapperFunction {
       case ("Modal", "onClose")             => "ReactMouseEventFromHtml => Callback"
       case ("Modal", "onMount")             => "Callback"
       case ("Modal", "onUnmount")           => "Callback"
-      case ("Pagination", "onPageChange")   => "ReactMouseEventFromHtml => Callback"
+      case ("Pagination", "onPageChange")   => "(ReactMouseEventFromHtml, SuiPaginationData) => Callback"
       case ("PaginationItem", "onClick")    => "ReactMouseEventFromHtml => Callback"
       case ("PaginationItem", "onKeyDown")  => "ReactMouseEventFromHtml => Callback"
       case ("Popup", "onOpen")              => "ReactMouseEventFromHtml => Callback"
