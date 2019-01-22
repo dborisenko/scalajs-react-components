@@ -11,7 +11,8 @@ import scala.scalajs.js.{undefined, UndefOr}
 final case class DefaultPortLabel(
   model: DefaultPortModel,
   className: UndefOr[String] = undefined,
-  key: js.UndefOr[String] = undefined
+  key: UndefOr[String] = undefined,
+  extraProps: UndefOr[js.Object] = undefined
 ) {
   def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
     val props = JSMacro[DefaultPortLabel](this)

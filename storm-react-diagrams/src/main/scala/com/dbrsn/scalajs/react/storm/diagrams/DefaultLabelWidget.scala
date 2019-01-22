@@ -12,7 +12,8 @@ import scala.scalajs.js.UndefOr
 final case class DefaultLabelWidget(
   model: DefaultLabelModel,
   className: UndefOr[String] = undefined,
-  key: js.UndefOr[String] = undefined
+  key: UndefOr[String] = undefined,
+  extraProps: UndefOr[js.Object] = undefined
 ) {
   def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
     val props = JSMacro[DefaultLabelWidget](this)

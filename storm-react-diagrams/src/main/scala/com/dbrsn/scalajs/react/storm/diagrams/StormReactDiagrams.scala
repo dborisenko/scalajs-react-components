@@ -6,6 +6,7 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 import scala.scalajs.js.|
 
+// scalastyle:off number.of.methods
 @js.native
 @JSImport("storm-react-diagrams", JSImport.Namespace)
 object StormReactDiagrams extends js.Object {
@@ -16,9 +17,6 @@ object StormReactDiagrams extends js.Object {
   private[diagrams] def DefaultLinkWidget: Element = js.native
   private[diagrams] def DefaultLabelWidget: Element = js.native
   // scalastyle:on method.name
-
-  @js.native
-  class BaseAction(val mouseX: Int, val mouseY: Int) extends js.Object
 
   @js.native
   trait BaseEntity extends js.Object {
@@ -210,4 +208,36 @@ object StormReactDiagrams extends js.Object {
 
     def zoomToFit(): Unit = js.native
   }
+
+  @js.native
+  trait SelectionModel extends js.Object {
+    def model: BaseModel = js.native
+    def initialX: Int = js.native
+    def initialY: Int = js.native
+  }
+
+  @js.native
+  class BaseAction extends js.Object {
+    def mouseX: Int = js.native
+    def mouseY: Int = js.native
+  }
+
+  @js.native
+  class MoveCanvasAction extends BaseAction {
+    def initialOffsetX: Int = js.native
+    def initialOffsetY: Int = js.native
+  }
+
+  @js.native
+  class MoveItemsAction extends BaseAction {
+    def moved: Boolean = js.native
+    def selectionModels: js.Array[SelectionModel] = js.native
+  }
+
+  @js.native
+  class SelectingAction extends BaseAction {
+    def mouseX2: Int = js.native
+    def mouseY2: Int = js.native
+  }
 }
+// scalastyle:on number.of.methods
