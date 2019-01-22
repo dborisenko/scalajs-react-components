@@ -1,6 +1,6 @@
 package com.dbrsn.scalajs.react.storm.diagrams
 
-import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.{DefaultPortModel, PortModel}
+import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.PortModel
 import japgolly.scalajs.react.{Children, JsComponent}
 
 import scala.scalajs.js
@@ -14,7 +14,7 @@ object StormDefaultPortLabel {
   }
 
   object Props {
-    def apply(model: DefaultPortModel, key: String): Props =
+    def apply(model: PortModel, key: String): Props =
       js.Dynamic.literal(model = model, key = key).asInstanceOf[Props]
   }
 
