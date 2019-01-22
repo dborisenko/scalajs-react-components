@@ -6,8 +6,8 @@ import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.{DefaultNodeMod
 import japgolly.scalajs.react.test._
 import org.specs2.mutable.Specification
 
-class StormReactDiagramWidgetSpec extends Specification {
-  "StormReactDiagramWidget should render nodes" >> {
+class DiagramWidgetSpec extends Specification {
+  "DiagramWidget should render nodes" >> {
     val text1 = UUID.randomUUID().toString
     val text2 = UUID.randomUUID().toString
     val text3 = UUID.randomUUID().toString
@@ -44,7 +44,7 @@ class StormReactDiagramWidgetSpec extends Specification {
     engine.setDiagramModel(model)
 
     val rendered = ReactTestUtils.renderIntoDocument(
-      StormReactDiagramWidget.Props(diagramEngine = engine, className = text5).render
+      DiagramWidget.Props(diagramEngine = engine, className = text5).render
     )
     val text = rendered.outerHtmlScrubbed()
     (text must contain(text1)) and (text must contain(text2)) and (text must contain(text3)) and

@@ -1,0 +1,21 @@
+package com.dbrsn.scalajs.react.storm.diagrams
+
+import com.dbrsn.scalajs.react.macros.tojs.JSMacro
+import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.DefaultPortModel
+import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
+import japgolly.scalajs.react.{Children, JsComponent}
+
+import scala.scalajs.js
+import scala.scalajs.js.{undefined, UndefOr}
+
+final case class DefaultPortLabel(
+  model: DefaultPortModel,
+  className: UndefOr[String] = undefined,
+  key: js.UndefOr[String] = undefined
+) {
+  def apply(): UnmountedWithRawType[js.Object, Null, RawMounted[js.Object, Null]] = {
+    val props = JSMacro[DefaultPortLabel](this)
+    val f = JsComponent[js.Object, Children.None, Null](StormReactDiagrams.DefaultPortLabel)
+    f(props)
+  }
+}

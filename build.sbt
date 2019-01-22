@@ -344,6 +344,7 @@ lazy val `storm-react-diagrams` = project
     ),
     (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
   )
+  .dependsOn(macros)
 
 lazy val `react-markdown` = project
   .in(file("react-markdown"))

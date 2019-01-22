@@ -12,7 +12,13 @@ object StormReactDiagrams extends js.Object {
   // scalastyle:off method.name
   def DiagramWidget: Element = js.native
   def DefaultPortLabel: Element = js.native
+  def DefaultNodeWidget: Element = js.native
+  def DefaultLinkWidget: Element = js.native
+  def DefaultLabelWidget: Element = js.native
   // scalastyle:on method.name
+
+  @js.native
+  class BaseAction(val mouseX: Int, val mouseY: Int) extends js.Object
 
   @js.native
   trait BaseEntity extends js.Object {
