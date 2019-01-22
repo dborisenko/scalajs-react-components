@@ -18,12 +18,17 @@ object StormReactDiagrams extends js.Object {
   private[diagrams] def DefaultLabelWidget: Element = js.native
   // scalastyle:on method.name
 
+  type ListenerId = String
+
   @js.native
   trait BaseEntity extends js.Object {
     def getID(): String = js.native
 
     def isLocked(): Boolean = js.native
     def setLocked(locked: Boolean): Unit = js.native
+
+    def addListener(listener: BaseListener): ListenerId = js.native
+    def removeListener(listener: ListenerId): Unit = js.native
   }
 
   //Models
@@ -239,5 +244,15 @@ object StormReactDiagrams extends js.Object {
     def mouseX2: Int = js.native
     def mouseY2: Int = js.native
   }
+
+  @js.native
+  trait BaseEvent extends js.Object {
+    def entity: BaseEntity = js.native
+    def firing: Boolean = js.native
+    def id: String = js.native
+  }
+
+  @js.native
+  trait BaseListener extends js.Object
 }
 // scalastyle:on number.of.methods

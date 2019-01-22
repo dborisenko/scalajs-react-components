@@ -2,12 +2,11 @@ package com.dbrsn.scalajs.react.storm.diagrams
 
 import com.dbrsn.scalajs.react.macros.tojs.JSMacro
 import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.DefaultLabelModel
-import japgolly.scalajs.react.{Children, JsComponent}
 import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
+import japgolly.scalajs.react.{Children, JsComponent}
 
 import scala.scalajs.js
-import scala.scalajs.js.undefined
-import scala.scalajs.js.UndefOr
+import scala.scalajs.js.{undefined, UndefOr}
 
 final case class DefaultLabelWidget(
   model: DefaultLabelModel,

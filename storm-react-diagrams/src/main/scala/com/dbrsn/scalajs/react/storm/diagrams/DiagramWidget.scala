@@ -3,7 +3,7 @@ package com.dbrsn.scalajs.react.storm.diagrams
 import com.dbrsn.scalajs.react.macros.tojs.JSMacro
 import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.{BaseAction, DiagramEngine}
 import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
-import japgolly.scalajs.react.{Children, JsComponent}
+import japgolly.scalajs.react.{Callback, CallbackTo, Children, JsComponent}
 
 import scala.scalajs.js
 import scala.scalajs.js.{undefined, UndefOr}
@@ -16,9 +16,9 @@ final case class DiagramWidget(
   inverseZoom: UndefOr[Boolean] = undefined,
   maxNumberPointsPerLink: UndefOr[Int] = undefined,
   smartRouting: UndefOr[Boolean] = undefined,
-  actionStartedFiring: UndefOr[BaseAction => Boolean] = undefined,
-  actionStillFiring: UndefOr[BaseAction => Unit] = undefined,
-  actionStoppedFiring: UndefOr[BaseAction => Unit] = undefined,
+  actionStartedFiring: UndefOr[BaseAction => CallbackTo[Boolean]] = undefined,
+  actionStillFiring: UndefOr[BaseAction => Callback] = undefined,
+  actionStoppedFiring: UndefOr[BaseAction => Callback] = undefined,
   deleteKeys: UndefOr[js.Array[Int]] = undefined,
   className: UndefOr[String] = undefined,
   key: UndefOr[String] = undefined,

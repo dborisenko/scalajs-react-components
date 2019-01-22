@@ -3,7 +3,7 @@ package com.dbrsn.scalajs.react.storm.diagrams
 import com.dbrsn.scalajs.react.macros.tojs.JSMacro
 import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.{DefaultLinkModel, DiagramEngine, PointModel}
 import japgolly.scalajs.react.component.Js.{RawMounted, UnmountedWithRawType}
-import japgolly.scalajs.react.{Children, JsComponent}
+import japgolly.scalajs.react.{Callback, Children, JsComponent}
 import org.scalajs.dom.MouseEvent
 
 import scala.scalajs.js
@@ -15,7 +15,7 @@ final case class DefaultLinkWidget(
   color: UndefOr[String] = undefined,
   width: UndefOr[Int] = undefined,
   smooth: UndefOr[Boolean] = undefined,
-  pointAdded: UndefOr[(PointModel, MouseEvent) => Any] = undefined,
+  pointAdded: UndefOr[(PointModel, MouseEvent) => Callback] = undefined,
   className: UndefOr[String] = undefined,
   key: UndefOr[String] = undefined,
   extraProps: UndefOr[js.Object] = undefined
