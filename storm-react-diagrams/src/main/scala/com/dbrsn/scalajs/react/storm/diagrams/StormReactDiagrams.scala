@@ -174,7 +174,7 @@ object StormReactDiagrams extends js.Object {
 
   @js.native
   class DefaultLinkFactory extends AbstractLinkFactory {
-    def generateReactWidget(diagramEngine: DiagramEngine, label: DefaultLinkModel): Element = js.native
+    def generateReactWidget(diagramEngine: DiagramEngine, link: DefaultLinkModel): Element = js.native
   }
 
   @js.native
