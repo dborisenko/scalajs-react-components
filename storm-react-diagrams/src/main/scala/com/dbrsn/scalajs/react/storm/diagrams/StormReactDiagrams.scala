@@ -29,7 +29,11 @@ object StormReactDiagrams extends js.Object {
   //Models
 
   @js.native
-  trait BaseModel extends BaseEntity
+  trait BaseModel extends BaseEntity {
+    def isSelected(): Boolean = js.native
+    def setSelected(selected: Boolean = true): Boolean = js.native
+    def remove(): Unit = js.native
+  }
 
   @js.native
   class DiagramModel extends BaseEntity {
@@ -63,8 +67,6 @@ object StormReactDiagrams extends js.Object {
     def setTargetPort(port: PortModel): Unit = js.native
     def getTargetPort(): PortModel = js.native
 
-    def remove(): Unit = js.native
-
     def isLastPoint(point: PointModel): Boolean = js.native
     def getPointIndex(point: PointModel): Int = js.native
     def getPortForPoint(point: PointModel): PortModel = js.native
@@ -88,7 +90,6 @@ object StormReactDiagrams extends js.Object {
   @js.native
   class NodeModel extends BaseModel {
     def setPosition(x: Double, y: Double): Unit = js.native
-    def remove(): Unit = js.native
 
     def addPort(port: PortModel): PortModel = js.native
     def removePort(port: PortModel): Unit = js.native
@@ -98,7 +99,6 @@ object StormReactDiagrams extends js.Object {
   class PointModel extends BaseModel {
     def isConnectedToPort(): Boolean = js.native
     def getLink(): LinkModel = js.native
-    def remove(): Unit = js.native
     def getX(): Double = js.native
     def getY(): Double = js.native
   }
