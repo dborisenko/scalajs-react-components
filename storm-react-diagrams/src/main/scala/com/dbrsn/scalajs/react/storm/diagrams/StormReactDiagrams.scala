@@ -168,19 +168,13 @@ object StormReactDiagrams extends js.Object {
   // Default factories
 
   @js.native
-  class DefaultLabelFactory extends AbstractLabelFactory {
-    def generateReactWidget(diagramEngine: DiagramEngine, label: DefaultLabelModel): Element = js.native
-  }
+  class DefaultLabelFactory extends AbstractLabelFactory
 
   @js.native
-  class DefaultLinkFactory extends AbstractLinkFactory {
-    def generateReactWidget(diagramEngine: DiagramEngine, link: DefaultLinkModel): Element = js.native
-  }
+  class DefaultLinkFactory extends AbstractLinkFactory
 
   @js.native
-  class DefaultNodeFactory extends AbstractNodeFactory {
-    def generateReactWidget(diagramEngine: DiagramEngine, node: DefaultNodeModel): Element = js.native
-  }
+  class DefaultNodeFactory extends AbstractNodeFactory
 
   @js.native
   class DefaultPortFactory extends AbstractPortFactory
