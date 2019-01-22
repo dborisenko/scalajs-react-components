@@ -1,6 +1,6 @@
 package com.dbrsn.scalajs.react.storm.diagrams
 
-import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.DefaultPortModel
+import com.dbrsn.scalajs.react.storm.diagrams.StormReactDiagrams.{DefaultPortModel, PortModel}
 import japgolly.scalajs.react.{Children, JsComponent}
 
 import scala.scalajs.js
@@ -9,7 +9,7 @@ object StormDefaultPortLabel {
 
   @js.native
   trait Props extends js.Object {
-    def model: DefaultPortModel
+    def model: PortModel
     def key: String
   }
 
