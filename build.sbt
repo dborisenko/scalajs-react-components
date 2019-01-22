@@ -327,7 +327,12 @@ lazy val `storm-react-diagrams` = project
   .settings(
     staticAnalysisSettings(
       compileWarts = Warts.allBut(Wart.Any, Wart.AsInstanceOf, Wart.Overloading, Wart.Nothing, Wart.DefaultArguments),
-      testWarts = Warts.allBut(Wart.NonUnitStatements)
+      testWarts = Warts.allBut(Wart.NonUnitStatements, Wart.Var)
+    )
+  )
+  .settings(
+    scalacOptions ++= Seq(
+      "-P:scalajs:sjsDefinedByDefault" // Declare a non-native JS type withou @ScalaJSDefined annotation
     )
   )
   .settings(publishSettings)
