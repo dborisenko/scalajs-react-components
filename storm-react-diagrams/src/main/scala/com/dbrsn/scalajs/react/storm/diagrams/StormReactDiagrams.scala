@@ -10,11 +10,11 @@ import scala.scalajs.js.|
 @JSImport("storm-react-diagrams", JSImport.Namespace)
 object StormReactDiagrams extends js.Object {
   // scalastyle:off method.name
-  def DiagramWidget: Element = js.native
-  def DefaultPortLabel: Element = js.native
-  def DefaultNodeWidget: Element = js.native
-  def DefaultLinkWidget: Element = js.native
-  def DefaultLabelWidget: Element = js.native
+  private[diagrams] def DiagramWidget: Element = js.native
+  private[diagrams] def DefaultPortLabel: Element = js.native
+  private[diagrams] def DefaultNodeWidget: Element = js.native
+  private[diagrams] def DefaultLinkWidget: Element = js.native
+  private[diagrams] def DefaultLabelWidget: Element = js.native
   // scalastyle:on method.name
 
   @js.native
