@@ -44,7 +44,7 @@ class DiagramWidgetSpec extends Specification {
     engine.setDiagramModel(model)
 
     val rendered = ReactTestUtils.renderIntoDocument(
-      DiagramWidget.Props(diagramEngine = engine, className = text5).render
+      DiagramWidget(diagramEngine = engine, className = text5)()
     )
     val text = rendered.outerHtmlScrubbed()
     (text must contain(text1)) and (text must contain(text2)) and (text must contain(text3)) and
