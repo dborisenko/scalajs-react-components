@@ -49,7 +49,7 @@ object SuiTypeMapper extends TypeMapper {
 
       case (_, "as" | "cellAs", "_lib.customas") => Normal("String | js.Function")
 
-      case (_, "computer" | "largeScreen" | "mobile" | "tablet" | "widescreen" | "width", _) =>
+      case (_, "computer" | "largeScreen" | "mobile" | "tablet" | "widescreen" | "width" | "widths", _) =>
         Enum(
           compName,
           Seq(

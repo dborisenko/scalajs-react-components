@@ -61,6 +61,7 @@ object SuiTypeMapperFunction {
       case ("Dropdown", "onOpen")           => "ReactMouseEventFromHtml => Callback"
       case ("Dropdown", "onSearchChange")   => "ReactMouseEventFromHtml => Callback"
       case ("Dropdown", "renderLabel")      => "(js.Any, Int, js.Any) => String"
+      case ("Step", "onClick")              => "ReactMouseEventFromHtml => Callback"
 
       case _ =>
         throw new Error(
