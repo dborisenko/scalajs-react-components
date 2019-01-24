@@ -5,7 +5,7 @@ import scala.scalajs.js.annotation.JSImport
 
 sealed trait HljsStyle extends js.Any
 
-// scalastyle:off object.name number.of.methods
+// scalastyle:off object.name number.of.methods number.of.types
 object HljsStyle {
   @js.native @JSImport("react-syntax-highlighter/dist/styles/hljs/agate", JSImport.Default)
   object agate extends HljsStyle
@@ -166,4 +166,4 @@ object HljsStyle {
   @js.native @JSImport("react-syntax-highlighter/dist/styles/hljs/zenburn", JSImport.Default)
   object zenburn extends HljsStyle
 }
-// scalastyle:on object.name number.of.methods
+// scalastyle:on object.name number.of.methods number.of.types
