@@ -26,9 +26,11 @@ object Dependencies extends DependencyBuilders {
     lazy val `semantic-ui-react` = "0.84.0"
     lazy val `react-sortable-hoc` = "1.4.0"
     lazy val `react-trello` = "2.0.8"
-    lazy val `babel-runtime` = "7.2.0"
+    lazy val `@babel/runtime` = "7.3.1"
+    lazy val `babel-runtime` = "6.26.0"
     lazy val `storm-react-diagrams` = "5.2.1"
     lazy val `react-markdown` = "4.0.6"
+    lazy val `react-syntax-highlighter` = "10.1.2"
   }
 
   // Scala: JVM libraries
@@ -50,7 +52,9 @@ object Dependencies extends DependencyBuilders {
   lazy val `semantic-ui-react`: NpmDependency = "semantic-ui-react" -> Versions.`semantic-ui-react`
   lazy val `react-sortable-hoc`: NpmDependency = "react-sortable-hoc" -> Versions.`react-sortable-hoc`
   lazy val `react-trello`: NpmDependency = "react-trello" -> Versions.`react-trello`
-  lazy val `babel-runtime`: NpmDependency = "@babel/runtime" -> Versions.`babel-runtime`
+  lazy val `@babel/runtime`: NpmDependency = "@babel/runtime" -> Versions.`@babel/runtime`
+  lazy val `babel-runtime`: NpmDependency = "babel-runtime" -> Versions.`babel-runtime`
   lazy val `storm-react-diagrams`: NpmDependency = "storm-react-diagrams" -> Versions.`storm-react-diagrams`
   lazy val `react-markdown`: NpmDependency = "react-markdown" -> Versions.`react-markdown`
+  lazy val `react-syntax-highlighter`: NpmDependency = "react-syntax-highlighter" -> Versions.`react-syntax-highlighter`
 }

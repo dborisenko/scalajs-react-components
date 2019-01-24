@@ -312,7 +312,7 @@ lazy val `react-trello` = project
     ),
     npmDependencies in Test := Seq(
       Dependencies.`react-trello`,
-      Dependencies.`babel-runtime`,
+      Dependencies.`@babel/runtime`,
       Dependencies.react,
       Dependencies.`react-dom`
     ),
@@ -377,6 +377,38 @@ lazy val `react-markdown` = project
   )
   .dependsOn(macros)
 
+lazy val `react-syntax-highlighter` = project
+  .in(file("react-syntax-highlighter"))
+  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSBundlerPlugin)
+  .settings(
+    staticAnalysisSettings(
+      compileWarts = Warts.allBut(Wart.Any, Wart.DefaultArguments, Wart.Nothing),
+      testWarts = Warts.allBut(Wart.NonUnitStatements, Wart.Any, Wart.Nothing)
+    )
+  )
+  .settings(publishSettings)
+  .settings(
+    scalacOptions ++= Seq(
+      "-P:scalajs:sjsDefinedByDefault" // Declare a non-native JS type withou @ScalaJSDefined annotation
+    )
+  )
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`scalajs-react-core`.value,
+      Dependencies.`scalajs-react-test`.value % Test,
+      Dependencies.specs2.value % Test
+    ),
+    npmDependencies in Test := Seq(
+      Dependencies.`react-syntax-highlighter`,
+      Dependencies.`babel-runtime`,
+      Dependencies.react,
+      Dependencies.`react-dom`
+    ),
+    (org.scalajs.sbtplugin.ScalaJSPluginInternal.scalaJSRequestsDOM in Test) := true
+  )
+  .dependsOn(macros)
+
 lazy val `scalajs-react-components` = project
   .in(file("."))
   .settings(staticAnalysisSettings())
@@ -387,7 +419,9 @@ lazy val `scalajs-react-components` = project
   .aggregate(`react-sortable-hoc`)
   .aggregate(`react-trello`)
   .aggregate(`storm-react-diagrams`)
+  .aggregate(`react-syntax-highlighter`)
   .dependsOn(`semantic-ui-react`)
   .dependsOn(`react-sortable-hoc`)
   .dependsOn(`react-trello`)
   .dependsOn(`storm-react-diagrams`)
+  .dependsOn(`react-syntax-highlighter`)

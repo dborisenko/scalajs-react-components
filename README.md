@@ -19,6 +19,8 @@ Adding types to javascript is a lot of guesswork, and we're certain to have gott
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/semantic-ui-react_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/semantic--ui--react-0.84.0-blue.svg)](https://www.npmjs.com/package/semantic-ui-react)
 
+Semantic is a UI framework designed for theming.
+
 Module `semantic-ui-react` contains scalajs wrapper for [semantic-ui-react](https://react.semantic-ui.com) component.
 
 Add dependencies in `build.sbt`:
@@ -51,6 +53,8 @@ Don't forget to add styles to your html:
 # React Sortable (HOC)
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-sortable-hoc_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/react--sortable--hoc-1.4.0-blue.svg)](https://www.npmjs.com/package/react-sortable-hoc)
+
+A set of higher-order components to turn any list into an animated, touch-friendly, sortable list.
 
 Module `react-sortable-hoc` contains scalajs wrapper for [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) component.
 
@@ -88,6 +92,8 @@ SortableList[Model, Props].Props(
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-trello_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/react--trello-2.0.8-blue.svg)](https://www.npmjs.com/package/react-trello)
 
+Pluggable components to add a trello-like kanban board to your application.
+
 Module `react-trello` contains scalajs wrapper for [react-trello](https://www.npmjs.com/package/react-trello) component.
 
 Add dependencies in `build.sbt`:
@@ -98,7 +104,7 @@ libraryDependencies ++= Seq(
 )
 npmDependencies in Compile ++= Seq(
   "react-trello" -> "2.0.8",
-  "@babel/runtime" -> "7.2.0",
+  "@babel/runtime" -> "7.3.1",
   "react" -> "16.7.0",
   "react-dom" -> "16.7.0"
 )
@@ -130,6 +136,8 @@ Board(
 # STORM React Diagrams
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/storm-react-diagrams_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/storm--react--diagrams-5.2.1-blue.svg)](https://www.npmjs.com/package/storm-react-diagrams)
+
+A super simple, no-nonsense diagramming library written in React that just works.
 
 Module `storm-react-diagrams` contains scalajs wrapper for [storm-react-diagrams](https://www.npmjs.com/package/storm-react-diagrams) component.
 
@@ -188,6 +196,8 @@ Don't forget to add styles to your html:
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-markdown_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-markdown_sjs0.6_2.12)
 [![react](https://img.shields.io/badge/react--markdown-4.0.6-blue.svg)](https://www.npmjs.com/package/react-markdown)
 
+Renders Markdown as pure React components.
+
 Module `react-markdown` contains scalajs wrapper for [react-markdown](https://www.npmjs.com/package/react-markdown) component.
 
 Add dependencies in `build.sbt`:
@@ -207,4 +217,38 @@ Example of usage:
 
 ```scala
 ReactMarkdown(source = "# This is a header\n\nAnd this is a paragraph")()
+```
+
+# React Syntax Highlighter
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn.scalajs.react.components/react-syntax-highlighter_sjs0.6_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn.scalajs.react.components/react-syntax-highlighter_sjs0.6_2.12)
+[![react](https://img.shields.io/badge/react--syntax--highlighter-10.1.2-blue.svg)](https://www.npmjs.com/package/react-syntax-highlighter)
+
+Syntax highlighting component for react with prismjs or highlightjs ast using inline styles.
+
+Module `react-syntax-highlighter` contains scalajs wrapper for [react-syntax-highlighter](https://www.npmjs.com/package/react-syntax-highlighter) component.
+
+Add dependencies in `build.sbt`:
+
+```scala
+libraryDependencies ++= Seq(
+  "com.dbrsn.scalajs.react.components" %%% "react-syntax-highlighter" % "0.2.0"
+)
+npmDependencies in Compile ++= Seq(
+  "react-syntax-highlighter" -> "10.1.2",
+  "babel-runtime" -> "6.26.0",
+  "react" -> "16.7.0",
+  "react-dom" -> "16.7.0"
+)
+```
+
+Example of usage:
+
+For highlightjs-based component:
+```scala
+SyntaxHighlighter(HljsLanguage.javascript, style = HljsStyle.docco)("(num) => num + 1")
+```
+
+For prismjs-based component:
+```scala
+PrismSyntaxHighlighter(PrismLanguage.javascript, style = PrismStyle.dark)("(num) => num + 1")
 ```

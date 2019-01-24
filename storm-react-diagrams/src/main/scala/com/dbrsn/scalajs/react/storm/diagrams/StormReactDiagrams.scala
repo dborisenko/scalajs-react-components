@@ -123,6 +123,7 @@ object StormReactDiagrams extends js.Object {
 
   @js.native
   class DefaultLabelModel extends LabelModel {
+    def label: String = js.native
     def setLabel(label: String): Unit = js.native
   }
 
