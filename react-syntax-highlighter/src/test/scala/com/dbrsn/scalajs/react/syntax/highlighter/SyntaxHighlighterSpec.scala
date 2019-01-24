@@ -12,6 +12,6 @@ class SyntaxHighlighterSpec extends Specification {
       )
     )
     val text = rendered.outerHtmlScrubbed()
-    text must contain("112571")
+    text must contain("(num) =&gt; num +")
   }
 }

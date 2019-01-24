@@ -8,10 +8,10 @@ class PrismSyntaxHighlighterSpec extends Specification {
   "PrismSyntaxHighlighter should render code properly" >> {
     val rendered = ReactTestUtils.renderIntoDocument(
       statefulWrapper(
-        PrismSyntaxHighlighter(PrismLanguage.javascript, style = PrismStyle.dark)("(num) => num + 1")
+        PrismSyntaxHighlighter(PrismLanguage.javascript, style = PrismStyle.dark)("(num) => num + 112571")
       )
     )
     val text = rendered.outerHtmlScrubbed()
-    text must contain("(num) =&gt; num +")
+    text must contain("112571")
   }
 }
