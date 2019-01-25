@@ -1,9 +1,9 @@
-package com.dbrsn.scalajs.react.syntax
+package com.dbrsn.scalajs.react.syntax.highlighter
 import japgolly.scalajs.react.ScalaComponent
 import japgolly.scalajs.react.component.Scala.Unmounted
 import japgolly.scalajs.react.vdom.VdomElement
 
-package object highlighter {
+object StateFull {
   private val StateFullComponent = ScalaComponent
     .builder[VdomElement]("StateFullComponent")
     .initialState("Hello, world!")

@@ -24,13 +24,13 @@ final case class SyntaxHighlighter(
     * earlier styles.
     * Default value: customStyle = {}
     */
-  customStyle: UndefOr[js.Object] = undefined,
+  customStyle: UndefOr[Style] = undefined,
   /**
     * codeTagProps - props that will be spread into the <code> tag that is the direct parent of the highlighted code
     * elements. Useful for styling/assigning classNames.
     * Default value: codeTagProps = { style: style['code[class*="language-"]'] }
     */
-  codeTagProps: UndefOr[js.Object] = undefined,
+  codeTagProps: UndefOr[Props] = undefined,
   /**
     * useInlineStyles - if this prop is passed in as false, react syntax highlighter will not add style objects to
     * elements, and will instead append classNames. You can then style the code block by using one of the CSS files
@@ -53,7 +53,7 @@ final case class SyntaxHighlighter(
     * You can use this to override those styles.
     * Default value: lineNumberContainerStyle = { float: 'left', paddingRight: '10px' }
     */
-  lineNumberContainerStyle: UndefOr[js.Object] = undefined,
+  lineNumberContainerStyle: UndefOr[Style] = undefined,
   /**
     * lineNumberStyle - inline style to be passed to the span wrapping each number. Can be either an object or a
     * function that recieves current line number as argument and returns style object.
@@ -68,7 +68,7 @@ final case class SyntaxHighlighter(
     *               return style;
     *             }}
     */
-  lineNumberStyle: UndefOr[js.Object | js.Function1[Int, js.Object]] = undefined,
+  lineNumberStyle: UndefOr[Style | Int => Style] = undefined,
   /**
     * wrapLines - a boolean value that determines whether or not each line of code should be wrapped in a parent
     * element. defaults to false, when false one can not take action on an element on the line level.
@@ -79,7 +79,7 @@ final case class SyntaxHighlighter(
     * function that recieves current line number as argument and returns props object.
     * Default value: lineProps = {}
     */
-  lineProps: js.UndefOr[js.Object] = undefined,
+  lineProps: js.UndefOr[Props] = undefined,
   /**
     * renderer - an optional custom renderer for rendering lines of code.
     */
