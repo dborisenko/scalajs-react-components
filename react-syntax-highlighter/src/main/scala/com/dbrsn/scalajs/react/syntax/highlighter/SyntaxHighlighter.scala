@@ -68,7 +68,7 @@ final case class SyntaxHighlighter(
     *               return style;
     *             }}
     */
-  lineNumberStyle: UndefOr[Style | Int => Style] = undefined,
+  lineNumberStyle: UndefOr[Int => Style] = undefined,
   /**
     * wrapLines - a boolean value that determines whether or not each line of code should be wrapped in a parent
     * element. defaults to false, when false one can not take action on an element on the line level.
@@ -79,7 +79,7 @@ final case class SyntaxHighlighter(
     * function that recieves current line number as argument and returns props object.
     * Default value: lineProps = {}
     */
-  lineProps: js.UndefOr[Props] = undefined,
+  lineProps: js.UndefOr[Int => Props] = undefined,
   /**
     * renderer - an optional custom renderer for rendering lines of code.
     */
