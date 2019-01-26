@@ -183,7 +183,7 @@ model.addAll(node1, node2, link1)
 // 7) load model into engine
 engine.setDiagramModel(model)
 
-StormReactDiagramWidget.Props(engine).render
+DiagramWidget(diagramEngine = engine)()
 ```
 
 Don't forget to add styles to your html:
