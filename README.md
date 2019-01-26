@@ -27,7 +27,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "semantic-ui-react" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "semantic-ui-react" -> "0.84.0",
@@ -62,7 +62,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "react-sortable-hoc" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "react-sortable-hoc" -> "1.4.0",
@@ -100,7 +100,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "react-trello" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "react-trello" -> "2.0.8",
@@ -145,7 +145,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "storm-react-diagrams" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "storm-react-diagrams" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "storm-react-diagrams" -> "5.2.1",
@@ -204,7 +204,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-markdown" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "react-markdown" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "react-markdown" -> "4.0.6",
@@ -231,7 +231,7 @@ Add dependencies in `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.dbrsn.scalajs.react.components" %%% "react-syntax-highlighter" % "0.3.0"
+  "com.dbrsn.scalajs.react.components" %%% "react-syntax-highlighter" % "0.3.1"
 )
 npmDependencies in Compile ++= Seq(
   "react-syntax-highlighter" -> "10.1.2",
